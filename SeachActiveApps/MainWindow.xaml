@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Button Name="btnSeach" Content="Поиск приложения" Width="200" Height="50" Click="BtnSeach_Click"></Button>
     </Grid>
 </Window>

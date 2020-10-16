@@ -8,6 +8,40 @@ using System.Threading.Tasks;
 
 class clWinAPI
 {
+    #region Hide Console App
+    [DllImport("user32.dll")]
+    static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
+    [DllImport("kernel32.dll")]
+    static extern IntPtr GetConsoleWindow();
+
+    const int SW_HIDE = 0;
+    const int SW_SHOW = 5;
+
+    //And then if you want to hide it use this command:
+
+    public static void HideConsoleApp(bool blHide)
+    {
+        if (blHide)
+        {
+            var handle = GetConsoleWindow();
+            ShowWindow(handle, SW_HIDE);
+        }
+        else
+        {
+            var handle = GetConsoleWindow();
+            ShowWindow(handle, SW_SHOW);
+        }
+
+
+    }
+
+
+    #endregion
+
+
+    #region #region Active App V1
+
     [DllImport("user32.dll")]
     static extern IntPtr GetActiveWindow();
 
@@ -17,9 +51,17 @@ class clWinAPI
     public const int WM_SYSCOMMAND = 0x0112;
     public const int SC_CLOSE = 0xF060;
 
-    #region V2
+    public static void FindActiveWindows()
+    {
+        IntPtr handle = GetActiveWindow();
+        //SendMessage(handle, WM_SYSCOMMAND, SC_CLOSE, 0);
 
-    
+    }
+    #endregion
+
+    #region Active App V2 
+
+
     [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
     static extern IntPtr GetForegroundWindow();
 
@@ -45,12 +87,7 @@ class clWinAPI
 
     #endregion
 
-    public static void FindActiveWindows()
-    {
-        IntPtr handle = GetActiveWindow();
-        //SendMessage(handle, WM_SYSCOMMAND, SC_CLOSE, 0);
 
-    }
 
 }
 

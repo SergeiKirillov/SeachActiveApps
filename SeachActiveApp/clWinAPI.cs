@@ -89,7 +89,7 @@ class clWinAPI
 
 
     #region Закрытие приложения
-
+    
     #endregion
 
 

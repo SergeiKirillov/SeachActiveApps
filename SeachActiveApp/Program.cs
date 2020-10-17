@@ -13,50 +13,64 @@ namespace SeachActiveApp
         {
             string strActivApp;
             string strActivAppOld=null;
-            DateTime dtMessageOld=DateTime.Now;
+            DateTime dtAppOld;
+            DateTime dtActiveApp;
             TimeSpan ts;
+
+            //считывание текущих значений из реестра только в момент запуска приложения и после этого используем локальную переменную
+            strActivAppOld = clReg.ReadAppParam("NameAppOld");
+            dtAppOld = Convert.ToDateTime(clReg.ReadAppParam("dtAppOld"));
 
 
             clWinAPI.HideConsoleApp(true); //Прячем программу
 
+            
+
             while (true)
             {
+                
                 strActivApp = clWinAPI.GetCaptionOfActiveWindow();
+                dtActiveApp = DateTime.Now;
 
-                if (strActivAppOld!=strActivApp)
+
+                ts = dtActiveApp.Subtract(dtAppOld);
+
+                if (strActivAppOld != strActivApp)
                 {
-                    ts = DateTime.Now.Subtract(dtMessageOld);
+
                     if (ts.TotalMinutes > 1)
                     {
-                        clFileRW.WriteFileTXT(DateTime.Now, strActivApp, ts);
+                        clFileRW.WriteFileTXT(dtActiveApp, strActivApp, ts);
+                        
                         strActivAppOld = strActivApp;
-                        dtMessageOld = DateTime.Now;
+                        dtAppOld = dtActiveApp;
+
+                        //запись в реестр текущих значений
+                        clReg.WriteAppParam("ActiveApp", strActivApp);
+                        clReg.WriteAppParam("TimeActiveApp", dtActiveApp.ToString());
+
                     }
-                    else if (ts.TotalHours> 1)
+
+
+                }
+                else if (ts.TotalHours > 1)
+                {
+                    clFileRW.WriteFileTXT(dtActiveApp, "(Работает приложение более 1 часа)" + strActivApp, ts);
+
+                    if (clReg.WriteMaxAppReg(dtAppOld, dtActiveApp, ts, strActivApp))
                     {
-                        clFileRW.WriteFileTXT(DateTime.Now, "(Работает приложение более 1 часа)"+strActivApp, ts);
+                        //сброс значений если произошла запись 
                         
                     }
-                    
+
+
                 }
-                
-                //if (message0 != message)
-                //{
-
-                //    tmptxt = String.Format("{0:dd.MM.yyyy HH:mm:ss} {1}", currenttime, message);
-
-
-                //}
-                //else
-                //{
-                //    tmptxt = String.Format("{0:dd.MM.yyyy HH:mm:ss} {1}", currenttime, "-----Повтор---- " + message);
-
-                //}
-
-
+                   
                 
 
-                Thread.Sleep(60000);
+                
+                               
+                Thread.Sleep(60000); //спим 1 мин
             }
 
         }

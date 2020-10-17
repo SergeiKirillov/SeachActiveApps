@@ -9,7 +9,7 @@ namespace SeachActiveApp
     class clFileRW
     {
         #region Вывод в файл
-        public static void WriteFileTXT(DateTime dt, string message)
+        public static void WriteFileTXT(DateTime dt, string message, TimeSpan timeSpan)
         {
             try
             {

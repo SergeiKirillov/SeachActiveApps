@@ -65,6 +65,11 @@ namespace SeachActiveApp
 
 
                 }
+                else
+                {
+                    //если приложение не меняется то записываем в реестр значение времени его работы
+                    clReg.WriteAppParam("SpanActiveApp", ts.TotalMinutes.ToString());
+                }
                    
                 
 

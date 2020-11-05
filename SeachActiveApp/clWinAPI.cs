@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -86,6 +88,8 @@ class clWinAPI
     }
 
     #endregion
+
+   //books.google.kz/books?id=hR3JipLEAaYC&pg=PA185&lpg=PA185&dq=c%23+%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0+%D1%87%D1%82%D0%BE+%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0+%D1%83%D0%B6%D0%B5+%D0%B7%D0%B0%D0%BF%D1%83%D1%89%D0%B5%D0%BD%D0%B0&source=bl&ots=0LBHvyuqly&sig=ACfU3U25kC-FJaa-WH-IK14LiGjOVGW4Ig&hl=ru&sa=X&ved=2ahUKEwi0pqfTzuvsAhVDl4sKHcSBCvc4FBDoATAFegQIAhAC#v=onepage&q=c%23%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20%D1%87%D1%82%D0%BE%20%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0%20%D1%83%D0%B6%D0%B5%20%D0%B7%D0%B0%D0%BF%D1%83%D1%89%D0%B5%D0%BD%D0%B0&f=false
 
 
     #region Закрытие приложения

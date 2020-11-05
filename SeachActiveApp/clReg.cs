@@ -8,6 +8,7 @@ namespace SeachActiveApp
 {
     class clReg
     {
+
         public static string ReadAppParam(string Key)
         {
             return null;

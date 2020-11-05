@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Management;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -24,16 +26,18 @@ namespace SeachActiveApp
             DateTime dtActiveApp;
             TimeSpan ts;
 
-            
 
-            //считывание текущих значений из реестра только в момент запуска приложения и после этого используем локальную переменную
+           
+
+                //считывание текущих значений из реестра только в момент запуска приложения и после этого используем локальную переменную
             strActivAppOld = clReg.ReadAppParam("NameAppOld");
             dtAppOld = Convert.ToDateTime(clReg.ReadAppParam("dtAppOld"));
 
 
             clWinAPI.HideConsoleApp(true); //Прячем программу
 
-            
+
+            bool mkr = isStillRunning();
 
             while (true)
             {
@@ -89,6 +93,19 @@ namespace SeachActiveApp
                 Thread.Sleep(60000); //спим 1 мин
             }
 
+        }
+
+        static bool isStillRunning()
+        {
+            string processName = Process.GetCurrentProcess().MainModule.ModuleName;
+            ManagementObjectSearcher mos = new ManagementObjectSearcher();
+            mos.Query.QueryString = @"SELECT * FROM Win32_Process WHERE Name = '" + processName + @"'";
+            if (mos.Get().Count > 1)
+            {
+                return true;
+            }
+            else
+                return false;
         }
     }
 }

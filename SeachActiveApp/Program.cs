@@ -9,13 +9,22 @@ namespace SeachActiveApp
 {
     class Program
     {
+        public DateTime dtStart;        //Время запуска программы
+        public DateTime dtStop;         //Время остановки программы. Если оно есть значит программу не перезагружали экстренно
+        public Boolean blSession;  //1 в начале цикла программы, а 0 вконце цикла программы - если при запуске программы это значение равно 1 то значит цикл не закончил свою работу
+
+
+
         static void Main(string[] args)
         {
+
             string strActivApp;
             string strActivAppOld=null;
             DateTime dtAppOld;
             DateTime dtActiveApp;
             TimeSpan ts;
+
+            
 
             //считывание текущих значений из реестра только в момент запуска приложения и после этого используем локальную переменную
             strActivAppOld = clReg.ReadAppParam("NameAppOld");
@@ -53,7 +62,9 @@ namespace SeachActiveApp
 
 
                 }
-                else if (ts.TotalHours > 1)
+
+
+                if (ts.TotalHours > 1)
                 {
                     clFileRW.WriteFileTXT(dtActiveApp, "(Работает приложение более 1 часа)" + strActivApp, ts);
 

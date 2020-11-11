@@ -11,9 +11,9 @@ namespace SeachActiveApp
 {
     class Program
     {
-        public DateTime dtStart;        //Время запуска программы
-        public DateTime dtStop;         //Время остановки программы. Если оно есть значит программу не перезагружали экстренно
-        public Boolean blSession;  //1 в начале цикла программы, а 0 вконце цикла программы - если при запуске программы это значение равно 1 то значит цикл не закончил свою работу
+        //public DateTime dtStart;        //Время запуска программы
+        //public DateTime dtStop;         //Время остановки программы. Если оно есть значит программу не перезагружали экстренно
+        //public Boolean blSession;  //1 в начале цикла программы, а 0 вконце цикла программы - если при запуске программы это значение равно 1 то значит цикл не закончил свою работу
 
 
 
@@ -21,10 +21,10 @@ namespace SeachActiveApp
         {
 
             string strActivApp;
-            string strActivAppOld=null;
-            DateTime dtAppOld;
+            //string strActivAppOld=null;
+            //DateTime dtAppOld;
             DateTime dtActiveApp;
-            TimeSpan ts;
+            
 
             
             if (isStillRunning())
@@ -49,11 +49,12 @@ namespace SeachActiveApp
                 System.Diagnostics.Debug.WriteLine("первый раз");
 
                 //считывание текущих значений из реестра только в момент запуска приложения и после этого используем локальную переменную
-                strActivAppOld = clReg.ReadAppParam("NameAppOld");
-                dtAppOld = Convert.ToDateTime(clReg.ReadAppParam("dtAppOld"));
-
+                //strActivAppOld = clReg.ReadAppParam("NameAppOld");
+                //dtAppOld = Convert.ToDateTime(clReg.ReadAppParam("dtAppOld"));
+                // ред. 11/11/2020  Будем использовать База для хранения данных с циклом 1 мин
 
                 clWinAPI.HideConsoleApp(true); //Прячем программу
+
 
                 while (true)
                 {
@@ -61,61 +62,12 @@ namespace SeachActiveApp
                     strActivApp = clWinAPI.GetCaptionOfActiveWindow();
                     dtActiveApp = DateTime.Now;
 
-
-                    ts = dtActiveApp.Subtract(dtAppOld);
-
-                    if (strActivAppOld != strActivApp)
-                    {
-
-                        if (ts.TotalMinutes > 1)
-                        {
-                            clFileRW.WriteFileTXT(dtActiveApp, strActivApp, ts);
-
-                            strActivAppOld = strActivApp;
-                            dtAppOld = dtActiveApp;
-
-                            //запись в реестр текущих значений
-                            clReg.WriteAppParam("ActiveApp", strActivApp);
-                            clReg.WriteAppParam("TimeActiveApp", dtActiveApp.ToString());
-
-                        }
-
-
-                    }
-
-
-                    if (ts.TotalHours > 1)
-                    {
-                        clFileRW.WriteFileTXT(dtActiveApp, "(Работает приложение более 1 часа)" + strActivApp, ts);
-
-                        if (clReg.WriteMaxAppReg(dtAppOld, dtActiveApp, ts, strActivApp))
-                        {
-                            //сброс значений если произошла запись 
-
-                        }
-
-
-                    }
-                    else
-                    {
-                        //если приложение не меняется то записываем в реестр значение времени его работы
-                        clReg.WriteAppParam("SpanActiveApp", ts.TotalMinutes.ToString());
-                    }
-
-
-
-
+                    new clRW(dtActiveApp, strActivApp, 1);
 
                     Thread.Sleep(60000); //спим 1 мин
                 }
 
             }
-            
-
-
-            
-
-            
 
         }
 

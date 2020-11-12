@@ -33,6 +33,7 @@ namespace SeachActiveApp
             GridViewApps.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             GridViewApps.MultiSelect = false;
 
+            
 
 
 
@@ -45,6 +46,64 @@ namespace SeachActiveApp
             var source = new BindingSource(bindList, null);
 
             GridViewApps.DataSource = source;
+        }
+
+
+
+
+        private void chkSelect_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (chkSelect.SelectedIndex == 2)
+            {
+                DataSelect.Visible = false;
+            }
+            else
+            {
+                if (chkSelect.SelectedIndex == 0)
+                {
+                    DataSelect.Format = DateTimePickerFormat.Long;
+                    DataSelect.Visible = true;
+                }
+                else
+                {
+                    DataSelect.Format = DateTimePickerFormat.Custom;
+                    DataSelect.CustomFormat = "MMMM yyyy";
+                    DataSelect.ShowUpDown = true;
+                    DataSelect.Visible = true;
+                }
+                
+                
+            }
+        }
+
+        private void btnRunningSelectQuery_Click(object sender, EventArgs e)
+        {
+            var AppsData = new clRW();
+
+            if (chkSelect.SelectedIndex == 2)
+            {
+                RefreshGridView(AppsData.GetAll());
+            }
+            else
+            {
+                    if ((chkSelect.SelectedIndex == 0) && (DataSelect.Value <= DateTime.Now))
+                    {
+                        int day = DataSelect.Value.Day;
+                        int mount = DataSelect.Value.Month;
+                        int year = DataSelect.Value.Year;
+                    }
+                    else if ((chkSelect.SelectedIndex == 1) && (DataSelect.Value.Month <= DateTime.Now.Month) && (DataSelect.Value.Year <= DateTime.Now.Year))
+                    {
+                        int mount = DataSelect.Value.Month;
+                        int year = DataSelect.Value.Year;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Вы выбрали дату больше сегодняшней!");
+                    }
+
+                
+            }
         }
     }
 }

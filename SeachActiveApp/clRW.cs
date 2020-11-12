@@ -31,9 +31,14 @@ namespace SeachActiveApp
 
         #region считываем значения с БД 
 
+        //Групировка по полю
+        //var groupedPost = posts.Find(p => p.Tags.Count > 10 ).GroupBy(*Group Condition*);
+
+
+        //Все значения 
         public IList<clData1Hour> GetAll()
         {
-            string NameDB = DateTime.Now.ToString("dd-MM-yyyy");
+            string NameDB = DateTime.Now.ToString("MM-yyyy");
             string pathProg = System.AppDomain.CurrentDomain.BaseDirectory.ToString() + NameDB + ".db";
 
             var rezult = new List<clData1Hour>();
@@ -90,7 +95,7 @@ namespace SeachActiveApp
         {
             try
             {
-                string NameDB = DateTime.Now.ToString("dd-MM-yyyy");
+                string NameDB = DateTime.Now.ToString("MM-yyyy");
                 string pathProg = System.AppDomain.CurrentDomain.BaseDirectory.ToString() + NameDB + ".db";
 
 

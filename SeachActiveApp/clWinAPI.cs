@@ -84,16 +84,32 @@ class clWinAPI
         {
             strTitle = stringBuilder.ToString();
         }
+        
         return strTitle;
     }
 
     #endregion
 
-   //books.google.kz/books?id=hR3JipLEAaYC&pg=PA185&lpg=PA185&dq=c%23+%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0+%D1%87%D1%82%D0%BE+%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0+%D1%83%D0%B6%D0%B5+%D0%B7%D0%B0%D0%BF%D1%83%D1%89%D0%B5%D0%BD%D0%B0&source=bl&ots=0LBHvyuqly&sig=ACfU3U25kC-FJaa-WH-IK14LiGjOVGW4Ig&hl=ru&sa=X&ved=2ahUKEwi0pqfTzuvsAhVDl4sKHcSBCvc4FBDoATAFegQIAhAC#v=onepage&q=c%23%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20%D1%87%D1%82%D0%BE%20%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0%20%D1%83%D0%B6%D0%B5%20%D0%B7%D0%B0%D0%BF%D1%83%D1%89%D0%B5%D0%BD%D0%B0&f=false
+    #region  Пoиск активного приложения(вариант 3)
+    [DllImport("user32.dll")]
+    static extern IntPtr GetActiveWindows();
+
+
+
+
+    #endregion
+
+    //https://www.codeproject.com/Articles/468566/Logging-Active-Window-Titles   --- Logging Active Window Titles
+
+    //books.google.kz/books?id=hR3JipLEAaYC&pg=PA185&lpg=PA185&dq=c%23+%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0+%D1%87%D1%82%D0%BE+%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0+%D1%83%D0%B6%D0%B5+%D0%B7%D0%B0%D0%BF%D1%83%D1%89%D0%B5%D0%BD%D0%B0&source=bl&ots=0LBHvyuqly&sig=ACfU3U25kC-FJaa-WH-IK14LiGjOVGW4Ig&hl=ru&sa=X&ved=2ahUKEwi0pqfTzuvsAhVDl4sKHcSBCvc4FBDoATAFegQIAhAC#v=onepage&q=c%23%20%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0%20%D1%87%D1%82%D0%BE%20%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0%20%D1%83%D0%B6%D0%B5%20%D0%B7%D0%B0%D0%BF%D1%83%D1%89%D0%B5%D0%BD%D0%B0&f=false
+    //https://habr.com/ru/post/352096/
+    //https://www.c-sharpcorner.com/article/working-with-win32-api-in-net/
+    //https://stackoverflow.com/questions/12019524/get-active-window-of-net-application  --- поиск и закрытие активного приложения
+
 
 
     #region Закрытие приложения
-    
+
     #endregion
 
 

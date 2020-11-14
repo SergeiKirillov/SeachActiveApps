@@ -86,24 +86,45 @@ namespace SeachActiveApp
             }
             else
             {
-                    if ((chkSelect.SelectedIndex == 0) && (DataSelect.Value <= DateTime.Now))
-                    {
-                        int day = DataSelect.Value.Day;
-                        int mount = DataSelect.Value.Month;
-                        int year = DataSelect.Value.Year;
-                    }
-                    else if ((chkSelect.SelectedIndex == 1) && (DataSelect.Value.Month <= DateTime.Now.Month) && (DataSelect.Value.Year <= DateTime.Now.Year))
-                    {
-                        int mount = DataSelect.Value.Month;
-                        int year = DataSelect.Value.Year;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Вы выбрали дату больше сегодняшней!");
-                    }
+                if ((chkSelect.SelectedIndex == 0) && (DataSelect.Value <= DateTime.Now))
+                {
+                    int day = DataSelect.Value.Day;
+                    int mount = DataSelect.Value.Month;
+                    int year = DataSelect.Value.Year;
+                    ViewSelectDay();
+
+                }
+                else if ((chkSelect.SelectedIndex == 1) && (DataSelect.Value.Month <= DateTime.Now.Month) && (DataSelect.Value.Year <= DateTime.Now.Year))
+                {
+                    int mount = DataSelect.Value.Month;
+                    int year = DataSelect.Value.Year;
+                    ViewSelectMount();
+
+                }
+                else
+                {
+                    MessageBox.Show("Вы выбрали дату больше сегодняшней!");
+                }
 
                 
             }
         }
+
+        private void ViewSelectDay()
+        {
+            //MessageBox.Show("За день");
+
+            var SelectDay = new clRW();
+            var source = SelectDay.Get(true, DataSelect.Value);
+            RefreshGridView(source);
+        }
+
+        private void ViewSelectMount()
+        {
+            var SelectMount = new clRW();
+            var source = SelectMount.Get(false, DataSelect.Value);
+            RefreshGridView(source);
+        }
+
     }
 }

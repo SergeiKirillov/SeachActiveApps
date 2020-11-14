@@ -31,8 +31,7 @@ namespace SeachActiveApp
 
         #region считываем значения с БД 
 
-        //Групировка по полю
-        //var groupedPost = posts.Find(p => p.Tags.Count > 10 ).GroupBy(*Group Condition*);
+        
 
 
         //Все значения 
@@ -90,7 +89,7 @@ namespace SeachActiveApp
         }
         #endregion
 
-        #region вывод в Базу данных
+        #region запись в Базу данных
         private static void WriteBD(DateTime dt, string message, int time1min)
         {
             try
@@ -136,7 +135,49 @@ namespace SeachActiveApp
 
         #endregion
 
+        public IList<clData1Hour> Get(bool Day, DateTime dt)
+        {
+            var rezult = new List<clData1Hour>();
 
+            int day = dt.Day;
+            int mount = dt.Month;
+            int year = dt.Year;
+
+            string pathProg = System.AppDomain.CurrentDomain.BaseDirectory.ToString() + mount.ToString() + "-" + year.ToString() + ".db";
+
+
+
+            using (var db = new LiteDatabase(pathProg))
+            {
+                var apps = db.GetCollection<clData1Hour>("Hour1");
+
+                //var resultsLDB = apps.FindAll().OrderByDescending(x => x.dtApp);
+
+                //Групировка по полю ------ SELECT strApp, count(Raz1Minut) FROM Hour1 Group by strApp Order by Count(Raz1Minut) Desc;
+
+                //var groupedPost = posts.Find(p => p.Tags.Count > 10 ).GroupBy(*Group Condition*);
+                //сгрупировать по приложению и подсчитать кол-во элементов
+
+                /*              
+                Или просумировать по полю Raz1Minut при одинаковом имени поля
+                 */
+
+
+
+                var resultsLDB = apps.FindAll().OrderByDescending(x => x.dtApp);
+
+                foreach (clData1Hour item in resultsLDB)
+                {
+                    
+                    rezult.Add(item);
+                }
+
+                //передор значенией с подсчетом по столбцу Raz1Minut и группировкой
+                //https://www.google.com/search?client=firefox-b-d&q=list+group+by+count+c%23
+
+                return rezult.FindAll(i=>i.dtApp.Date==dt);
+            }
+        }
         
 
 

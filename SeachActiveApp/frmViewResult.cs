@@ -48,6 +48,14 @@ namespace SeachActiveApp
             GridViewApps.DataSource = source;
         }
 
+        private void RefreshGridViewAppCount(IList<clDataAppCount> dataAppCounts)
+        {
+            var bindList = new BindingList<clDataAppCount>(dataAppCounts);
+            var source = new BindingSource(bindList, null);
+
+            GridViewApps.DataSource = source;
+        }
+
 
 
 
@@ -116,14 +124,14 @@ namespace SeachActiveApp
 
             var SelectDay = new clRW();
             var source = SelectDay.Get(true, DataSelect.Value);
-            RefreshGridView(source);
+            RefreshGridViewAppCount(source);
         }
 
         private void ViewSelectMount()
         {
             var SelectMount = new clRW();
             var source = SelectMount.Get(false, DataSelect.Value);
-            RefreshGridView(source);
+            RefreshGridViewAppCount(source);
         }
 
     }

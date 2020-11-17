@@ -135,9 +135,10 @@ namespace SeachActiveApp
 
         #endregion
 
-        public IList<clData1Hour> Get(bool Day, DateTime dt)
+        public IList<clDataAppCount> Get(bool Day, DateTime dt)
         {
             var rezult = new List<clData1Hour>();
+            var resultAppCount = new List<clDataAppCount>();
 
             int day = dt.Day;
             int mount = dt.Month;
@@ -147,7 +148,7 @@ namespace SeachActiveApp
 
 
 
-            using (var db = new LiteDatabase(pathProg))
+            using ( var db = new LiteDatabase(pathProg))
             {
                 var apps = db.GetCollection<clData1Hour>("Hour1");
 
@@ -164,18 +165,87 @@ namespace SeachActiveApp
 
 
 
-                var resultsLDB = apps.FindAll().OrderByDescending(x => x.dtApp);
 
-                foreach (clData1Hour item in resultsLDB)
-                {
-                    
-                    rezult.Add(item);
-                }
+
+                //////Первый вариант 
+                ///
+                //var resultsLDB = apps.FindAll().OrderByDescending(x => x.dtApp);
+                //foreach (clData1Hour item in resultsLDB)
+                //{
+
+                //    rezult.Add(item);
+                //}
+                ////return rezult.FindAll(i=>i.dtApp.Date==dt);
+
 
                 //передор значенией с подсчетом по столбцу Raz1Minut и группировкой
                 //https://www.google.com/search?client=firefox-b-d&q=list+group+by+count+c%23
 
-                return rezult.FindAll(i=>i.dtApp.Date==dt);
+
+
+                //Второй вариант - Групировка 
+                //var result = apps
+                //    .Find(Query.EQ("strApp", "Debug"))
+                //    .Where(x => x.dtApp <= DateTime.Now.Date)
+                //    .OrderBy(x => x.strApp)
+                //    .Select(x => new
+                //    {
+                //        App =x.strApp,
+                //        Dt = x.dtApp
+                //    });
+
+                //-----------
+                //var result = apps
+                //    .Find(Query.Not("strApp", "Debug"))
+                //    .Where(x => x.dtApp <= DateTime.Now.Date)
+                //    .OrderBy(x => x.strApp)
+                //    ;
+                //int CountResult = result.Count();
+
+                //foreach (clData1Hour item in result)
+                //{
+
+                //    rezult.Add(item);
+                //}
+
+                if (Day)
+                {
+                    var result = apps
+                    .Find(Query.Not("strApp", null))
+                    .Where(x => x.dtApp.Date == dt.Date)
+                    .GroupBy(x => x.strApp)
+                    .Select(x => new clDataAppCount
+                    {
+                        strApp = x.Key,
+                        CountMinut = x.Count()
+                    }
+                    )
+                    ;
+                    int countResult = result.Count();
+
+                    foreach (var item in result.OrderByDescending(x=>x.CountMinut))
+                    {
+                        string name = item.strApp;
+                        int count = item.CountMinut;
+                        System.Diagnostics.Debug.WriteLine(name + " --- " + count.ToString());
+
+                        resultAppCount.Add(item);
+
+                    }
+                }
+                else
+                {
+
+                }
+
+
+
+
+
+
+                return resultAppCount;
+
+
             }
         }
         

@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clData1Hour.cs" />
+    <Compile Include="clDataAppCount.cs" />
     <Compile Include="clRW.cs" />
     <Compile Include="clReg.cs" />
     <Compile Include="clWinAPI.cs" />

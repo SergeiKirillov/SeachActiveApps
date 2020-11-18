@@ -235,7 +235,28 @@ namespace SeachActiveApp
                 }
                 else
                 {
+                    var result = apps
+                    .Find(Query.Not("strApp", null))
+                    .Where(x => x.dtApp.Date.Month == dt.Date.Month)
+                    .GroupBy(x => x.strApp)
+                    .Select(x => new clDataAppCount
+                    {
+                        strApp = x.Key,
+                        CountMinut = x.Count()
+                    }
+                    )
+                    ;
+                    int countResult = result.Count();
 
+                    foreach (var item in result.OrderByDescending(x => x.CountMinut))
+                    {
+                        string name = item.strApp;
+                        int count = item.CountMinut;
+                        System.Diagnostics.Debug.WriteLine(name + " --- " + count.ToString());
+
+                        resultAppCount.Add(item);
+
+                    }
                 }
 
 

@@ -14,7 +14,7 @@ class www
 {
 }
 
-
+//https://habr.com/ru/post/120157/  статья про WWW
 class server
 {
     TcpListener Listener;
@@ -42,7 +42,8 @@ class server
     static void ClientThread(object StateInfo)
     {
         // Просто создаем новый экземпляр класса Client и передаем ему приведенный к классу TcpClient объект StateInfo
-        new Client((TcpClient)StateInfo);
+        //new Client((TcpClient)StateInfo);
+        new clientSmall((TcpClient)StateInfo);
     }
 
     ~server() // Остановка сервера
@@ -212,4 +213,58 @@ class Client
     }
 
 
+}
+
+class clientSmall
+{
+    public clientSmall(TcpClient Client)
+    {
+        ////Вариант 1 - Простая станичка -
+
+        string strData = "<tr><td>34,5</td><td>3,5</td><td>36</td><td>23</td></tr>" +
+            "<tr><td>35,5</td><td>4</td><td>36⅔</td><td>23–23,5</td></tr>" +
+            "<tr><td>36</td><td>4,5</td><td>37⅓</td><td>23,5</td></tr>" +
+            "<tr><td>36,5</td><td>5</td><td>38</td><td>24</td></tr>" +
+            "<tr><td>37</td><td>5,5</td><td>38⅔</td><td>24,5</td></tr>" +
+            "<tr><td>38</td><td>6</td><td>39⅓</td><td>25</td></tr>" +
+            "<tr><td>38,5</td><td>6,5</td><td>40</td><td>25,5</td></tr>";
+
+        string strTable = "<table border = '1'><caption>Таблица размеров обуви</caption><tr><th>Россия</th><th>Великобритания</th><th>Европа</th><th>Длина ступни, см</th>" + "</tr>" +
+            strData +
+            "</table>";
+        
+            //Код простой интернет странички
+        string html = "<!DOCTYPE html><html><head><title>Отчет с компьютера</title></head><body>" + strTable + "</body></html>";
+
+        //Ответ сервера 
+        //windows-1251
+        //koi8-r
+        //utf-8
+        string Str = "HTTP/1.1 200 OK\nContent-type: text/html; charset=utf-8\nContent-Length:" + html.Length.ToString() + "\n\n" + html;
+
+        //ответ в массив байт
+        byte[] Buffer = Encoding.UTF8.GetBytes(Str);//преобразуем в кодировку utf-8 с поддержкой русских букв
+
+        //Отправим его клиенту
+        Client.GetStream().Write(Buffer, 0, Buffer.Length);
+
+        Client.Close();
+    }
+
+    private void SendError(TcpClient Client, int Code)
+    {
+        // Получаем строку вида "200 OK"
+        // HttpStatusCode хранит в себе все статус-коды HTTP/1.1
+        string CodeStr = Code.ToString() + " " + ((HttpStatusCode)Code).ToString();
+        // Код простой HTML-странички
+        string Html = "<html><body><h1>" + CodeStr + "</h1></body></html>";
+        // Необходимые заголовки: ответ сервера, тип и длина содержимого. После двух пустых строк - само содержимое
+        string Str = "HTTP/1.1 " + CodeStr + "\nContent-type: text/html\nContent-Length:" + Html.Length.ToString() + "\n\n" + Html;
+        // Приведем строку к виду массива байт
+        byte[] Buffer = Encoding.ASCII.GetBytes(Str);
+        // Отправим его клиенту
+        Client.GetStream().Write(Buffer, 0, Buffer.Length);
+        // Закроем соединение
+        Client.Close();
+    }
 }

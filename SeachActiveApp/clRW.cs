@@ -144,11 +144,12 @@ namespace SeachActiveApp
             int mount = dt.Month;
             int year = dt.Year;
 
-            string pathProg = System.AppDomain.CurrentDomain.BaseDirectory.ToString() + mount.ToString() + "-" + year.ToString() + ".db";
+            string pathProg = System.AppDomain.CurrentDomain.BaseDirectory.ToString() + mount.ToString("D2") + "-" + year.ToString() + ".db";
 
 
 
-            using ( var db = new LiteDatabase(pathProg))
+            //using ( var db = new LiteDatabase(pathProg))
+            using (var db = new LiteDatabase(@"Filename="+pathProg+";Connection=shared"))
             {
                 var apps = db.GetCollection<clData1Hour>("Hour1");
 

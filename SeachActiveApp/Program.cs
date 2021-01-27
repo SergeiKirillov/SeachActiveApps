@@ -26,9 +26,7 @@ namespace SeachActiveApp
             //DateTime dtAppOld;
             DateTime dtActiveApp;
 
-            server www = new server();
-            Thread server = new Thread(www.start);
-            server.Start();
+            
 
             
             if (isStillRunning()) //Если запустили второй раз то показываем форму ввода пароля
@@ -59,6 +57,9 @@ namespace SeachActiveApp
 
                 clWinAPI.HideConsoleApp(true); //Прячем программу
 
+                server www = new server();
+                Thread server = new Thread(www.start);
+                server.Start();
 
                 while (true)
                 {

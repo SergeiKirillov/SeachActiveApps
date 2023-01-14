@@ -21,6 +21,7 @@ class server
 
     public void start()
     {
+        //TcpListener Listener;
         try
         {
             int port = 8000;
@@ -87,6 +88,8 @@ class server
 
     ~server() // Остановка сервера
     {
+        //TcpListener Listener;
+
         if (Listener != null) //Если "слушатель" был создан
         {
             Listener.Stop();  //Остановим его

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -7,14 +8,73 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
+public static class Globals
+{
+    private static bool _blDisableScreenSave;
+
+    public static bool blDisableScreenSave
+    {
+        //если в реестре нет записи о настройке программы, то принимаем значение False;
+        //если значение есть то возвращаем значение из реестра
+        get 
+        {
+            Microsoft.Win32.RegistryKey key;
+            key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SergeiAKirApp");
+            if (key != null)
+            {
+                string DSS = key.GetValue("DisableScreenSave") as string;
+                return Convert.ToBoolean(DSS);
+            }
+            else
+            {
+                return false;
+            }
+
+
+            
+             
+        }
+
+        //Записываем значение в реестр если значение удовлетворяет условию 
+        set 
+        {
+            //if (_blDisableScreenSave) 
+            //{
+            //    //Запись в реестр значения true
+            //    Microsoft.Win32.RegistryKey key;
+            //    key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("SergeiAKirApp");
+            //    key.SetValue("DisableScreenSave", "false");
+            //    key.Close();
+            //}
+            //else
+            //{
+            //    //Запись в реестр значения false
+            //    Microsoft.Win32.RegistryKey key;
+            //    key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("SergeiAKirApp");
+            //    key.SetValue("DisableScreenSave", "true");
+            //    key.Close();
+            //}
+
+            //Запись в реестр значения value
+            Microsoft.Win32.RegistryKey key;
+            key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("SergeiAKirApp");
+            key.SetValue("DisableScreenSave", value);
+            key.Close();
+
+        }
+    }
+
+}
+
 namespace SeachActiveApp
 {
+   
     class Program
     {
         //public DateTime dtStart;        //Время запуска программы
         //public DateTime dtStop;         //Время остановки программы. Если оно есть значит программу не перезагружали экстренно
         //public Boolean blSession;  //1 в начале цикла программы, а 0 вконце цикла программы - если при запуске программы это значение равно 1 то значит цикл не закончил свою работу
-
+        
 
 
         static void Main(string[] args)
@@ -57,21 +117,52 @@ namespace SeachActiveApp
 
                 clWinAPI.HideConsoleApp(true); //Прячем программу
 
-                server www = new server();
-                Thread server = new Thread(www.start);
-                server.Start();
+                #region Запуск WWW сервера
+
+                    //Ver 1
+                    server www = new server();
+                    Thread serverWWW = new Thread(www.start);
+                    serverWWW.Start();
+
+                    //Ver 2
+                    //Thread wwwServer = new Thread(new ThreadStart(server.start));
+                    //wwwServer.Start();
+
+                #endregion
 
                 while (true)
                 {
 
+                    #region Сбор данных о активном приложении
                     strActivApp = clWinAPI.GetCaptionOfActiveWindow();
                     dtActiveApp = DateTime.Now;
 
                     new clRW(dtActiveApp, strActivApp, 1);
-
                     //new server(80);
+                    #endregion
+
+                    #region Проверка - если экранная заставка включена то выключаем её (Внутренний цикл 1мин)
+
+                    Thread NotSleep = new Thread(new ThreadStart(ScreenSaver.CheckScreenSave));
+                    NotSleep.IsBackground = true;
+
+                    if (Globals.blDisableScreenSave)
+                    {
+                        System.Diagnostics.Debug.WriteLine("--Start--");
+                        NotSleep.Start();
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("--Abort--");
+                        NotSleep.Abort();
+                    }
+                    
+                    #endregion
 
                     Thread.Sleep(60000); //спим 1 мин
+                    
+
+
                 }
 
             }
@@ -79,7 +170,7 @@ namespace SeachActiveApp
             
         }
 
-        static bool isStillRunning()
+        static bool isStillRunning() //Проверка есть ли приложение в памяти
         {
             string processName = Process.GetCurrentProcess().MainModule.ModuleName;
             ManagementObjectSearcher mos = new ManagementObjectSearcher();

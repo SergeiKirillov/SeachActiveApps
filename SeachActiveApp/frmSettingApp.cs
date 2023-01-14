@@ -15,14 +15,22 @@ namespace SeachActiveApp
     {
         public frmSettingApp()
         {
+            //При инициализации формы считываем значения из класса и по нему взводим элемент checkbox
+            
             InitializeComponent();
-
-             
+            chkDisableScreenSave.Checked = Globals.blDisableScreenSave;
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void chkDisableScreenSave_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (chkDisableScreenSave.Checked==true)
+            {
+                Globals.blDisableScreenSave = true;
+            }
+            else if (chkDisableScreenSave.Checked==false)
+            {
+                Globals.blDisableScreenSave = false;
+            }
         }
     }
 }

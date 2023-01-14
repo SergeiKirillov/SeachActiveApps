@@ -28,38 +28,50 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.chkSaveToFiles = new System.Windows.Forms.CheckBox();
+            this.chkSaveToBD = new System.Windows.Forms.CheckBox();
+            this.chkDisableScreenSave = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
-            // checkBox1
+            // chkSaveToFiles
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(59, 32);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(189, 17);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "сохранение результатов в файл";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.chkSaveToFiles.AutoSize = true;
+            this.chkSaveToFiles.Location = new System.Drawing.Point(59, 32);
+            this.chkSaveToFiles.Name = "chkSaveToFiles";
+            this.chkSaveToFiles.Size = new System.Drawing.Size(189, 17);
+            this.chkSaveToFiles.TabIndex = 0;
+            this.chkSaveToFiles.Text = "сохранение результатов в файл";
+            this.chkSaveToFiles.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // chkSaveToBD
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(59, 55);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(226, 17);
-            this.checkBox2.TabIndex = 1;
-            this.checkBox2.Text = "сохранение результатов в базу данных";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.chkSaveToBD.AutoSize = true;
+            this.chkSaveToBD.Location = new System.Drawing.Point(59, 55);
+            this.chkSaveToBD.Name = "chkSaveToBD";
+            this.chkSaveToBD.Size = new System.Drawing.Size(226, 17);
+            this.chkSaveToBD.TabIndex = 1;
+            this.chkSaveToBD.Text = "сохранение результатов в базу данных";
+            this.chkSaveToBD.UseVisualStyleBackColor = true;
+            // 
+            // chkDisableScreenSave
+            // 
+            this.chkDisableScreenSave.AutoSize = true;
+            this.chkDisableScreenSave.Location = new System.Drawing.Point(59, 79);
+            this.chkDisableScreenSave.Name = "chkDisableScreenSave";
+            this.chkDisableScreenSave.Size = new System.Drawing.Size(311, 17);
+            this.chkDisableScreenSave.TabIndex = 2;
+            this.chkDisableScreenSave.Text = "Отключение Экранной заставки при работе программы";
+            this.chkDisableScreenSave.UseVisualStyleBackColor = true;
+            this.chkDisableScreenSave.CheckedChanged += new System.EventHandler(this.chkDisableScreenSave_CheckedChanged);
             // 
             // frmSettingApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.checkBox2);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.chkDisableScreenSave);
+            this.Controls.Add(this.chkSaveToBD);
+            this.Controls.Add(this.chkSaveToFiles);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmSettingApp";
@@ -72,7 +84,8 @@
 
         #endregion
 
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox chkSaveToFiles;
+        private System.Windows.Forms.CheckBox chkSaveToBD;
+        private System.Windows.Forms.CheckBox chkDisableScreenSave;
     }
 }

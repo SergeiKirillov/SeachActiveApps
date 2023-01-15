@@ -134,6 +134,7 @@ namespace SeachActiveApp
                 {
 
                     #region Сбор данных о активном приложении
+                    //Внутри потока опрос с промежутком в 1 мин
                     strActivApp = clWinAPI.GetCaptionOfActiveWindow();
                     dtActiveApp = DateTime.Now;
 
@@ -146,20 +147,25 @@ namespace SeachActiveApp
                     Thread NotSleep = new Thread(new ThreadStart(ScreenSaver.CheckScreenSave));
                     NotSleep.IsBackground = true;
 
-                    if (Globals.blDisableScreenSave)
-                    {
-                        System.Diagnostics.Debug.WriteLine("--Start--");
-                        NotSleep.Start();
-                    }
-                    else
-                    {
-                        System.Diagnostics.Debug.WriteLine("--Abort--");
-                        NotSleep.Abort();
-                    }
+                    ////версия 1  -  прерываем поток для отключения заставки
+                    //if (Globals.blDisableScreenSave)
+                    //{
+                    //    System.Diagnostics.Debug.WriteLine("--Start--"+DateTime.Now);
+                    //    NotSleep.Start();
+                    //}
+                    //else
+                    //{
+                    //    System.Diagnostics.Debug.WriteLine("--Abort--"+DateTime.Now);
+                    //    NotSleep.Abort();
+                    //    //NotSleep.Join(TimeSpan.FromSeconds(10));
+                    //}
+
+                    //версия 2 - Внутри потока при каждом запуске проверяем значение глобальной переменной и если включена то отключаем экранную заставку или включаем её 
+                    NotSleep.Start();
                     
                     #endregion
 
-                    Thread.Sleep(60000); //спим 1 мин
+                    Thread.Sleep(TimeSpan.FromHours(1)); //спим 1 час
                     
 
 

@@ -107,6 +107,8 @@ public static class ScreenSaver
 
         public static void KillScreenSaver()
         {
+            //отключение экранной заставки
+
             IntPtr hDesktop = OpenDesktop("Screen-saver", 0,
             false, DESKTOP_READOBJECTS | DESKTOP_WRITEOBJECTS);
             if (hDesktop != IntPtr.Zero)
@@ -133,16 +135,34 @@ public static class ScreenSaver
 
     public static void CheckScreenSave()
     {
-        while (true)
-        {
-            if (ScreenSaver.GetScreenSaverRunning())
+       while (true)
+       {
+            if (Globals.blDisableScreenSave)
             {
-                ScreenSaver.KillScreenSaver();
-                //Console.WriteLine(DateTime.Now);
-                System.Diagnostics.Debug.WriteLine(DateTime.Now);
+                //Отключение экранной заставки  если галочка "Отключение экранной заставки" поднята
+
+                if (ScreenSaver.GetScreenSaverRunning())
+                {
+                    ScreenSaver.KillScreenSaver();
+                    //Console.WriteLine(DateTime.Now);
+                    System.Diagnostics.Debug.WriteLine(DateTime.Now);
+                }
             }
-            //Thread.Sleep(60000);
-        }
+            else
+            {
+                //Включение экранной заставки если снять галочку "Отключение экранной заставки"
+
+                if (!ScreenSaver.GetScreenSaverRunning())
+                {
+                    ScreenSaver.SetScreenSaverActive(1);
+                    //Console.WriteLine(DateTime.Now);
+                    System.Diagnostics.Debug.WriteLine(DateTime.Now);
+                }
+
+            }
+           
+            Thread.Sleep(TimeSpan.FromMinutes(10));
+       }
             
             
     } 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using LiteDB;
 
@@ -11,8 +12,23 @@ namespace SeachActiveApp
     {
         public clRW()
         {
+            
 
         }
+
+        public static void AciveApp()
+        {
+            while (true)
+            {
+                string strActivApp = clWinAPI.GetCaptionOfActiveWindow();
+                DateTime dtActiveApp = DateTime.Now;
+
+                new clRW(dtActiveApp, strActivApp, 1);
+
+                Thread.Sleep(TimeSpan.FromMinutes(1));
+            }
+        }
+
 
 
         public clRW(DateTime dt, string message, int time1min)

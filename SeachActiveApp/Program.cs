@@ -134,15 +134,24 @@ namespace SeachActiveApp
                 {
 
                     #region Сбор данных о активном приложении
-                    //Внутри потока опрос с промежутком в 1 мин
-                    strActivApp = clWinAPI.GetCaptionOfActiveWindow();
-                    dtActiveApp = DateTime.Now;
 
-                    new clRW(dtActiveApp, strActivApp, 1);
-                    //new server(80);
+                    ////Ver 1
+                    ////Внутри потока опрос с промежутком в 1 мин
+                    //strActivApp = clWinAPI.GetCaptionOfActiveWindow();
+                    //dtActiveApp = DateTime.Now;
+
+                    //new clRW(dtActiveApp, strActivApp, 1);
+                    ////new server(80);
+                    ///
+
+                    //Ver2 - C помощью фонового потока
+                    Thread AppActive = new Thread(clRW.AciveApp);
+                    AppActive.IsBackground = true;
+                    AppActive.Start();
+
                     #endregion
 
-                    #region Проверка - если экранная заставка включена то выключаем её (Внутренний цикл 1мин)
+                    #region Проверка - если экранная заставка включена то выключаем её (Внутренний цикл 10мин)
 
                     Thread NotSleep = new Thread(new ThreadStart(ScreenSaver.CheckScreenSave));
                     NotSleep.IsBackground = true;

@@ -133,6 +133,7 @@ public static class ScreenSaver
             return true;
         }
 
+    private static int intTimeCountScreenSave;
     public static void CheckScreenSave()
     {
        while (true)
@@ -143,29 +144,57 @@ public static class ScreenSaver
 
                 if (ScreenSaver.GetScreenSaverRunning())
                 {
-                    ScreenSaver.KillScreenSaver();
-                    //Console.WriteLine(DateTime.Now);
-                    System.Diagnostics.Debug.WriteLine(DateTime.Now);
+                    if (intTimeCountScreenSave!=10)
+                    {
+                        intTimeCountScreenSave = intTimeCountScreenSave + 1;
+                        System.Diagnostics.Debug.WriteLine("Кол-во циклов: "+ intTimeCountScreenSave);
+                    }
+                    else
+                    {
+                        intTimeCountScreenSave = 0;
+                        ScreenSaver.KillScreenSaver();
+                        //Console.WriteLine(DateTime.Now);
+                        //System.Diagnostics.Debug.WriteLine(DateTime.Now);
+                        System.Diagnostics.Debug.WriteLine("Кол-во циклов: " + intTimeCountScreenSave);
+
+                    }
+                    
                 }
             }
             else
             {
                 //Включение экранной заставки если снять галочку "Отключение экранной заставки"
 
-                if (!ScreenSaver.GetScreenSaverRunning())
+                if (!ScreenSaver.GetScreenSaverRunning()) //Если экранная заставка не запущена 
                 {
-                    ScreenSaver.SetScreenSaverActive(1);
-                    //Console.WriteLine(DateTime.Now);
-                    System.Diagnostics.Debug.WriteLine(DateTime.Now);
+                    
+                    if (ScreenSaver.GetScreenSaverActive()) //Если экранная завтавка Активирована, но не запущена
+                    {
+                        ScreenSaver.SetScreenSaverActive(1); //Активируем экранную заставку
+                        //Console.WriteLine(DateTime.Now);
+                        System.Diagnostics.Debug.WriteLine(DateTime.Now + "Экранная заставка запущена и активирована");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("Экранная заставка не запущена");
+                    }
+
+                    
+                    
                 }
 
             }
            
-            Thread.Sleep(TimeSpan.FromMinutes(10));
+            Thread.Sleep(TimeSpan.FromMinutes(1));
        }
             
             
-    } 
+    }
+
+    
+    
+
+
 }
 
 

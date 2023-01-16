@@ -151,7 +151,7 @@ namespace SeachActiveApp
 
                     #endregion
 
-                    #region Проверка - если экранная заставка включена то выключаем её (Внутренний цикл 10мин)
+                    #region Проверка - если экранная заставка включена то выключаем её (Внутренний цикл 1мин * 10 раз)
 
                     Thread NotSleep = new Thread(new ThreadStart(ScreenSaver.CheckScreenSave));
                     NotSleep.IsBackground = true;
@@ -171,8 +171,11 @@ namespace SeachActiveApp
 
                     //версия 2 - Внутри потока при каждом запуске проверяем значение глобальной переменной и если включена то отключаем экранную заставку или включаем её 
                     NotSleep.Start();
-                    
+
                     #endregion
+
+                    
+
 
                     Thread.Sleep(TimeSpan.FromHours(1)); //спим 1 час
                     

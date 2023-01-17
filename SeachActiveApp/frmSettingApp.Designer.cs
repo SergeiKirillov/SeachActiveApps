@@ -72,6 +72,9 @@
             this.txtTimeDisableScreenSave.Name = "txtTimeDisableScreenSave";
             this.txtTimeDisableScreenSave.Size = new System.Drawing.Size(32, 20);
             this.txtTimeDisableScreenSave.TabIndex = 3;
+            this.txtTimeDisableScreenSave.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTimeDisableScreenSave_KeyDown);
+            this.txtTimeDisableScreenSave.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTimeDisableScreenSave_KeyPress);
+            this.txtTimeDisableScreenSave.Leave += new System.EventHandler(this.txtTimeDisableScreenSave_Leave);
             // 
             // label1
             // 

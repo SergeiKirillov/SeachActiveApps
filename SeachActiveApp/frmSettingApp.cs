@@ -33,5 +33,28 @@ namespace SeachActiveApp
                 Globals.blDisableScreenSave = false;
             }
         }
+
+        private void txtTimeDisableScreenSave_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+
+            if (!Char.IsDigit(number) && number!= 8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtTimeDisableScreenSave_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode==Keys.Enter || e.KeyCode==Keys.Tab)
+            {
+                Globals.intTimeDisableScreenSave = Convert.ToInt32(txtTimeDisableScreenSave.Text);
+            }
+        }
+
+        private void txtTimeDisableScreenSave_Leave(object sender, EventArgs e)
+        {
+            txtTimeDisableScreenSave.Text = Globals.intTimeDisableScreenSave.ToString();
+        }
     }
 }

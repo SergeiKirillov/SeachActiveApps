@@ -55,25 +55,25 @@ public static class Globals
 
             if (key!=null)
             {
-                int TDSS = Convert.ToInt32(key.GetValue("TimeDisableScreenSave"));
+                int TDSS = (int)key.GetValue("TimeDisableScreenSave");
                 if (TDSS!=0)
                 {
                     return TDSS;
                 }
                 else
                 {
-                    return ScreenSaver.GetScreenSaverTimeout() + 1;
+                    return ScreenSaver.GetScreenSaverTimeout()/60;
                 }
                 
             }
             else
             {
-                return ScreenSaver.GetScreenSaverTimeout()+1;
+                return ScreenSaver.GetScreenSaverTimeout()/60;
             }
         }
         set 
         {
-            if (value > (ScreenSaver.GetScreenSaverTimeout()+1)) 
+            if (value > 0) 
             {
                 //Запись в реестр значения value
                 Microsoft.Win32.RegistryKey key;
@@ -86,7 +86,7 @@ public static class Globals
                 //Запись в реестр значения value
                 Microsoft.Win32.RegistryKey key;
                 key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("SergeiAKirApp");
-                key.SetValue("TimeDisableScreenSave", (ScreenSaver.GetScreenSaverTimeout() + 1));
+                key.SetValue("TimeDisableScreenSave", ScreenSaver.GetScreenSaverTimeout()/60);
                 key.Close();
             }
         }

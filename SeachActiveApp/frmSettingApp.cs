@@ -19,6 +19,7 @@ namespace SeachActiveApp
             
             InitializeComponent();
             chkDisableScreenSave.Checked = Globals.blDisableScreenSave;
+            txtTimeDisableScreenSave.Text = Globals.intTimeDisableScreenSave.ToString();
         }
 
         private void chkDisableScreenSave_CheckedChanged(object sender, EventArgs e)

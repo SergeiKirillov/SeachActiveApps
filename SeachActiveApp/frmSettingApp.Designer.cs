@@ -31,6 +31,8 @@
             this.chkSaveToFiles = new System.Windows.Forms.CheckBox();
             this.chkSaveToBD = new System.Windows.Forms.CheckBox();
             this.chkDisableScreenSave = new System.Windows.Forms.CheckBox();
+            this.txtTimeDisableScreenSave = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // chkSaveToFiles
@@ -56,7 +58,7 @@
             // chkDisableScreenSave
             // 
             this.chkDisableScreenSave.AutoSize = true;
-            this.chkDisableScreenSave.Location = new System.Drawing.Point(59, 79);
+            this.chkDisableScreenSave.Location = new System.Drawing.Point(59, 113);
             this.chkDisableScreenSave.Name = "chkDisableScreenSave";
             this.chkDisableScreenSave.Size = new System.Drawing.Size(311, 17);
             this.chkDisableScreenSave.TabIndex = 2;
@@ -64,11 +66,29 @@
             this.chkDisableScreenSave.UseVisualStyleBackColor = true;
             this.chkDisableScreenSave.CheckedChanged += new System.EventHandler(this.chkDisableScreenSave_CheckedChanged);
             // 
+            // txtTimeDisableScreenSave
+            // 
+            this.txtTimeDisableScreenSave.Location = new System.Drawing.Point(59, 136);
+            this.txtTimeDisableScreenSave.Name = "txtTimeDisableScreenSave";
+            this.txtTimeDisableScreenSave.Size = new System.Drawing.Size(32, 20);
+            this.txtTimeDisableScreenSave.TabIndex = 3;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(97, 139);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(296, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Через какое время экранная заставка будет отключена";
+            // 
             // frmSettingApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txtTimeDisableScreenSave);
             this.Controls.Add(this.chkDisableScreenSave);
             this.Controls.Add(this.chkSaveToBD);
             this.Controls.Add(this.chkSaveToFiles);
@@ -87,5 +107,7 @@
         private System.Windows.Forms.CheckBox chkSaveToFiles;
         private System.Windows.Forms.CheckBox chkSaveToBD;
         private System.Windows.Forms.CheckBox chkDisableScreenSave;
+        private System.Windows.Forms.TextBox txtTimeDisableScreenSave;
+        private System.Windows.Forms.Label label1;
     }
 }

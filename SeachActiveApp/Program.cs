@@ -10,9 +10,10 @@ using System.Threading.Tasks;
 
 public static class Globals
 {
-    private static bool _blDisableScreenSave;
+    //private static bool _blDisableScreenSave;
 
-    public static bool blDisableScreenSave
+
+    public static bool blDisableScreenSave //bool отключение заставки
     {
         //если в реестре нет записи о настройке программы, то принимаем значение False;
         //если значение есть то возвращаем значение из реестра
@@ -29,31 +30,12 @@ public static class Globals
             {
                 return false;
             }
-
-
-            
-             
+ 
         }
 
         //Записываем значение в реестр если значение удовлетворяет условию 
         set 
         {
-            //if (_blDisableScreenSave) 
-            //{
-            //    //Запись в реестр значения true
-            //    Microsoft.Win32.RegistryKey key;
-            //    key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("SergeiAKirApp");
-            //    key.SetValue("DisableScreenSave", "false");
-            //    key.Close();
-            //}
-            //else
-            //{
-            //    //Запись в реестр значения false
-            //    Microsoft.Win32.RegistryKey key;
-            //    key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("SergeiAKirApp");
-            //    key.SetValue("DisableScreenSave", "true");
-            //    key.Close();
-            //}
 
             //Запись в реестр значения value
             Microsoft.Win32.RegistryKey key;
@@ -63,6 +45,53 @@ public static class Globals
 
         }
     }
+
+    public static int intTimeDisableScreenSave //int Время когда будет происходить разблокировка 
+    {
+        get 
+        {
+            Microsoft.Win32.RegistryKey key;
+            key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SergeiAKirApp");
+
+            if (key!=null)
+            {
+                int TDSS = Convert.ToInt32(key.GetValue("TimeDisableScreenSave"));
+                if (TDSS!=0)
+                {
+                    return TDSS;
+                }
+                else
+                {
+                    return ScreenSaver.GetScreenSaverTimeout() + 1;
+                }
+                
+            }
+            else
+            {
+                return ScreenSaver.GetScreenSaverTimeout()+1;
+            }
+        }
+        set 
+        {
+            if (value > (ScreenSaver.GetScreenSaverTimeout()+1)) 
+            {
+                //Запись в реестр значения value
+                Microsoft.Win32.RegistryKey key;
+                key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("SergeiAKirApp");
+                key.SetValue("TimeDisableScreenSave", value);
+                key.Close();
+            }
+            else
+            {
+                //Запись в реестр значения value
+                Microsoft.Win32.RegistryKey key;
+                key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("SergeiAKirApp");
+                key.SetValue("TimeDisableScreenSave", (ScreenSaver.GetScreenSaverTimeout() + 1));
+                key.Close();
+            }
+        }
+    }
+
 
 }
 

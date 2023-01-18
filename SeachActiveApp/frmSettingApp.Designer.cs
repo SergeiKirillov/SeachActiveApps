@@ -75,6 +75,7 @@
             this.txtTimeDisableScreenSave.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTimeDisableScreenSave_KeyDown);
             this.txtTimeDisableScreenSave.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTimeDisableScreenSave_KeyPress);
             this.txtTimeDisableScreenSave.Leave += new System.EventHandler(this.txtTimeDisableScreenSave_Leave);
+           
             // 
             // label1
             // 

@@ -124,10 +124,10 @@ namespace SeachActiveApp
         {
 
 
-            string strActivApp;
+            //string strActivApp;
             //string strActivAppOld=null;
             //DateTime dtAppOld;
-            DateTime dtActiveApp;
+            //DateTime dtActiveApp;
 
             
 

@@ -42,11 +42,13 @@ namespace SeachActiveApp
             {
                 e.Handled = true;
             }
+
+
         }
 
         private void txtTimeDisableScreenSave_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode==Keys.Enter || e.KeyCode==Keys.Tab)
+            if (e.KeyCode==Keys.Enter)
             {
                 Globals.intTimeDisableScreenSave = Convert.ToInt32(txtTimeDisableScreenSave.Text);
             }
@@ -54,7 +56,9 @@ namespace SeachActiveApp
 
         private void txtTimeDisableScreenSave_Leave(object sender, EventArgs e)
         {
-            txtTimeDisableScreenSave.Text = Globals.intTimeDisableScreenSave.ToString();
+            Globals.intTimeDisableScreenSave = Convert.ToInt32(txtTimeDisableScreenSave.Text);
         }
+
+        
     }
 }

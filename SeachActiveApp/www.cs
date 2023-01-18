@@ -304,7 +304,7 @@ class clientSmall
 
             Client.Close();
         }
-        catch (Exception e)
+        catch (Exception)
         {
                     
         }

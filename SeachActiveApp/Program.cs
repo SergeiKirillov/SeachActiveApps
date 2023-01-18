@@ -55,15 +55,25 @@ public static class Globals
 
             if (key!=null)
             {
-                int TDSS = (int)key.GetValue("TimeDisableScreenSave");
-                if (TDSS!=0)
+                try
                 {
-                    return TDSS;
+                    int TDSS = (int)key.GetValue("TimeDisableScreenSave");
+                    if (TDSS != 0)
+                    {
+                        return TDSS;
+                    }
+                    else
+                    {
+                        return ScreenSaver.GetScreenSaverTimeout() / 60;
+                    }
                 }
-                else
+                catch (Exception)
                 {
-                    return ScreenSaver.GetScreenSaverTimeout()/60;
+
+                    return ScreenSaver.GetScreenSaverTimeout() / 60;
                 }
+
+                
                 
             }
             else

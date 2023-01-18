@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO.MemoryMappedFiles;
 using System.Linq;
 using System.Management;
 using System.Text;
@@ -12,6 +13,7 @@ public static class Globals
 {
     //private static bool _blDisableScreenSave;
 
+    public static MemoryMappedFile SharedMemory = MemoryMappedFile.CreateOrOpen("TimeDisableScreenSave", 4 * 2 + 4);
 
     public static bool blDisableScreenSave //bool отключение заставки
     {
@@ -101,6 +103,8 @@ public static class Globals
             }
         }
     }
+
+    
 
 
 }

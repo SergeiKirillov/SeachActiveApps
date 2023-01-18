@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO.MemoryMappedFiles;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -148,14 +149,30 @@ public static class ScreenSaver
                     {
                         intTimeCountScreenSave = intTimeCountScreenSave + 1;
                         System.Diagnostics.Debug.WriteLine("Кол-во циклов: "+ intTimeCountScreenSave);
+
+
+                        char[] message = intTimeCountScreenSave.ToString().ToCharArray();
+                        int size = message.Length;
+                        using (MemoryMappedViewAccessor writer = Globals.SharedMemory.CreateViewAccessor(0, size * 2+4))
+                        {
+                            writer.Write(0, size);
+                            writer.WriteArray<Char>(4, message, 0, message.Length);
+                            foreach (char item in message)
+                            {
+                                System.Diagnostics.Debug.WriteLine("Передача числа: " + item);
+                            } 
+
+                        }
+
+
                     }
                     else
                     {
                         intTimeCountScreenSave = 0;
-                        ScreenSaver.KillScreenSaver();
-                        //ScreenSaver.SetScreenSaverActive(0); //не отключает
-                        //Console.WriteLine(DateTime.Now);
-                        //System.Diagnostics.Debug.WriteLine(DateTime.Now);
+                        ScreenSaver.KillScreenSaver(); //не всегда срабатывает
+                        ScreenSaver.SetScreenSaverActive(0); //не отключает
+                        
+                        System.Diagnostics.Debug.WriteLine(DateTime.Now);
                         System.Diagnostics.Debug.WriteLine("Кол-во циклов: " + intTimeCountScreenSave);
 
                     }

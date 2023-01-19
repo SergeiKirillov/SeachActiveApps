@@ -13,7 +13,12 @@ public static class Globals
 {
     //private static bool _blDisableScreenSave;
 
-    public static MemoryMappedFile SharedMemory = MemoryMappedFile.CreateOrOpen("TimeDisableScreenSave", 4 * 2 + 4);
+    //Создание участка разделяемой памяти
+    //Первый параметр - название участка, 
+    //второй - длина участка памяти в байтах: тип char  занимает 2 байта 
+    //плюс четыре байта для одного объекта типа Integer(size)
+    //плюс четыре байта для одного объекта типа Integer(Кол-во оставшихся минут)
+    public static MemoryMappedFile SharedMemory = MemoryMappedFile.CreateOrOpen("TimeDisableScreenSave", 4 * 2 + 4 + 4);
 
     public static bool blDisableScreenSave //bool отключение заставки
     {

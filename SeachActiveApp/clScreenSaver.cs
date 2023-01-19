@@ -147,22 +147,27 @@ public static class ScreenSaver
                 {
                     if (intTimeCountScreenSave!=Globals.intTimeDisableScreenSave)
                     {
-                        intTimeCountScreenSave = intTimeCountScreenSave ++;
+                        intTimeCountScreenSave = intTimeCountScreenSave + 1;
                         System.Diagnostics.Debug.WriteLine("Кол-во циклов: "+ intTimeCountScreenSave);
 
-
+                        #region Передаем значение внешней программе - скринсерверу
+                        
                         char[] message = intTimeCountScreenSave.ToString().ToCharArray();
+                        message = "Кол-во иставшихся минут:".ToCharArray();
                         int size = message.Length;
-                        using (MemoryMappedViewAccessor writer = Globals.SharedMemory.CreateViewAccessor(0, size * 2+4))
+                        using (MemoryMappedViewAccessor writer = Globals.SharedMemory.CreateViewAccessor(0, size * 2 + 4 + 4))
                         {
-                            writer.Write(0, size);
-                            writer.WriteArray<Char>(4, message, 0, message.Length);
-                            foreach (char item in message)
-                            {
-                                System.Diagnostics.Debug.WriteLine("Передача числа: " + item);
-                            } 
+                            writer.Write(0, size); //размер сообщения
+                            writer.Write(4, Globals.intTimeDisableScreenSave - intTimeCountScreenSave); //число сколько осталось мин до выключения заставки 
+                            writer.WriteArray<Char>(8, message, 0, message.Length); //Пример передачи сообшения
+                            //foreach (char item in message)
+                            //{
+                            //    System.Diagnostics.Debug.WriteLine("Передача числа: " + item);
+                            //}
 
                         }
+                        #endregion
+
 
 
                     }

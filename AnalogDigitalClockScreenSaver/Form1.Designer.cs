@@ -28,13 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "AnalogDigitalClockScreenSaver";
+            this.ClientSize = new System.Drawing.Size(816, 450);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.ShowInTaskbar= false;
-            this.TopMost= true;
+            this.Name = "Form1";
+            this.ShowInTaskbar = false;
+            this.Text = "AnalogDigitalClockScreenSaver";
+            this.TopMost = true;
+            this.ResumeLayout(false);
+
         }
 
         #endregion

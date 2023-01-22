@@ -57,6 +57,7 @@
             this.Controls.Add(this.txtLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmScreenSaver";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.frmScreenSaver_Load);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.frmScreenSaver_KeyPress);

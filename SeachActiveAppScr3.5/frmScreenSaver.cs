@@ -25,7 +25,7 @@ namespace SeachActiveAppScr3._5
         [DllImport("user32.dll")]
         static extern bool GetClientRect(IntPtr hWnd, out Rectangle lpRect);
 
-        private bool previewMode;
+        private bool previewMode=false;
 
 
 
@@ -80,22 +80,24 @@ namespace SeachActiveAppScr3._5
         private void frmScreenSaver_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!previewMode) Application.Exit();
+            //Application.Exit();
         }
 
         private void frmScreenSaver_MouseClick(object sender, MouseEventArgs e)
         {
             if (!previewMode) Application.Exit();
+            //Application.Exit();
         }
 
         private Point mouseLocation;
         private void frmScreenSaver_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!previewMode)
-            {
-                Application.Exit();
-            }
-            else
-            {
+            //if (!previewMode)
+            //{
+            //    Application.Exit();
+            //}
+            //else
+            //{
                 if (!mouseLocation.IsEmpty)
                 {
                     if (Math.Abs(mouseLocation.X - e.X) > 5 || Math.Abs(mouseLocation.Y - e.Y) > 5) Application.Exit();
@@ -103,7 +105,7 @@ namespace SeachActiveAppScr3._5
                 }
 
                 mouseLocation = e.Location;
-            }
+            //}
         }
 
         private void MoveTimer_Tick(object sender, EventArgs e)

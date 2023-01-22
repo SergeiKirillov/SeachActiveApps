@@ -67,20 +67,20 @@ namespace SeachActiveAppScreenSaver
         private Point mouseLocation;
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!previewMode) 
-            { 
-               Application.Exit(); 
-            }
-            else
-            {
-                if (!mouseLocation.IsEmpty)
-                {
-                    if (Math.Abs(mouseLocation.X - e.X) > 5 || Math.Abs(mouseLocation.Y - e.Y) > 5) Application.Exit();
+            //if (!previewMode) 
+            //{ 
+            //   Application.Exit(); 
+            //}
+            //else
+            //{
+            //    if (!mouseLocation.IsEmpty)
+            //    {
+            //        if (Math.Abs(mouseLocation.X - e.X) > 5 || Math.Abs(mouseLocation.Y - e.Y) > 5) Application.Exit();
 
-                }
+            //    }
 
-                mouseLocation = e.Location;
-            }
+            //    mouseLocation = e.Location;
+            //}
             
         }
 

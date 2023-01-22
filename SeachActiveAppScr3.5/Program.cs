@@ -35,6 +35,7 @@ namespace SeachActiveAppScr3._5
                 if (firstArgument == "/c")
                 {
                     //TODO configuration mode
+                    Application.Run(new frmSeachActiveAppScrSetting());
                 }
 
                 else if (firstArgument == "/p")
@@ -66,6 +67,8 @@ namespace SeachActiveAppScr3._5
             {
                 ShowScreenSaver();
                 Application.Run();
+
+                //Application.Run(new frmSeachActiveAppScrSetting());
             }
 
             

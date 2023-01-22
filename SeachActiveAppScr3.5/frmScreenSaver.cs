@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SeachActiveAppScr3._5
 {
@@ -73,8 +75,23 @@ namespace SeachActiveAppScr3._5
             Cursor.Hide();
             TopMost = true;
 
+            RegistryKey key = Registry.CurrentUser.OpenSubKey("SergeiAKirApp");
+            string ssText = (string)key.GetValue("text");
+            if (ssText == null)
+            {
+                txtLabel.Text = "C# Screen Saver";
+            }
+            else
+            {
+                txtLabel.Text = (string)key.GetValue("text");
+            }
+
             MoveTimer.Interval = 3000;
             MoveTimer.Start();
+
+            
+            
+
         }
 
         private void frmScreenSaver_KeyPress(object sender, KeyPressEventArgs e)

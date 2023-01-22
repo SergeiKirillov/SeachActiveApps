@@ -86,7 +86,7 @@ namespace SeachActiveAppScr3._5
                 txtLabel.Text = (string)key.GetValue("text");
             }
 
-            MoveTimer.Interval = 3000;
+            MoveTimer.Interval = 1000;
             MoveTimer.Start();
 
             
@@ -129,6 +129,9 @@ namespace SeachActiveAppScr3._5
         {
             txtLabel.Left = rand.Next(Math.Max(1, Bounds.Width - txtLabel.Width));
             txtLabel.Top = rand.Next(Math.Max(1, Bounds.Height - txtLabel.Height));
+            string TimeNow = DateTime.Now.ToString("HH:mm");
+            txtLabel.Text = TimeNow;
+            
         }
     }
 }

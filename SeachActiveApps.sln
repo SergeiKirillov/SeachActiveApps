@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.33026.149
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeachActiveApp", "SeachActiveApp\SeachActiveApp.csproj", "{2EB371AB-2396-4CB7-9C07-852DBD5BAB18}"
 EndProject
@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppToAppClient", "AppToAppC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeachActiveAppScreenSaver", "SeachActiveAppScreenSaver\SeachActiveAppScreenSaver.csproj", "{48C5E160-081D-449D-B78C-E1D82AB331F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeachActiveAppScr3.5", "SeachActiveAppScr3.5\SeachActiveAppScr3.5.csproj", "{6A5A86DF-FB5E-44BD-86D2-7D9B80567698}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeachActiveAppScr", "SeachActiveAppScr3.5\SeachActiveAppScr.csproj", "{6A5A86DF-FB5E-44BD-86D2-7D9B80567698}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

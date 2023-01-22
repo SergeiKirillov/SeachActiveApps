@@ -10,6 +10,23 @@ namespace SeachActiveAppScr3._5
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
+        /// 
+
+        private static bool blTextSS;
+        private static string strTextSS;
+
+        public static bool blTxtScreenSaver
+        {
+            get { return blTextSS; }
+            set { blTextSS = value; }
+        }
+
+        public static string strTxtScreenSaver
+        {
+            get { return strTextSS; }
+            set { strTextSS = value; }
+        }
+
         [STAThread]
         static void Main(string[] args)
         {
@@ -73,6 +90,8 @@ namespace SeachActiveAppScr3._5
 
             
         }
+
+
 
         static void ShowScreenSaver()
         {

@@ -68,5 +68,31 @@ namespace SeachActiveAppScr3._5
             }
                 
         }
+
+        private void chkText_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkText.Checked)
+            {
+                txtBox.Enabled = true;
+                chkTimeNow.Checked = false;
+            }
+            else
+            {
+                txtBox.Enabled = false;
+                chkTimeNow.Checked = true;
+            }
+        }
+
+        private void chkTimeNow_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkTimeNow.Checked)
+            {
+                chkText.Checked = false;
+            }
+            else
+            {
+                chkText.Checked = true;
+            }
+        }
     }
 }

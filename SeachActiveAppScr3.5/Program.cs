@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SeachActiveAppScr3._5
 {
@@ -12,19 +14,61 @@ namespace SeachActiveAppScr3._5
         /// </summary>
         /// 
 
-        private static bool blTextSS;
-        private static string strTextSS;
+        
+        
 
         public static bool blTxtScreenSaver
         {
-            get { return blTextSS; }
-            set { blTextSS = value; }
+            get
+            {
+                bool blSS;
+                using (RegistryKey blTextSS = Registry.CurrentUser.OpenSubKey("SergeiAKirApp", true))
+                {
+                    blSS = Convert.ToBoolean(blTextSS.GetValue("blText") as string); 
+                }
+                return blSS;
+            }
+            set
+            {
+                //Запись в реестр значения value
+                using (RegistryKey blTextSS = Registry.CurrentUser.OpenSubKey("SergeiAKirApp", true))
+                {
+                    blTextSS.SetValue("blText", value);
+                }
+
+            }
         }
 
         public static string strTxtScreenSaver
         {
-            get { return strTextSS; }
-            set { strTextSS = value; }
+            get 
+            {
+                string strSS;
+                using (RegistryKey strTextSS = Registry.CurrentUser.OpenSubKey("SergeiAKirApp", true))
+                {
+                    strSS = strTextSS.GetValue("Text") as string;
+                }
+                if (strSS == null)
+                {
+                    return "Screen Saver для программы SeachActiveApp";
+                }
+                else
+                {
+                    return strSS;
+                }
+                
+
+               
+            }
+            set 
+            {
+                //Запись в реестр значения value
+                using (RegistryKey strTextSS = Registry.CurrentUser.OpenSubKey("SergeiAKirApp", true))
+                {
+                    strTextSS.SetValue("Text", value);
+                }
+                
+            }
         }
 
         [STAThread]

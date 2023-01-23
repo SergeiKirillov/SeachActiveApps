@@ -73,20 +73,31 @@ namespace SeachActiveAppScr3._5
         private void frmScreenSaver_Load(object sender, EventArgs e)
         {
             Cursor.Hide();
-            TopMost = true;
+            TopMost = true;  
+            this.TransparencyKey = this.BackColor;
 
-            RegistryKey key = Registry.CurrentUser.OpenSubKey("SergeiAKirApp");
-            string ssText = (string)key.GetValue("text");
-            if (ssText == null)
+
+            //RegistryKey key = Registry.CurrentUser.OpenSubKey("SergeiAKirApp");
+            //string ssText = (string)key.GetValue("text");
+            //if (ssText == null)
+            //{
+            //    txtLabel.Text = "C# Screen Saver";
+            //}
+            //else
+            //{
+            //    txtLabel.Text = (string)key.GetValue("text");
+            //}
+
+            if (Program.blTxtScreenSaver)
             {
-                txtLabel.Text = "C# Screen Saver";
+                txtLabel.Text = Program.strTxtScreenSaver;
             }
             else
             {
-                txtLabel.Text = (string)key.GetValue("text");
+                txtLabel.Text = DateTime.Now.ToString("HH:mm");
             }
 
-            MoveTimer.Interval = 1000;
+            MoveTimer.Interval = 60000;
             MoveTimer.Start();
 
             
@@ -129,8 +140,15 @@ namespace SeachActiveAppScr3._5
         {
             txtLabel.Left = rand.Next(Math.Max(1, Bounds.Width - txtLabel.Width));
             txtLabel.Top = rand.Next(Math.Max(1, Bounds.Height - txtLabel.Height));
-            string TimeNow = DateTime.Now.ToString("HH:mm");
-            txtLabel.Text = TimeNow;
+
+            if (Program.blTxtScreenSaver)
+            {
+                txtLabel.Text = Program.strTxtScreenSaver;
+            }
+            else
+            {
+                txtLabel.Text = DateTime.Now.ToString("HH:mm");
+            }
             
         }
     }

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.txtBox = new System.Windows.Forms.TextBox();
-            this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
             this.chkTimeNow = new System.Windows.Forms.CheckBox();
@@ -44,20 +43,11 @@
             this.txtBox.Size = new System.Drawing.Size(337, 20);
             this.txtBox.TabIndex = 0;
             this.txtBox.Tag = "Введите текст который будет отображаться в экранной заставке";
-            // 
-            // btnOK
-            // 
-            this.btnOK.Location = new System.Drawing.Point(150, 98);
-            this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(160, 24);
-            this.btnOK.TabIndex = 1;
-            this.btnOK.Text = "OK";
-            this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            this.txtBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBox_KeyDown);
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(316, 98);
+            this.btnCancel.Location = new System.Drawing.Point(628, 414);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(160, 24);
             this.btnCancel.TabIndex = 2;
@@ -107,7 +97,6 @@
             this.Controls.Add(this.chkTimeNow);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnOK);
             this.Controls.Add(this.txtBox);
             this.Name = "frmSeachActiveAppScrSetting";
             this.Text = "Параметры настройки программы";
@@ -120,7 +109,6 @@
         #endregion
 
         private System.Windows.Forms.TextBox txtBox;
-        private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.CheckBox chkTimeNow;

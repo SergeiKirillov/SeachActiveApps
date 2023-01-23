@@ -21,21 +21,42 @@ namespace SeachActiveAppScr3._5
 
         private void SaveSettings()
         {
-            // Create or get existing Registry subkey
-            RegistryKey key = Registry.CurrentUser.CreateSubKey("SergeiAKirApp");
+            //// Create or get existing Registry subkey
+            //RegistryKey key = Registry.CurrentUser.CreateSubKey("SergeiAKirApp");
 
-            key.SetValue("Text", txtBox.Text);
+            //key.SetValue("Text", txtBox.Text);
+
+            Program.strTxtScreenSaver = txtBox.Text;
 
         }
 
         private void LoadSettings() 
         {
-            // Get the value stored in the Registry
-            RegistryKey key = Registry.CurrentUser.OpenSubKey("SergeiAKirApp");
-            if (key == null)
-                txtBox.Text = "ScreenSaver от программы SeachApctiveApp";
+           
+            if (Program.blTxtScreenSaver)
+            {
+                chkText.Checked = true;
+                txtBox.Enabled = true;
+                chkTimeNow.Checked = false;
+
+                //// Get the value stored in the Registry
+                //RegistryKey key = Registry.CurrentUser.OpenSubKey("SergeiAKirApp");
+                //if (key == null)
+                //    txtBox.Text = "ScreenSaver от программы SeachApctiveApp";
+                //else
+                //    txtBox.Text = (string)key.GetValue("Text");
+
+                txtBox.Text = Program.strTxtScreenSaver;
+            }
             else
-                txtBox.Text = (string)key.GetValue("Text");
+            {
+                chkText.Checked = false;
+                txtBox.Enabled = false;
+                chkTimeNow.Checked = true;
+                
+
+            }
+            
 
         }
 
@@ -52,20 +73,20 @@ namespace SeachActiveAppScr3._5
 
         private void frmSeachActiveAppScrSetting_Load(object sender, EventArgs e)
         {
-            RegistryKey key = Registry.CurrentUser.OpenSubKey("SergeiAKirApp");
+            //RegistryKey key = Registry.CurrentUser.OpenSubKey("SergeiAKirApp");
 
-            string ssText = (string)key.GetValue("text");
+            //string ssText = (string)key.GetValue("text");
             
-            //if (key == null) txtBox.Text = "C# Screen Saver";
+            ////if (key == null) txtBox.Text = "C# Screen Saver";
             
-            if (ssText == null)
-            {
-                txtBox.Text = "C# Screen Saver";
-            }
-            else
-            {
-                txtBox.Text = (string)key.GetValue("text");
-            }
+            //if (ssText == null)
+            //{
+            //    txtBox.Text = "C# Screen Saver";
+            //}
+            //else
+            //{
+            //    txtBox.Text = (string)key.GetValue("text");
+            //}
                 
         }
 
@@ -81,6 +102,8 @@ namespace SeachActiveAppScr3._5
                 txtBox.Enabled = false;
                 chkTimeNow.Checked = true;
             }
+
+            Program.blTxtScreenSaver = chkText.Checked;
         }
 
         private void chkTimeNow_CheckedChanged(object sender, EventArgs e)
@@ -92,6 +115,16 @@ namespace SeachActiveAppScr3._5
             else
             {
                 chkText.Checked = true;
+            }
+
+            //Program.blTxtScreenSaver = chkText.Checked;
+        }
+
+        private void txtBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Program.strTxtScreenSaver = txtBox.Text;
             }
         }
     }

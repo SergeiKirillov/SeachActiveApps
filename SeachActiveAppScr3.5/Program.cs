@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -7,6 +8,63 @@ namespace SeachActiveAppScr3._5
 {
     static class Program
     {
+        public static bool blTxtScreenSaver
+        {
+            get
+            {
+                bool blSS;
+                using (RegistryKey blTextSS = Registry.CurrentUser.OpenSubKey("SergeiAKirApp", true))
+                {
+                    blSS = Convert.ToBoolean(blTextSS.GetValue("blText") as string);
+                }
+                return blSS;
+            }
+            set
+            {
+                //Запись в реестр значения value
+                using (RegistryKey blTextSS = Registry.CurrentUser.OpenSubKey("SergeiAKirApp", true))
+                {
+                    blTextSS.SetValue("blText", value);
+                }
+
+            }
+        }
+
+        public static string strTxtScreenSaver
+        {
+            get
+            {
+                string strSS;
+                using (RegistryKey strTextSS = Registry.CurrentUser.OpenSubKey("SergeiAKirApp", true))
+                {
+                    strSS = strTextSS.GetValue("Text") as string;
+                }
+                if (strSS == null)
+                {
+                    return "Screen Saver для программы SeachActiveApp";
+                }
+                else
+                {
+                    return strSS;
+                }
+
+
+
+            }
+            set
+            {
+                //Запись в реестр значения value
+                using (RegistryKey strTextSS = Registry.CurrentUser.OpenSubKey("SergeiAKirApp", true))
+                {
+                    strTextSS.SetValue("Text", value);
+                }
+
+            }
+        }
+
+
+
+
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>

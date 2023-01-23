@@ -33,18 +33,21 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblSettingText = new System.Windows.Forms.Label();
+            this.chkTimeNow = new System.Windows.Forms.CheckBox();
+            this.chkText = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // txtBox
             // 
-            this.txtBox.Location = new System.Drawing.Point(17, 64);
+            this.txtBox.Location = new System.Drawing.Point(147, 74);
             this.txtBox.Name = "txtBox";
             this.txtBox.Size = new System.Drawing.Size(337, 20);
             this.txtBox.TabIndex = 0;
+            this.txtBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBox_KeyDown);
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(17, 90);
+            this.btnOK.Location = new System.Drawing.Point(22, 175);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(160, 23);
             this.btnOK.TabIndex = 1;
@@ -54,7 +57,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(194, 90);
+            this.btnCancel.Location = new System.Drawing.Point(199, 175);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(160, 23);
             this.btnCancel.TabIndex = 2;
@@ -76,17 +79,41 @@
             // lblSettingText
             // 
             this.lblSettingText.AutoSize = true;
-            this.lblSettingText.Location = new System.Drawing.Point(14, 48);
+            this.lblSettingText.Location = new System.Drawing.Point(19, 133);
             this.lblSettingText.Name = "lblSettingText";
             this.lblSettingText.Size = new System.Drawing.Size(342, 13);
             this.lblSettingText.TabIndex = 4;
             this.lblSettingText.Text = "Введите текст который будет отображаться в экранной заставке";
+            // 
+            // chkTimeNow
+            // 
+            this.chkTimeNow.AutoSize = true;
+            this.chkTimeNow.Location = new System.Drawing.Point(22, 53);
+            this.chkTimeNow.Name = "chkTimeNow";
+            this.chkTimeNow.Size = new System.Drawing.Size(169, 17);
+            this.chkTimeNow.TabIndex = 5;
+            this.chkTimeNow.Text = "Отображать текущее время";
+            this.chkTimeNow.UseVisualStyleBackColor = true;
+            this.chkTimeNow.CheckedChanged += new System.EventHandler(this.chkTimeNow_CheckedChanged);
+            // 
+            // chkText
+            // 
+            this.chkText.AutoSize = true;
+            this.chkText.Location = new System.Drawing.Point(22, 77);
+            this.chkText.Name = "chkText";
+            this.chkText.Size = new System.Drawing.Size(119, 17);
+            this.chkText.TabIndex = 6;
+            this.chkText.Text = "Отображать текст";
+            this.chkText.UseVisualStyleBackColor = true;
+            this.chkText.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
             // frmSeachActiveAppScrSetting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.chkText);
+            this.Controls.Add(this.chkTimeNow);
             this.Controls.Add(this.lblSettingText);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.btnCancel);
@@ -107,5 +134,7 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblSettingText;
+        private System.Windows.Forms.CheckBox chkTimeNow;
+        private System.Windows.Forms.CheckBox chkText;
     }
 }

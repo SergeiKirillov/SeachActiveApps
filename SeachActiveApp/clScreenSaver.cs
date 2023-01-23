@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO.MemoryMappedFiles;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
+using System.Windows.Forms;
 
 public static class ScreenSaver
 {
+    //https://translated.turbopages.org/proxy_u/en-ru.ru.68c3861d-63c01374-5f5e3d5f-74722d776562/https/www.codeproject.com/Articles/17067/Controlling-The-Screen-Saver-With-C
+
+
     // Signatures for unmanaged calls
     [DllImport("user32.dll", CharSet = CharSet.Auto)]
     private static extern bool SystemParametersInfo(int uAction, int uParam, ref int lpvParam, int flags );
@@ -214,8 +219,19 @@ public static class ScreenSaver
             
     }
 
-    
-    
+
+    //private static void MoveCursor()
+    //{
+    //    // Set the Current cursor, move the cursor's Position,
+    //    // and set its clipping rectangle to the form. 
+
+    //    this.Cursor = new Cursor(Cursor.Current.Handle);
+    //    Cursor.Position = new Point(Cursor.Position.X - 50, Cursor.Position.Y - 50);
+    //    Cursor.Clip = new Rectangle(this.Location, this.Size);
+    //}
+
+
+
 
 
 }

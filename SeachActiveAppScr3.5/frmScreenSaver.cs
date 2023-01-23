@@ -74,6 +74,7 @@ namespace SeachActiveAppScr3._5
         {
             Cursor.Hide();
             TopMost = true;
+            //this.TransparencyKey = this.BackColor;
 
             //RegistryKey key = Registry.CurrentUser.OpenSubKey("SergeiAKirApp");
             //string ssText = (string)key.GetValue("text");
@@ -148,6 +149,7 @@ namespace SeachActiveAppScr3._5
             {
                 txtLabel.Text = DateTime.Now.ToString("HH:mm");
             }
+
 
         }
     }

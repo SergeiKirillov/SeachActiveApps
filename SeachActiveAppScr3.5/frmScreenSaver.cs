@@ -97,7 +97,7 @@ namespace SeachActiveAppScr3._5
             }
 
 
-            MoveTimer.Interval = 3000;
+            MoveTimer.Interval = 60000; //1мин  
             MoveTimer.Start();
 
             
@@ -149,6 +149,12 @@ namespace SeachActiveAppScr3._5
             {
                 txtLabel.Text = DateTime.Now.ToString("HH:mm");
             }
+
+            #region Получение значения из памяти и его отображение
+                    
+
+            #endregion
+
 
 
         }

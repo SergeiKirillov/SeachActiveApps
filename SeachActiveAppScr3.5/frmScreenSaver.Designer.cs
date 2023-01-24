@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.txtLabel = new System.Windows.Forms.Label();
             this.MoveTimer = new System.Windows.Forms.Timer(this.components);
+            this.lblStopTimeScreenSaver = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtLabel
@@ -48,12 +49,24 @@
             // 
             this.MoveTimer.Tick += new System.EventHandler(this.MoveTimer_Tick);
             // 
+            // lblStopTimeScreenSaver
+            // 
+            this.lblStopTimeScreenSaver.AutoSize = true;
+            this.lblStopTimeScreenSaver.Font = new System.Drawing.Font("Microsoft Sans Serif", 46F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblStopTimeScreenSaver.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.lblStopTimeScreenSaver.Location = new System.Drawing.Point(12, 9);
+            this.lblStopTimeScreenSaver.Name = "lblStopTimeScreenSaver";
+            this.lblStopTimeScreenSaver.Size = new System.Drawing.Size(64, 71);
+            this.lblStopTimeScreenSaver.TabIndex = 1;
+            this.lblStopTimeScreenSaver.Text = "0";
+            // 
             // frmScreenSaver
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lblStopTimeScreenSaver);
             this.Controls.Add(this.txtLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmScreenSaver";
@@ -72,6 +85,7 @@
 
         private System.Windows.Forms.Label txtLabel;
         private System.Windows.Forms.Timer MoveTimer;
+        private System.Windows.Forms.Label lblStopTimeScreenSaver;
     }
 }
 

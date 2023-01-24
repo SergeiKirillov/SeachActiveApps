@@ -39,8 +39,13 @@ public static class ScreenSaver
     [DllImport("user32.dll", CharSet = CharSet.Auto)]
     public static extern IntPtr GetForegroundWindow( );
 
-     // Callbacks
-       private delegate bool EnumDesktopWindowsProc(IntPtr hDesktop, IntPtr lParam);
+    [DllImport("User32.dll")]
+    static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+    [DllImport("User32.dll")]
+    static extern int SetForegroundWindow(IntPtr hWnd);
+
+    // Callbacks
+    private delegate bool EnumDesktopWindowsProc(IntPtr hDesktop, IntPtr lParam);
 
      // Constants
         private const int SPI_GETSCREENSAVERACTIVE = 16;
@@ -178,9 +183,22 @@ public static class ScreenSaver
                     }
                     else
                     {
+                        //варриант 1
                         intTimeCountScreenSave = 0;
-                        ScreenSaver.KillScreenSaver(); //не всегда срабатывает
-                        ScreenSaver.SetScreenSaverActive(0); //не отключает
+
+                        ////Вер 2 - ищем приложенние SeachActiveAppScr3 и посылаем ему символы
+                        //IntPtr hWndSS = FindWindow(null, "SeachActiveAppScr3.5");
+                        //IntPtr hWndSS = FindWindow(null, "ScreenSaver");
+                        //SetForegroundWindow(hWndSS);
+                        //SendKeys.SendWait("hh");//Error отказано в доступе
+
+
+                        ////Вер 1 - убиваем экранную заставку
+                        //ScreenSaver.KillScreenSaver(); //не всегда срабатывает, для SeachActiveApp3.5 вызывает зависание
+                        //ScreenSaver.SetScreenSaverActive(0); //не отключает
+
+                        //вариант 3
+                        //Посылаем бит в память. Экранная заставка его считывает и завершает работу
                         
                         System.Diagnostics.Debug.WriteLine(DateTime.Now);
                         System.Diagnostics.Debug.WriteLine("Кол-во циклов: " + intTimeCountScreenSave);

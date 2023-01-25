@@ -215,6 +215,10 @@ public static class ScreenSaver
                     }
                     
                 }
+                else
+                {
+                    intTimeCountScreenSave=0; //если заставка не включена то кол-во мин до выключения равно 0
+                }
             }
             else
             {

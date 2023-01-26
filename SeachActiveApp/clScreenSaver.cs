@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 public static class ScreenSaver
 {
@@ -43,6 +44,36 @@ public static class ScreenSaver
     static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
     [DllImport("User32.dll")]
     static extern int SetForegroundWindow(IntPtr hWnd);
+
+    #region Вариант 4.1  - не работает
+    //[DllImport("user32.dll")]
+    //private static extern void mouse_event(UInt32 dwFlags, UInt32 dx, UInt32 dy, UInt32 dwData, IntPtr dwExtraInfo);
+
+    //private const UInt32 MOVE = 0x0001;
+    //private const UInt32 LEFTDOWN = 0x0002;
+    //private const UInt32 LEFTUP = 0x0004;
+    //private const UInt32 RIGHTDOWN = 0x0008;
+    //private const UInt32 RIGHTUP = 0x0010;
+    //private const UInt32 MIDDLEDOWN = 0x0020;
+    //private const UInt32 MIDDLEUP = 0x0040;
+    //private const UInt32 WHEEL = 0x0800;
+    //private const UInt32 ABSOLUTE = 0x8000;
+
+    #endregion
+
+    #region Вариант 4.2  - не работает
+    //[DllImport("user32.dll")]
+    //public static extern void SetCursorPos(int x, int y);
+    #endregion
+
+    #region Вариант 4.3 
+
+    
+
+    #endregion
+
+
+
 
     // Callbacks
     private delegate bool EnumDesktopWindowsProc(IntPtr hDesktop, IntPtr lParam);
@@ -159,57 +190,111 @@ public static class ScreenSaver
                     {
                         intTimeCountScreenSave = intTimeCountScreenSave + 1;
                         System.Diagnostics.Debug.WriteLine("Кол-во циклов: "+ intTimeCountScreenSave);
-
-                        #region Передаем значение внешней программе - скринсерверу
-                        try
-                        {
-                            char[] message = intTimeCountScreenSave.ToString().ToCharArray();
-                            message = "Кол-во иставшихся минут:".ToCharArray();
-                            int size = message.Length;
-                            using (MemoryMappedViewAccessor writer = Globals.SharedMemory.CreateViewAccessor(0, size * 2 + 4 + 4))
+                        int ObratniOtchet = Globals.intTimeDisableScreenSave - intTimeCountScreenSave;
+                        //if (ObratniOtchet!=0)
+                        //{
+                            #region Передаем значение внешней программе - скринсерверу
+                            try
                             {
-                                writer.Write(0, size); //размер сообщения
-                                writer.Write(4, Globals.intTimeDisableScreenSave - intTimeCountScreenSave); //число сколько осталось мин до выключения заставки 
-                                writer.WriteArray<Char>(8, message, 0, message.Length); 
-                                //Пример передачи сообшения
-                                //foreach (char item in message)
-                                //{
-                                //    System.Diagnostics.Debug.WriteLine("Передача числа: " + item);
-                                //}
+                                char[] message = intTimeCountScreenSave.ToString().ToCharArray();
+                                message = "Кол-во иставшихся минут:".ToCharArray();
+                                int size = message.Length;
+
+                                using (MemoryMappedViewAccessor writer = Globals.SharedMemory.CreateViewAccessor(0, size * 2 + 4 + 4))
+                                {
+                                    writer.Write(0, size); //размер сообщения
+                                    writer.Write(4, ObratniOtchet); //число сколько осталось мин до выключения заставки 
+                                    writer.WriteArray<Char>(8, message, 0, message.Length);
+                                    //Пример передачи сообшения
+                                    //foreach (char item in message)
+                                    //{
+                                    //    System.Diagnostics.Debug.WriteLine("Передача числа: " + item);
+                                    //}
+
+                                }
+                            }
+                            catch (Exception)
+                            {
+
 
                             }
-                        }
-                        catch (Exception)
-                        {
 
-                            
-                        }
-                        
-                        #endregion
+                            #endregion
+                        //}
+
 
 
 
                     }
                     else
                     {
-                        //варриант 1
+                        
                         intTimeCountScreenSave = 0;
 
-                        ////Вер 2 - ищем приложенние SeachActiveAppScr3 и посылаем ему символы
-                        //IntPtr hWndSS = FindWindow(null, "SeachActiveAppScr3.5");
-                        //IntPtr hWndSS = FindWindow(null, "ScreenSaver");
-                        //SetForegroundWindow(hWndSS);
-                        //SendKeys.SendWait("hh");//Error отказано в доступе
-
-
-                        ////Вер 1 - убиваем экранную заставку
-                        //ScreenSaver.KillScreenSaver(); //не всегда срабатывает, для SeachActiveApp3.5 вызывает зависание
-                        //ScreenSaver.SetScreenSaverActive(0); //не отключает
 
                         //вариант 3
                         //Посылаем бит в память. Экранная заставка его считывает и завершает работу
-                        
-                        System.Diagnostics.Debug.WriteLine(DateTime.Now);
+                        #region Передаем значение внешней программе - скринсерверу
+                        //try
+                        //{
+                        //    char[] message = intTimeCountScreenSave.ToString().ToCharArray();
+                        //    message = "Кол-во иставшихся минут:".ToCharArray();
+                        //    int size = message.Length;
+
+                        //    using (MemoryMappedViewAccessor writer = Globals.SharedMemory.CreateViewAccessor(0, size * 2 + 4 + 4))
+                        //    {
+                        //        writer.Write(0, size); //размер сообщения
+                        //        writer.Write(4, 0); //число сколько осталось мин до выключения заставки 
+                        //        writer.WriteArray<Char>(8, message, 0, message.Length);
+                        //        //Пример передачи сообшения
+                        //        //foreach (char item in message)
+                        //        //{
+                        //        //    System.Diagnostics.Debug.WriteLine("Передача числа: " + item);
+                        //        //}
+
+                        //    }
+                        //}
+                        //catch (Exception)
+                        //{
+                        //}
+
+                            #endregion
+
+                            ////Вер 2 - ищем приложенние SeachActiveAppScr3 и посылаем ему символы
+                            //IntPtr hWndSS = FindWindow(null, "SeachActiveAppScr3.5");
+                            //IntPtr hWndSS = FindWindow(null, "ScreenSaver");
+                            //SetForegroundWindow(hWndSS);
+                            //SendKeys.SendWait("hh");//Error отказано в доступе
+
+
+                            //Вер 1 - убиваем экранную заставку
+                            //ScreenSaver.KillScreenSaver(); //не всегда срабатывает, для SeachActiveApp3.5 вызывает зависание
+                            //ScreenSaver.SetScreenSaverActive(0); //не отключает
+
+
+
+                            //Вариант 4.1 - не работает
+                            //Перемещение указателя мышки или нажатие на кнопку мышки 
+                            //mouse_event(ABSOLUTE | MOVE, 32000, 32000, 0, IntPtr.Zero);
+                            //mouse_event(ABSOLUTE| RIGHTDOWN,32000,32000,0, IntPtr.Zero);
+                            //mouse_event(ABSOLUTE | RIGHTUP, 32000, 32000, 0, IntPtr.Zero);
+
+                            //Вариант 4.2 - не работает
+                            //Перемещение указателя мышки или нажатие на кнопку мышки
+                            //SetCursorPos(1,1);
+
+                            //Вариант 4.3 - не работает SendKeys не может выполняться в рамках этого приложения, так как приложение не обрабатывает сообщения Windows. 
+                            //Ищем программу калькулятор и посылаем ей значение
+                            //IntPtr cWindow = FindWindow(null, "Calculator");
+                            //if (Convert.ToBoolean(SetForegroundWindow(calcWindow))) SendKeys.Send("10{+}10=");
+
+
+                            //Вариант 4.4 - не работает.Нужно имя процесса заставки
+                            //IntPtr cWindow = FindWindow(null, "SeachActiveAppSCR"); //0
+                            //System.Diagnostics.Debug.WriteLine(cWindow); 
+                            //if (Convert.ToBoolean(SetForegroundWindow(cWindow))) PostMessage(cWindow, WM_CLOSE, 0, 0); ;
+
+                            System.Diagnostics.Debug.WriteLine(DateTime.Now);
                         System.Diagnostics.Debug.WriteLine("Кол-во циклов: " + intTimeCountScreenSave);
 
                     }

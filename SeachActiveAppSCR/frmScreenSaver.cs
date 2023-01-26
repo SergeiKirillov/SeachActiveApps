@@ -192,7 +192,10 @@ namespace SeachActiveAppSCR
                     rear.ReadArray<char>(0, message1, 0, size);
                 }
 
-
+                if (message2==0)
+                {
+                    Application.Exit();
+                }
 
                 lblStopTimeScreenSaver.Text = message2.ToString();
 

@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.IO.MemoryMappedFiles;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -178,8 +180,10 @@ public static class ScreenSaver
     private static int intTimeCountScreenSave;
     public static void CheckScreenSave()
     {
+
        while (true)
        {
+            
             if (Globals.blDisableScreenSave)
             {
                 //Отключение экранной заставки  если галочка "Отключение экранной заставки" поднята
@@ -232,6 +236,8 @@ public static class ScreenSaver
                         intTimeCountScreenSave = 0;
 
 
+
+
                         //вариант 3
                         //Посылаем бит в память. Экранная заставка его считывает и завершает работу
                         #region Передаем значение внешней программе - скринсерверу
@@ -258,43 +264,59 @@ public static class ScreenSaver
                         //{
                         //}
 
-                            #endregion
+                        #endregion
 
-                            ////Вер 2 - ищем приложенние SeachActiveAppScr3 и посылаем ему символы
-                            //IntPtr hWndSS = FindWindow(null, "SeachActiveAppScr3.5");
-                            //IntPtr hWndSS = FindWindow(null, "ScreenSaver");
-                            //SetForegroundWindow(hWndSS);
-                            //SendKeys.SendWait("hh");//Error отказано в доступе
-
-
-                            //Вер 1 - убиваем экранную заставку
-                            //ScreenSaver.KillScreenSaver(); //не всегда срабатывает, для SeachActiveApp3.5 вызывает зависание
-                            //ScreenSaver.SetScreenSaverActive(0); //не отключает
-
-
-
-                            //Вариант 4.1 - не работает
-                            //Перемещение указателя мышки или нажатие на кнопку мышки 
-                            //mouse_event(ABSOLUTE | MOVE, 32000, 32000, 0, IntPtr.Zero);
-                            //mouse_event(ABSOLUTE| RIGHTDOWN,32000,32000,0, IntPtr.Zero);
-                            //mouse_event(ABSOLUTE | RIGHTUP, 32000, 32000, 0, IntPtr.Zero);
-
-                            //Вариант 4.2 - не работает
-                            //Перемещение указателя мышки или нажатие на кнопку мышки
-                            //SetCursorPos(1,1);
-
-                            //Вариант 4.3 - не работает SendKeys не может выполняться в рамках этого приложения, так как приложение не обрабатывает сообщения Windows. 
-                            //Ищем программу калькулятор и посылаем ей значение
-                            //IntPtr cWindow = FindWindow(null, "Calculator");
-                            //if (Convert.ToBoolean(SetForegroundWindow(calcWindow))) SendKeys.Send("10{+}10=");
+                        RegistryKey screenSaverKey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop");
+                        if (screenSaverKey != null)
+                        {
+                            string screenSaverFilePath = screenSaverKey.GetValue("SCRNSAVE.EXE", string.Empty).ToString();
+                            if (!string.IsNullOrEmpty(screenSaverFilePath) && File.Exists(screenSaverFilePath))
+                            {
+                                if (screenSaverFilePath!= "C:\\Windows\\SysWOW64\\SeachActiveAppSCR.scr")
+                                {
+                                    //Вер 1 - убиваем экранную заставку
+                                    ScreenSaver.KillScreenSaver(); //не всегда срабатывает, для SeachActiveApp3.5 вызывает зависание
+                                    ScreenSaver.SetScreenSaverActive(0); //не отключает
+                                }
+                                
+                            }
+                        }
 
 
-                            //Вариант 4.4 - не работает.Нужно имя процесса заставки
-                            //IntPtr cWindow = FindWindow(null, "SeachActiveAppSCR"); //0
-                            //System.Diagnostics.Debug.WriteLine(cWindow); 
-                            //if (Convert.ToBoolean(SetForegroundWindow(cWindow))) PostMessage(cWindow, WM_CLOSE, 0, 0); ;
 
-                            System.Diagnostics.Debug.WriteLine(DateTime.Now);
+                        ////Вер 2 - ищем приложенние SeachActiveAppScr3 и посылаем ему символы
+                        //IntPtr hWndSS = FindWindow(null, "SeachActiveAppScr3.5");
+                        //IntPtr hWndSS = FindWindow(null, "ScreenSaver");
+                        //SetForegroundWindow(hWndSS);
+                        //SendKeys.SendWait("hh");//Error отказано в доступе
+
+
+                        
+
+
+
+                        //Вариант 4.1 - не работает
+                        //Перемещение указателя мышки или нажатие на кнопку мышки 
+                        //mouse_event(ABSOLUTE | MOVE, 32000, 32000, 0, IntPtr.Zero);
+                        //mouse_event(ABSOLUTE| RIGHTDOWN,32000,32000,0, IntPtr.Zero);
+                        //mouse_event(ABSOLUTE | RIGHTUP, 32000, 32000, 0, IntPtr.Zero);
+
+                        //Вариант 4.2 - не работает
+                        //Перемещение указателя мышки или нажатие на кнопку мышки
+                        //SetCursorPos(1,1);
+
+                        //Вариант 4.3 - не работает SendKeys не может выполняться в рамках этого приложения, так как приложение не обрабатывает сообщения Windows. 
+                        //Ищем программу калькулятор и посылаем ей значение
+                        //IntPtr cWindow = FindWindow(null, "Calculator");
+                        //if (Convert.ToBoolean(SetForegroundWindow(calcWindow))) SendKeys.Send("10{+}10=");
+
+
+                        //Вариант 4.4 - не работает.Нужно имя процесса заставки
+                        //IntPtr cWindow = FindWindow(null, "SeachActiveAppSCR"); //0
+                        //System.Diagnostics.Debug.WriteLine(cWindow); 
+                        //if (Convert.ToBoolean(SetForegroundWindow(cWindow))) PostMessage(cWindow, WM_CLOSE, 0, 0); ;
+
+                        System.Diagnostics.Debug.WriteLine(DateTime.Now);
                         System.Diagnostics.Debug.WriteLine("Кол-во циклов: " + intTimeCountScreenSave);
 
                     }

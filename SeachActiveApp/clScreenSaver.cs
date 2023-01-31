@@ -235,9 +235,6 @@ public static class ScreenSaver
                         
                         intTimeCountScreenSave = 0;
 
-
-
-
                         //вариант 3
                         //Посылаем бит в память. Экранная заставка его считывает и завершает работу
                         #region Передаем значение внешней программе - скринсерверу
@@ -270,9 +267,15 @@ public static class ScreenSaver
                         if (screenSaverKey != null)
                         {
                             string screenSaverFilePath = screenSaverKey.GetValue("SCRNSAVE.EXE", string.Empty).ToString();
-                            if (!string.IsNullOrEmpty(screenSaverFilePath) && File.Exists(screenSaverFilePath))
+                            bool blIsNullOrEmpty = string.IsNullOrEmpty(screenSaverFilePath); //проверка не пустой ли ключь
+                            bool blFileExists = File.Exists(screenSaverFilePath); //Проверяем существует ли файл
+                            FileInfo fileInfo= new FileInfo(screenSaverFilePath); //
+                            string strFileName = fileInfo.Name; //получаем из полного пути имя файла
+
+                            //if (!blIsNullOrEmpty && blFileExists)
+                            if (!blIsNullOrEmpty)
                             {
-                                if (screenSaverFilePath!= "C:\\Windows\\SysWOW64\\SeachActiveAppSCR.scr")
+                                if (strFileName != "SeachActiveAppSCR.scr")
                                 {
                                     //Вер 1 - убиваем экранную заставку
                                     ScreenSaver.KillScreenSaver(); //не всегда срабатывает, для SeachActiveApp3.5 вызывает зависание

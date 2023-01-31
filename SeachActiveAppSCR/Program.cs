@@ -118,6 +118,9 @@ namespace SeachActiveAppSCR
                     ////ver1
                     //MakeScreenshot();
 
+                    //ver1.1
+                    MakeScreenshot2();
+
                     ////Ver2
                     //Image f = CaptureScreen.GetDesktopImage();
                     //f.Save("d:\\screenshot.jpg");
@@ -133,10 +136,10 @@ namespace SeachActiveAppSCR
             }
             else
             {
-                //MakeScreenshot();
+                //MakeScreenshot2();
 
-                Image f = CaptureScreen.GetDesktopImage();
-                f.Save("d:\\screenshot.jpg");
+                //Image f = CaptureScreen.GetDesktopImage();
+                //f.Save("d:\\screenshot.jpg");
 
                 ShowScreenSaver();
                 Application.Run();
@@ -177,7 +180,33 @@ namespace SeachActiveAppSCR
                 bitmap.Save("d:\\screenshot.jpg", ImageFormat.Jpeg);
             }
         }
+        #endregion
 
+
+        #region Версия 1.1 - MakeScreenshot2(Создаем скриншот MULTI рабочего стола) - 
+        //https://myrusakov.ru/csharp-create-screenshot.html
+        public static void MakeScreenshot2()
+        {
+            // получаем размеры окна рабочего стола
+            Rectangle bounds = Screen.GetBounds(Point.Empty);
+
+            // создаем пустое изображения размером с экран устройства
+            //using (var bitmap = new Bitmap(bounds.Width, bounds.Height))
+            using (var bitmap = new Bitmap(SystemInformation.VirtualScreen.Width, SystemInformation.VirtualScreen.Height, PixelFormat.Format32bppArgb))
+            {
+
+                // создаем объект на котором можно рисовать
+                using (var g = Graphics.FromImage(bitmap))
+                {
+                    // перерисовываем экран на наш графический объект
+                    //g.CopyFromScreen(Point.Empty, Point.Empty, bounds.Size);
+                    g.CopyFromScreen(SystemInformation.VirtualScreen.X, SystemInformation.VirtualScreen.Y, 0, 0, SystemInformation.VirtualScreen.Size, CopyPixelOperation.SourceCopy);
+                }
+
+                // сохраняем в файл с форматом JPG
+                bitmap.Save("d:\\screenshot.jpg", ImageFormat.Jpeg);
+            }
+        }
 
 
         #endregion

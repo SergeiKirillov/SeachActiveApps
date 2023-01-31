@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO.MemoryMappedFiles;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -38,6 +39,14 @@ namespace SeachActiveAppSCR
         public frmScreenSaver(Rectangle bounds)
         {
             InitializeComponent();
+
+
+
+            //Bitmap imgScreenShot = new Bitmap(@"d:\screenshot.jpg");
+            Bitmap imgScreenShot = new Bitmap(@"d:\screenshot.jpg");
+            this.BackgroundImage = imgScreenShot;
+            txtLabel.BackColor = Color.Transparent;
+            lblStopTimeScreenSaver.BackColor = Color.Transparent;
             this.Bounds = bounds;
         }
 
@@ -45,6 +54,7 @@ namespace SeachActiveAppSCR
         {
             InitializeComponent();
 
+           
             //
             // Set the preview window as the parent of this window
             SetParent(this.Handle, PreviewWndHandle);
@@ -216,6 +226,10 @@ namespace SeachActiveAppSCR
 
             #endregion
 
+
         }
+
+
+      
     }
 }

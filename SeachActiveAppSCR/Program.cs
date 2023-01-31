@@ -119,7 +119,7 @@ namespace SeachActiveAppSCR
                     //MakeScreenshot();
 
                     //ver1.1
-                    MakeScreenshot2();
+                    //MakeScreenshot2();
 
                     ////Ver2
                     //Image f = CaptureScreen.GetDesktopImage();
@@ -183,7 +183,7 @@ namespace SeachActiveAppSCR
         #endregion
 
 
-        #region Версия 1.1 - MakeScreenshot2(Создаем скриншот MULTI рабочего стола) - 
+        #region Версия 1.1 - MakeScreenshot2(Создаем скриншот MULTI рабочего стола) - Черный экран
         //https://myrusakov.ru/csharp-create-screenshot.html
         public static void MakeScreenshot2()
         {

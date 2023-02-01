@@ -188,6 +188,7 @@ class MyScreenShot
                 //Здесь мы получаем дескриптор контекста устройства рабочего стола.
                 IntPtr hDC = PlatformInvokeUSER32.GetDC
                               (PlatformInvokeUSER32.GetDesktopWindow());
+                MyIO.WriteFileTXT(DateTime.Now, "Рабочий стол:" + hDC.ToString(), "SceenShot");
 
                 //Здесь мы делаем контекст устройства
 
@@ -201,11 +202,13 @@ class MyScreenShot
                 size.cy = PlatformInvokeUSER32.GetSystemMetrics
                           (PlatformInvokeUSER32.SM_CYSCREEN);
 
+                
+
                 //Мы создаем совместимое растровое изображение экрана с размером с помощью
                 //контекст устройства экрана.
                 hBitmap = PlatformInvokeGDI32.CreateCompatibleBitmap
                             (hDC, size.cx, size.cy);
-                MyIO.WriteFileTXT(DateTime.Now, "hBitmap:" + hBitmap.ToString(), "SceenShot"); //вывод в текстовы файл
+               
                 //Как hBitmap IntPtr, мы не можем проверить его значение null.
                 //Для этой цели используется значение IntPtr.Zero.
                 if (hBitmap != IntPtr.Zero)
@@ -214,21 +217,26 @@ class MyScreenShot
                     //контекст и держит ссылку на старый битовый массив.
                     IntPtr hOld = (IntPtr)PlatformInvokeGDI32.SelectObject
                                            (hMemDC, hBitmap);
-                    MyIO.WriteFileTXT(DateTime.Now, "hOld:" + hOld.ToString(), "SceenShot"); //вывод в текстовы файл
+                    MyIO.WriteFileTXT(DateTime.Now, "Память:" + hOld.ToString(), "SceenShot"); //вывод в текстовы файл
                     //Мы копируем Битовый массив к контексту устройства памяти.
-                    PlatformInvokeGDI32.BitBlt(hMemDC, 0, 0, size.cx, size.cy, hDC,
+                    bool rrr = PlatformInvokeGDI32.BitBlt(hMemDC, 0, 0, size.cx, size.cy, hDC,
                                                0, 0, PlatformInvokeGDI32.SRCCOPY);
+                    MyIO.WriteFileTXT(DateTime.Now, "Копирование изображение:" + rrr, "SceenShot"); //вывод в текстовы файл
+
                     //Мы выбираем старый битовый массив назад к контексту устройства памяти.
-                    PlatformInvokeGDI32.SelectObject(hMemDC, hOld);
+                    IntPtr SO = PlatformInvokeGDI32.SelectObject(hMemDC, hOld);
+                    MyIO.WriteFileTXT(DateTime.Now, "Возвращаемое значение после выбирания:" + SO, "SceenShot");
+
                     //Мы удаляем контекст устройства памяти.
                     PlatformInvokeGDI32.DeleteDC(hMemDC);
                     //Мы выпускаем контекст устройства экрана.
-                    PlatformInvokeUSER32.ReleaseDC(PlatformInvokeUSER32.
-                                                   GetDesktopWindow(), hDC);
+                    IntPtr RIU = PlatformInvokeUSER32.ReleaseDC(PlatformInvokeUSER32.GetDesktopWindow(), hDC);
                     //Изображение создано и сохранено в локальную переменную
+                    MyIO.WriteFileTXT(DateTime.Now, "ReleaseDC(1-освобожден):" + RIU, "SceenShot");
 
                     Bitmap bmp = System.Drawing.Image.FromHbitmap(hBitmap);
                     MyIO.WriteFileTXT(DateTime.Now, bmp.RawFormat.ToString(), "SceenShot"); //вывод в текстовы файл
+
                     //Освободим память, чтобы избежать утечек памяти.
                     PlatformInvokeGDI32.DeleteObject(hBitmap);
                     //Вызовим сборщик мусора.

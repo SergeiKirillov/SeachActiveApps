@@ -252,6 +252,18 @@ class MyScreenShot
 
     #endregion
 
+    #region Версия 3 - DrawToBitmap 
+
+
+
+
+
+    #endregion
+
+    #region Версия 4 - OleDraw () 
+
+    #endregion
+
 }
 
 

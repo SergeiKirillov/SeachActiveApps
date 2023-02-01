@@ -40,11 +40,12 @@ namespace SeachActiveAppSCR
         {
             InitializeComponent();
 
-
-
+            
             //Bitmap imgScreenShot = new Bitmap(@"d:\screenshot.jpg");
-            Bitmap imgScreenShot = new Bitmap(@"d:\screenshot.jpg");
-            this.BackgroundImage = imgScreenShot;
+            //this.BackgroundImage = imgScreenShot;
+
+            this.BackgroundImage = MyScreenShot.CaptureScreen.GetDesktopImage();
+            
             txtLabel.BackColor = Color.Transparent;
             lblStopTimeScreenSaver.BackColor = Color.Transparent;
             this.Bounds = bounds;
@@ -79,6 +80,9 @@ namespace SeachActiveAppSCR
 
         private void frmScreenSaver_Load(object sender, EventArgs e)
         {
+            
+            
+
             Cursor.Hide();
             TopMost = true;
             //this.TransparencyKey = this.BackColor;

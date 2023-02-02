@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using LiteDB;
 
@@ -11,8 +12,23 @@ namespace SeachActiveApp
     {
         public clRW()
         {
+            
 
         }
+
+        public static void AciveApp()
+        {
+            while (true)
+            {
+                string strActivApp = clWinAPI.GetCaptionOfActiveWindow();
+                DateTime dtActiveApp = DateTime.Now;
+
+                new clRW(dtActiveApp, strActivApp, 1);
+
+                Thread.Sleep(TimeSpan.FromMinutes(1));
+            }
+        }
+
 
 
         public clRW(DateTime dt, string message, int time1min)
@@ -144,11 +160,12 @@ namespace SeachActiveApp
             int mount = dt.Month;
             int year = dt.Year;
 
-            string pathProg = System.AppDomain.CurrentDomain.BaseDirectory.ToString() + mount.ToString() + "-" + year.ToString() + ".db";
+            string pathProg = System.AppDomain.CurrentDomain.BaseDirectory.ToString() + mount.ToString("D2") + "-" + year.ToString() + ".db";
 
 
 
-            using ( var db = new LiteDatabase(pathProg))
+            //using ( var db = new LiteDatabase(pathProg))
+            using (var db = new LiteDatabase(@"Filename="+pathProg+";Connection=shared"))
             {
                 var apps = db.GetCollection<clData1Hour>("Hour1");
 

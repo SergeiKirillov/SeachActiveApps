@@ -75,11 +75,7 @@ namespace SeachActiveAppSCR
         [STAThread]
         static void Main(string[] args)
         {
-            #region меняем экранную заставку
-            //Image f = MyScreenShot.CaptureScreen.GetDesktopImage();
-            //f.Save("d:\\screenshot.jpg");
-            #endregion
-
+                       
 
 
             Application.EnableVisualStyles();

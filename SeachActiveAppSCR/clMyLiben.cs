@@ -475,8 +475,15 @@ class MyScreenShot
 
     #endregion
 
-    #region Версия 5.2 (https://stackoverflow.com/questions/1163761/capture-screenshot-of-active-window)
+    #region Версия 5.2 (https://stackoverflow.com/questions/1163761/capture-screenshot-of-active-window) - на заставке CaptureDesktop - черный квадрат, а CaptureActiveWindow - скорее всего вылетает с ошибкой
 
+    #region Применение 
+    //Image img = MyScreenShot.ScreenCapture3.CaptureDesktop();
+    //img.Save(@"D:\CaptureDesktop.jpg", ImageFormat.Jpeg);
+
+    //Image img2 = MyScreenShot.ScreenCapture3.CaptureActiveWindow();
+    //img.Save(@"D:\CaptureActiveWindow.jpg", ImageFormat.Jpeg);
+    #endregion
 
     public class ScreenCapture3
     {

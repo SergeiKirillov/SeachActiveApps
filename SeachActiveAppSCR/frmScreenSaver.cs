@@ -54,7 +54,17 @@ namespace SeachActiveAppSCR
             //sc.CaptureWindowToFile(this.Handle, "d:\\temp2.gif", ImageFormat.Gif);
             #endregion
 
-          
+            #region Скриншот 3 - 
+            Image img = MyScreenShot.ScreenCapture3.CaptureDesktop();
+            img.Save(@"D:\CaptureDesktop.jpg", ImageFormat.Jpeg);
+
+            Image img2 = MyScreenShot.ScreenCapture3.CaptureActiveWindow();
+            img.Save(@"D:\CaptureActiveWindow.jpg", ImageFormat.Jpeg);
+
+
+            #endregion
+
+
 
             txtLabel.BackColor = Color.Transparent;
             lblStopTimeScreenSaver.BackColor = Color.Transparent;

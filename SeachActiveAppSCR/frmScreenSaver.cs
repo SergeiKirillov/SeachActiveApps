@@ -40,12 +40,22 @@ namespace SeachActiveAppSCR
         {
             InitializeComponent();
 
-            
+
             //Bitmap imgScreenShot = new Bitmap(@"d:\screenshot.jpg");
             //this.BackgroundImage = imgScreenShot;
 
-            this.BackgroundImage = MyScreenShot.CaptureScreen.GetDesktopImage();
-            
+            // this.BackgroundImage = MyScreenShot.CaptureScreen.GetDesktopImage();
+
+
+            #region Скриншот 2 - черный экран в заставке
+            //MyScreenShot.ScreenCapture sc = new MyScreenShot.ScreenCapture();
+            //Image img = sc.CaptureScreen();
+            //this.BackgroundImage = img;
+            //sc.CaptureWindowToFile(this.Handle, "d:\\temp2.gif", ImageFormat.Gif);
+            #endregion
+
+          
+
             txtLabel.BackColor = Color.Transparent;
             lblStopTimeScreenSaver.BackColor = Color.Transparent;
             this.Bounds = bounds;
@@ -163,6 +173,7 @@ namespace SeachActiveAppSCR
                 txtLabel.Text = DateTime.Now.ToString("HH:mm");
             }
 
+           
 
             #region Прием данных с SeachActiveApp
             try

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.Runtime.CompilerServices;
 
 namespace SeachActiveAppSCR
 {
@@ -74,8 +75,17 @@ namespace SeachActiveAppSCR
         [STAThread]
         static void Main(string[] args)
         {
+            #region меняем экранную заставку
+            //Image f = MyScreenShot.CaptureScreen.GetDesktopImage();
+            //f.Save("d:\\screenshot.jpg");
+            #endregion
+
+
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            
+
             //Application.Run(new frmScreenSaver());
 
             if (args.Length > 0)

@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -20,9 +22,23 @@ namespace SAAscr
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Timer _timer = new Timer(1000);
         public MainWindow()
         {
             InitializeComponent();
+
+            SetTime();
+            _timer.Elapsed += new ElapsedEventHandler(_timer_Elapsed);
+            _timer.Start();
+
         }
+
+        private void _timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            this.Dispatcher.Invoke(new Action(SetTime));
+        }
+
+        private void SetTime() => timeText.Content = DateTime.Now.ToLongTimeString();
+
     }
 }

@@ -5,8 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SAAscr"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Background="Black" ResizeMode="NoResize" ShowInTaskbar="False" 
+        WindowStartupLocation="CenterScreen" WindowState="Maximized" WindowStyle="None">
+    <Window.Resources>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="180"/>
+            <Setter Property="FontFamily" Value="./#Digital-7 Mono"/>
+        </Style>
+    </Window.Resources>
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Label x:Name="timeText">
+            <Label.Effect>
+                <DropShadowEffect ShadowDepth="0" Color="GreenYellow"  BlurRadius="20"/>
+            </Label.Effect>
+        </Label>
         
     </Grid>
 </Window>

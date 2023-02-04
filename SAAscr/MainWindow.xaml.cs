@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
@@ -40,5 +39,17 @@ namespace SAAscr
 
         private void SetTime() => timeText.Content = DateTime.Now.ToLongTimeString();
 
+        bool _isActive;
+        private void Window_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!_isActive)
+            {
+                _isActive = true;
+            }
+            else
+            {
+                Application.Current.Shutdown();
+            }
+        }
     }
 }

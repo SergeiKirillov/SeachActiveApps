@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SAAscr"
         mc:Ignorable="d"
         Title="MainWindow" Background="Black" ResizeMode="NoResize" ShowInTaskbar="False" 
-        WindowStartupLocation="CenterScreen" WindowState="Maximized" WindowStyle="None">
+        WindowStartupLocation="CenterScreen" WindowState="Maximized" WindowStyle="None" MouseMove="Window_MouseMove">
     <Window.Resources>
         <Style TargetType="{x:Type Label}">
             <Setter Property="Foreground" Value="White"/>
@@ -14,7 +14,7 @@
             <Setter Property="FontFamily" Value="./#Digital-7 Mono"/>
         </Style>
     </Window.Resources>
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Top">
         <Label x:Name="timeText">
             <Label.Effect>
                 <DropShadowEffect ShadowDepth="0" Color="GreenYellow"  BlurRadius="20"/>

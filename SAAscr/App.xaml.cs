@@ -6,13 +6,14 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms;
 
 namespace SAAscr
 {
     /// <summary>
     /// Логика взаимодействия для App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App : System.Windows.Application
     {
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -26,8 +27,8 @@ namespace SAAscr
                 switch (arg)
                 {
                     case "/c":
-                        MessageBox.Show("Этот сринсервер не имеет пока конфигурации.", "ScreenSaver", MessageBoxButton.OK, MessageBoxImage.Information);
-                        Application.Current.Shutdown();
+                        System.Windows.MessageBox.Show("Этот сринсервер не имеет пока конфигурации.", "ScreenSaver", MessageBoxButton.OK, MessageBoxImage.Information);
+                        System.Windows.Application.Current.Shutdown();
                         break;
                     case "/s":
                         MainWindow Main = new MainWindow();

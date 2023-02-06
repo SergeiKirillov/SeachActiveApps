@@ -32,6 +32,7 @@
             this.lblStopTimeScreenSaver = new System.Windows.Forms.Label();
             this.txtLabel = new System.Windows.Forms.Label();
             this.MoveTimer = new System.Windows.Forms.Timer(this.components);
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblStopTimeScreenSaver
@@ -50,7 +51,7 @@
             this.txtLabel.AutoSize = true;
             this.txtLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtLabel.ForeColor = System.Drawing.Color.Red;
-            this.txtLabel.Location = new System.Drawing.Point(444, 163);
+            this.txtLabel.Location = new System.Drawing.Point(368, 13);
             this.txtLabel.Name = "txtLabel";
             this.txtLabel.Size = new System.Drawing.Size(344, 108);
             this.txtLabel.TabIndex = 1;
@@ -60,12 +61,24 @@
             // 
             this.MoveTimer.Tick += new System.EventHandler(this.MoveTimer_Tick);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.ForeColor = System.Drawing.Color.Yellow;
+            this.label1.Location = new System.Drawing.Point(27, 275);
+            this.label1.MaximumSize = new System.Drawing.Size(600, 100);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(0, 20);
+            this.label1.TabIndex = 2;
+            // 
             // frmScreenSaver
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.txtLabel);
             this.Controls.Add(this.lblStopTimeScreenSaver);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -86,6 +99,7 @@
         private System.Windows.Forms.Label lblStopTimeScreenSaver;
         private System.Windows.Forms.Label txtLabel;
         private System.Windows.Forms.Timer MoveTimer;
+        private System.Windows.Forms.Label label1;
     }
 }
 

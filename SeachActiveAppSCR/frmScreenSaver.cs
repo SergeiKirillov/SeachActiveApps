@@ -84,6 +84,8 @@ namespace SeachActiveAppSCR
             //    txtLabel.Text = (string)key.GetValue("text");
             //}
 
+            label1.Text = "1 января  Новый год \n8 марта  Международный женский день";
+
             if (Program.blTxtScreenSaver)
             {
                 txtLabel.Text = Program.strTxtScreenSaver;
@@ -140,6 +142,12 @@ namespace SeachActiveAppSCR
             txtLabel.Left = rand.Next(Math.Max(1, Bounds.Width - txtLabel.Width));
             txtLabel.Top = rand.Next(Math.Max(1, Bounds.Height - txtLabel.Height));
 
+
+            label1.Text = "1 января  Новый год \n8 марта  Международный женский день";
+            label1.Left= rand.Next(Math.Max(1, Bounds.Width - label1.Width));
+            label1.Top = rand.Next(Math.Max(1, Bounds.Height - label1.Height));
+
+
             if (Program.blTxtScreenSaver)
             {
                 txtLabel.Text = Program.strTxtScreenSaver;
@@ -147,6 +155,7 @@ namespace SeachActiveAppSCR
             else
             {
                 txtLabel.Text = DateTime.Now.ToString("HH:mm");
+             
             }
 
 

@@ -105,7 +105,7 @@ public static class Globals
             #endregion
 
             return (int)WorkInReestr.intToAPP("TimeDisableScreenSave");
-
+            
         }
         set 
         {

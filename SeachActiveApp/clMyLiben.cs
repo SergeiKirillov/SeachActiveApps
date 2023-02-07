@@ -662,39 +662,7 @@ public class WorkInReestr
 
     }
 
-    public static int intToAPP(string NameKey)
-    {
-
-        using (RegistryKey intTSS = Registry.CurrentUser.OpenSubKey(NameApp, true))
-        {
-            if (intTSS != null)
-            {
-
-                
-                if (intTSS.GetValue(NameKey) != null)
-                {
-                    return (int)intTSS.GetValue(NameKey);
-                }
-                else
-                {
-                    int intText = 1;
-                    strAPPTo(NameKey, "1");
-                    return intText;
-                }
-                
-            }
-            else
-            {
-                
-                int intText = 1;
-                strAPPTo(NameKey, "1");
-                return intText;
-
-            }
-
-        }
-
-    }
+   
 
     public static bool blToAPP(string NameKey)
     {
@@ -703,13 +671,13 @@ public class WorkInReestr
         {
             if (key != null)
             {
-                if (Convert.ToBoolean(key.GetValue("blText")))
+                if (Convert.ToBoolean(key.GetValue(NameKey)))
                 {
-                    return Convert.ToBoolean(key.GetValue("blText") as string);
+                    return Convert.ToBoolean(key.GetValue(NameKey) as string);
                 }
                 else
                 {
-                    string strText = "false";
+                    string strText = "False";
                     strAPPTo(NameKey, strText);
                     return false;
                 }
@@ -718,7 +686,7 @@ public class WorkInReestr
             else
             {
                 
-                string strText = "false";
+                string strText = "False";
                 strAPPTo(NameKey, strText);
                 return false;
             }
@@ -750,7 +718,52 @@ public class WorkInReestr
         
     }
 
+    public static int intToAPP(string NameKey)
+    {
 
-    
+        using (RegistryKey intTSS = Registry.CurrentUser.OpenSubKey(NameApp, true))
+        {
+            if (intTSS != null)
+            {
+
+
+                if (intTSS.GetValue(NameKey) != null)
+                {
+                    int intTemp = Convert.ToInt32(intTSS.GetValue(NameKey,1));
+                    return intTemp;
+                }
+                else
+                {
+                    int intText = 1;
+                    intAPPTo(NameKey, 1);
+                    return intText;
+                }
+
+            }
+            else
+            {
+
+                int intText = 1;
+                intAPPTo(NameKey, 1);
+                return intText;
+
+            }
+
+        }
+
+    }
+
+    public static void intAPPTo(string NameKey, int ValueKey)
+    {
+        using (RegistryKey strTextSS = Registry.CurrentUser.CreateSubKey(NameApp))
+        {
+
+            strTextSS.SetValue(NameKey, ValueKey, RegistryValueKind.DWord);
+
+        }
+        
+
+    }
+
 }
 

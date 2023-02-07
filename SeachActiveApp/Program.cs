@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO.MemoryMappedFiles;
 using System.Linq;
 using System.Management;
@@ -26,29 +27,40 @@ public static class Globals
         //если значение есть то возвращаем значение из реестра
         get 
         {
-            Microsoft.Win32.RegistryKey key;
-            key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SergeiAKirApp");
-            if (key != null)
-            {
-                string DSS = key.GetValue("DisableScreenSave") as string;
-                return Convert.ToBoolean(DSS);
-            }
-            else
-            {
-                return false;
-            }
+            #region Var-1 read bool 
+            //Microsoft.Win32.RegistryKey key;
+            //key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SergeiAKirApp");
+            //if (key != null)
+            //{
+            //    string DSS = key.GetValue("DisableScreenSave") as string;
+            //    return Convert.ToBoolean(DSS);
+            //}
+            //else
+            //{
+            //    return false;
+            //}
+            #endregion
+            #region Var-2 read bool 
+            return WorkInReestr.blToAPP("DisableScreenSave");
+            #endregion
+            
  
         }
 
         //Записываем значение в реестр если значение удовлетворяет условию 
         set 
         {
+            #region Var-1 Write bool
+            ////Запись в реестр значения value
+            //Microsoft.Win32.RegistryKey key;
+            //key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("SergeiAKirApp");
+            //key.SetValue("DisableScreenSave", value);
+            //key.Close();
+            #endregion
 
-            //Запись в реестр значения value
-            Microsoft.Win32.RegistryKey key;
-            key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("SergeiAKirApp");
-            key.SetValue("DisableScreenSave", value);
-            key.Close();
+            #region Var-2 Write bool
+            WorkInReestr.strAPPTo("DisableScreenSave", value.ToString());
+            #endregion
 
         }
     }
@@ -57,54 +69,74 @@ public static class Globals
     {
         get 
         {
-            Microsoft.Win32.RegistryKey key;
-            key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SergeiAKirApp");
 
-            if (key!=null)
-            {
-                try
-                {
-                    int TDSS = (int)key.GetValue("TimeDisableScreenSave");
-                    if (TDSS != 0)
-                    {
-                        return TDSS;
-                    }
-                    else
-                    {
-                        return ScreenSaver.GetScreenSaverTimeout() / 60;
-                    }
-                }
-                catch (Exception)
-                {
+            #region Var-1 Read Int
 
-                    return ScreenSaver.GetScreenSaverTimeout() / 60;
-                }
+            //Microsoft.Win32.RegistryKey key;
+            //key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SergeiAKirApp");
 
-                
-                
-            }
-            else
-            {
-                return ScreenSaver.GetScreenSaverTimeout()/60;
-            }
+            //if (key != null)
+            //{
+            //    try
+            //    {
+            //        int TDSS = (int)key.GetValue("TimeDisableScreenSave");
+            //        if (TDSS != 0)
+            //        {
+            //            return TDSS;
+            //        }
+            //        else
+            //        {
+            //            return ScreenSaver.GetScreenSaverTimeout() / 60;
+            //        }
+            //    }
+            //    catch (Exception)
+            //    {
+
+            //        return ScreenSaver.GetScreenSaverTimeout() / 60;
+            //    }
+
+
+
+            //}
+            //else
+            //{
+            //    return ScreenSaver.GetScreenSaverTimeout() / 60;
+            //}
+            #endregion
+
+            return (int)WorkInReestr.intToAPP("TimeDisableScreenSave");
+
         }
         set 
         {
             if (value > 0) 
             {
-                //Запись в реестр значения value
-                Microsoft.Win32.RegistryKey key;
-                key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("SergeiAKirApp");
-                key.SetValue("TimeDisableScreenSave", value);
-                key.Close();
+                #region Var-1 Write int 
+                ////Запись в реестр значения value
+                //Microsoft.Win32.RegistryKey key;
+                //key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("SergeiAKirApp");
+                //key.SetValue("TimeDisableScreenSave", value);
+                //key.Close();
+                #endregion
+
+                #region Var-2 Write int 
+                WorkInReestr.strAPPTo("TimeDisableScreenSave", value.ToString());
+                #endregion
             }
             else
             {
                 //Запись в реестр значения value
-                Microsoft.Win32.RegistryKey key;
-                key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("SergeiAKirApp");
-                key.SetValue("TimeDisableScreenSave", ScreenSaver.GetScreenSaverTimeout()/60);
-                key.Close();
+                #region Var-1 Write default
+                //Microsoft.Win32.RegistryKey key;
+                //key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("SergeiAKirApp");
+                //key.SetValue("TimeDisableScreenSave", ScreenSaver.GetScreenSaverTimeout() / 60);
+                //key.Close();
+                #endregion
+
+                #region Var-2 Write default
+                WorkInReestr.strAPPTo("TimeDisableScreenSave", (ScreenSaver.GetScreenSaverTimeout() / 60).ToString());
+                #endregion
+
             }
         }
     }

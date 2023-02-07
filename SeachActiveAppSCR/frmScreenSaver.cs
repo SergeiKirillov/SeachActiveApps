@@ -84,7 +84,8 @@ namespace SeachActiveAppSCR
             //    txtLabel.Text = (string)key.GetValue("text");
             //}
 
-            label1.Text = "1 января  Новый год \n8 марта  Международный женский день";
+            //label1.Text = "1 января  Новый год \n8 марта  Международный женский день";
+            label1.Text = WorkInReestr.strToAPP("DataMessage");
 
             if (Program.blTxtScreenSaver)
             {
@@ -225,6 +226,13 @@ namespace SeachActiveAppSCR
 
             #endregion
 
+        }
+
+
+        private string ReadReestrToApp()
+        {
+
+            return "";
         }
     }
 }

@@ -15,20 +15,37 @@ namespace SeachActiveAppSCR
         {
             get
             {
-                bool blSS;
-                using (RegistryKey blTextSS = Registry.CurrentUser.OpenSubKey("SergeiAKirApp", true))
-                {
-                    blSS = Convert.ToBoolean(blTextSS.GetValue("blText") as string);
-                }
-                return blSS;
+                #region Variant 1 - Read Bool
+                //bool blSS;
+                //using (RegistryKey blTextSS = Registry.CurrentUser.OpenSubKey("SergeiAKirApp", true))
+                //{
+                //    if (blTextSS!=null)
+                //    {
+                //        blSS = Convert.ToBoolean(blTextSS.GetValue("blText") as string);
+                //    }
+                //    else
+                //    {
+                //        blSS = false;
+                //    }
+
+
+                //}
+                //return blSS;
+                #endregion
+
+                return WorkInReestr.blToAPP("blText");
             }
             set
             {
+                #region Variant 1 - write Bool
                 //Запись в реестр значения value
-                using (RegistryKey blTextSS = Registry.CurrentUser.OpenSubKey("SergeiAKirApp", true))
-                {
-                    blTextSS.SetValue("blText", value);
-                }
+                //using (RegistryKey blTextSS = Registry.CurrentUser.OpenSubKey("SergeiAKirApp", true))
+                //{
+                //    blTextSS.SetValue("blText", value);
+                //}
+                #endregion
+
+                WorkInReestr.strAPPTo("blText", value.ToString());
 
             }
         }
@@ -37,31 +54,48 @@ namespace SeachActiveAppSCR
         {
             get
             {
-                string strSS;
-                using (RegistryKey strTextSS = Registry.CurrentUser.OpenSubKey("SergeiAKirApp", true))
-                {
-                    strSS = strTextSS.GetValue("Text") as string;
-                }
-                if (strSS == null)
-                {
-                    return "Screen Saver для программы SeachActiveApp";
-                }
-                else
-                {
-                    return strSS;
-                }
+                #region Variant 1 - Read
+                //string strSS;
+                //using (RegistryKey strTextSS = Registry.CurrentUser.OpenSubKey("SergeiAKirApp", true))
+                //{
+                //    if (strTextSS!=null)
+                //    {
+                //        strSS = strTextSS.GetValue("Text") as string;
+
+                //        if (strSS != null)
+                //        {
+                //            return strSS;
+
+                //        }
+                //        else
+                //        {
+                //            return "Screen Saver для программы SeachActiveApp";
+                //        }
+                //    }
+                //    else
+                //    {
+                //        return "Screen Saver для программы SeachActiveApp";
+                //    }
+
+                //}
 
 
+                #endregion
+
+                return WorkInReestr.strToAPP("Text");
 
             }
             set
             {
+                #region Variant 1 - Write
                 //Запись в реестр значения value
-                using (RegistryKey strTextSS = Registry.CurrentUser.OpenSubKey("SergeiAKirApp", true))
-                {
-                    strTextSS.SetValue("Text", value);
-                }
+                //using (RegistryKey strTextSS = Registry.CurrentUser.OpenSubKey("SergeiAKirApp", true))
+                //{
+                //    strTextSS.SetValue("Text", value);
+                //}
+                #endregion
 
+                WorkInReestr.strAPPTo("Text", value);
             }
         }
 

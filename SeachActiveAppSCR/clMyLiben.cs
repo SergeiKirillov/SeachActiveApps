@@ -771,6 +771,10 @@ public class WorkInReestr
 
 public class MyNetFramework
 {
+    //https://learn.microsoft.com/ru-ru/dotnet/framework/migration-guide/version-compatibility - Совместимость версий
+
+    //После получения версии на которое расчитано приложение делаем перевод его в  поиск
+    //значений ключей равно или больше  чем версия скомпилировнного приложения
     #region Version 1 - Получение списка версий Frameworkа из реестра
     public static void WhichVersion()
     {

@@ -9,6 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppToAppClient", "AppToAppC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeachActiveAppSCR", "SeachActiveAppSCR\SeachActiveAppSCR.csproj", "{5B45C74A-0545-4700-BE92-D41B8FABC127}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{7C3D5F00-F3AE-4D6C-BC76-F35F8479EEA5}"
+	ProjectSection(SolutionItems) = preProject
+		clMyLiben.cs = clMyLiben.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

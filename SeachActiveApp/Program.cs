@@ -1,11 +1,16 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO.MemoryMappedFiles;
 using System.Linq;
 using System.Management;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
+using System.Security;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -161,14 +166,17 @@ namespace SeachActiveApp
         {
 
 
-            //string strActivApp;
-            //string strActivAppOld=null;
-            //DateTime dtAppOld;
-            //DateTime dtActiveApp;
-
             
+            string dd1 = System.Environment.Version.ToString(); //версия в системе
+                       
+            string dd3 = MyNetFramework.ShowFrameworkVersionApp(); //версия приложения
 
-            
+
+
+            MyIO.WriteFileTXT(DateTime.Now, dd1+" -- "+ dd3, "NFw");
+
+
+
             if (isStillRunning()) //Если запустили второй раз то показываем форму ввода пароля
             {
                 System.Diagnostics.Debug.WriteLine("второй раз");

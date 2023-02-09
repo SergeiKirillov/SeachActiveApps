@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using Microsoft.Win32;
 using System.Reflection;
 using System.Runtime.Versioning;
+using System.Runtime.Remoting.Lifetime;
 
 internal class clMyLiben
 {
@@ -722,7 +723,7 @@ public class WorkInReestr
 
     public static int intToAPP(string NameKey)
     {
-
+        int intText = 1;
         using (RegistryKey intTSS = Registry.CurrentUser.OpenSubKey(NameApp, true))
         {
             if (intTSS != null)
@@ -731,12 +732,12 @@ public class WorkInReestr
 
                 if (intTSS.GetValue(NameKey) != null)
                 {
-                    int intTemp = Convert.ToInt32(intTSS.GetValue(NameKey,1));
-                    return intTemp;
+                    intText = Convert.ToInt32(intTSS.GetValue(NameKey,1));
+                    return intText;
                 }
                 else
                 {
-                    int intText = 1;
+                    intText = 1;
                     intAPPTo(NameKey, 1);
                     return intText;
                 }
@@ -745,7 +746,7 @@ public class WorkInReestr
             else
             {
 
-                int intText = 1;
+                intText = 1;
                 intAPPTo(NameKey, 1);
                 return intText;
 
@@ -899,11 +900,12 @@ public class MyNetFramework
 
     #region Определяем на какую версию заточено приложение
 
-    public static string ShowFrameworkVersionApp() 
+    public static bool blOKFrameworkVersionApp() 
     {
         //https://question-it.com/questions/769879/kak-uznat-imja-i-versiju-tselevogo-frejmvorka-iz-exe
 
         //var attributes = assembly.CustomAttributes; //получаем имя файла из параметров функции //public static string ShowFrameworkVersionApp(Assembly assembly) 
+        bool blNetFrameWork = false;
         var fxAssembly = Assembly.LoadFrom(Assembly.GetExecutingAssembly().Location);
         var attributes = fxAssembly.CustomAttributes; //тередаем текущее имя файла
         string sfv="";
@@ -915,25 +917,151 @@ public class MyNetFramework
                 if (arg == null)
                 {
                     sfv= "";
+                    blNetFrameWork = false;
                     throw new NullReferenceException("Unable to read framework version");
+                    
                     
                 }
                 else
                 {
                     //sfv= arg.Value.ToString();
+                    #region Получаем массив чисел выражающий версию приложения
+                    
                     string sfv0 = arg.Value.ToString();
-                    int sfv1 = sfv0.IndexOf("=v")+2;
-                    string sfv2 = sfv0.Substring(sfv1, sfv0.Length-sfv1);
+                    int sfv1 = sfv0.IndexOf("=v") + 2;
+                    string sfv2 = sfv0.Substring(sfv1, sfv0.Length - sfv1);
+
+                    int[] array = sfv2.Select(x => Convert.ToInt32(char.GetNumericValue(x))).ToArray(); //Преобразукм строку в массив сисел
+                    array = array.Where(x => x != -1).ToArray();//Удаляем из массива (-1)
+                    #endregion
+
+                    #region Преобраем числовой массив версии Framework в число для поиска в рестре
+                    int intMinVerApp = 0;
+                    if (array[0] == 4)
+                    {
+                        switch (array[1])
+                        {
+                            case 5:
+                                switch (array[2])
+                                {
+                                    case 1:
+                                        intMinVerApp = 378675;
+                                        break;
+                                    case 2:
+                                        intMinVerApp = 379893;
+                                        break;
+                                    default:
+                                        intMinVerApp = 378389;
+                                        break;
+                                }
+                                break;
+                            case 6:
+                                switch (array[2])
+                                {
+                                    case 1:
+                                        intMinVerApp = 394254;
+                                        break;
+                                    case 2:
+                                        intMinVerApp = 394802;
+                                        break;
+                                    default:
+                                        intMinVerApp = 393295;
+                                        break;
+                                }
+                                break;
+                            case 7:
+                                switch (array[2])
+                                {
+                                    case 1:
+                                        intMinVerApp = 461308;
+                                        break;
+                                    case 2:
+                                        intMinVerApp = 461808;
+                                        break;
+                                    default:
+                                        intMinVerApp = 460798;
+                                        break;
+                                }
+                                break;
+                            case 8:
+                                switch (array[2])
+                                {
+                                    case 1:
+                                        intMinVerApp = 533320;
+                                        break;
+                                    default:
+                                        intMinVerApp = 528040;
+                                        break;
+                                }
+                                break;
+
+                            default:
+                                intMinVerApp = 0;
+                                break;
+                        }
+                    }
+                    else if (array[1] < 4)
+                    {
+                        blNetFrameWork = false;
+                    }
+                    #endregion
+
+                    #region по заданной ветке реестра находим нинимальная версия в системе она должна быть больше чем версия АРР
+                    const string subkey = @"SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\";
+                    int intRegVerNet;
+                    using (RegistryKey intTSS = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32).OpenSubKey(subkey))
+                    {
+                        if (intTSS != null)
+                        {
+                            if (intTSS.GetValue("Release") != null)
+                            {
+                                intRegVerNet = Convert.ToInt32(intTSS.GetValue("Release", 0));
+                            }
+                            else
+                            {
+                                intRegVerNet = 0;
+                            }
+                        }
+                        else
+                        {
+                            intRegVerNet = 0;
+                        }
+                    }
+
+                    #endregion
+
+                    Console.WriteLine(intRegVerNet.ToString());
+                    Console.WriteLine(intMinVerApp.ToString());
+
+                    MyIO.WriteFileTXT(DateTime.Now, "System-" + intRegVerNet+ " -- App-" + intMinVerApp + "("+ sfv0 + ")", "NFw");
+
+                    if (intRegVerNet > intMinVerApp) blNetFrameWork =  true; 
+                    else blNetFrameWork = false;
+
+
+                    //if (sfv2>"4.5")
+                    //{
+                    //    
+                    //}
+                    //else
+                    //{
+                    //    if (sfv2<"4.5")
+                    //    {
+
+                    //    }     
+                    //}
+
                     sfv = sfv2; 
                 }
                 
 
             }
+
             
-            
+
         }
 
-        return sfv;
+        return blNetFrameWork;
     }
 
     #endregion

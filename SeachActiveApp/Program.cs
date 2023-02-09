@@ -14,6 +14,7 @@ using System.Security;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 public static class Globals
 {
@@ -166,15 +167,21 @@ namespace SeachActiveApp
         {
 
 
-            
-            string dd1 = System.Environment.Version.ToString(); //версия в системе
-                       
-            string dd3 = MyNetFramework.ShowFrameworkVersionApp(); //версия приложения
+
+            //string dd1 = System.Environment.Version.ToString(); //версия в системе
+
+            //string dd3 = MyNetFramework.ShowFrameworkVersionApp(); //версия приложения
 
 
 
-            MyIO.WriteFileTXT(DateTime.Now, dd1+" -- "+ dd3, "NFw");
+            //MyIO.WriteFileTXT(DateTime.Now, dd1+" -- "+ dd3, "NFw");
 
+
+            if (!MyNetFramework.blOKFrameworkVersionApp())
+            {
+                System.Windows.Forms.MessageBox.Show("Проблема с Net FrameWork");
+                Application.Exit();
+            }
 
 
             if (isStillRunning()) //Если запустили второй раз то показываем форму ввода пароля

@@ -793,12 +793,14 @@ public class MyNetFramework
                     if (install == "")
                     {
                         strVersionNet = strVersionNet + versionName + " " + name;
+                        MyIO.WriteFileTXT(DateTime.Now, "VersionName -" + versionName + " -- name-" + name, "NFw");
                     }
                     else
                     {
                         if (sp != "" && install == "1")
                         {
                             strVersionNet = strVersionNet + versionName + " " + name + " SP " + sp;
+                            MyIO.WriteFileTXT(DateTime.Now, "VersionName-" + versionName + " -- name-" + name + " -- SP-" + sp, "NFw");
                         }
                     }
 
@@ -819,16 +821,19 @@ public class MyNetFramework
                         if (install == "")
                         {
                             strVersionNet = strVersionNet + versionName + " " + name;
+                            MyIO.WriteFileTXT(DateTime.Now, "VersionName -" + versionName + " -- name-" + name, "NFw");
                         }
                         else
                         {
                             if (sp != "" && install == "1")
                             {
                                 strVersionNet = strVersionNet + " " + SubKeyName + " " + name + " SP" + sp;
+                                MyIO.WriteFileTXT(DateTime.Now, "VersionName-" + versionName + " -- name-" + name + " -- SP-" + sp, "NFw");
                             }
                             else if (install == "1")
                             {
                                 strVersionNet = strVersionNet + " " + SubKeyName + " " + name;
+                                MyIO.WriteFileTXT(DateTime.Now, "VersionName -" + versionName + " -- name-" + name, "NFw");
                             }
                         }
 
@@ -1060,7 +1065,7 @@ public class MyNetFramework
             
 
         }
-
+        WhichVersion();
         return blNetFrameWork;
     }
 

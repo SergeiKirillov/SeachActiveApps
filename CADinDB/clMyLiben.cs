@@ -13,6 +13,9 @@ using Microsoft.Win32;
 using System.Reflection;
 using System.Runtime.Versioning;
 using System.Runtime.Remoting.Lifetime;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.IO;
+using System.Data.SQLite;
 
 internal class clMyLiben
 {
@@ -30,6 +33,28 @@ internal class clMyLiben
 /// </summary>
 class MyIO
 {
+    /// <summary>
+    /// Конструктор переменной класса для ввода пути. Вытвскивает значение из ветки реестра и при ее отсутствии создает 
+    /// </summary>
+
+    public static string myPath
+    {
+        ///<summary>
+        ///Если ключа в реестре нет то используем значение пути по умолчанию,
+        ///ели есть то передаемего
+        /// </summary>
+        /// 
+
+        get 
+        {
+            return WorkInReestr.strToAPP("MyPath", System.AppDomain.CurrentDomain.BaseDirectory.ToString()); 
+        }
+        set 
+        {
+            WorkInReestr.strAPPTo("MyPath",value); 
+        }
+    }
+
 
     /// <summary>
     /// Вывод информации в файл на диске D
@@ -71,14 +96,87 @@ class MyIO
     }
     #endregion
 
+
     ///<summary>
     ///Получение пути к Базе Данных
     /// </summary>
+    /// <param name="FileName">Имя файла БД</param>
     /// 
-    public static string PathAPP()
+    #region PathAPP - проверка существования файла по заданному пути
+
+   
+    public static bool PathAPP(string FileName)
     {
-        return System.AppDomain.CurrentDomain.BaseDirectory.ToString();
-    } 
+        //if (File.Exists(System.AppDomain.CurrentDomain.BaseDirectory+FileName))
+        string pathBD = MyIO.myPath + "\\" +FileName;
+        if (File.Exists(pathBD))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    #endregion
+    
+
+}
+
+class MyDBsqlite
+{
+    ///<summary>
+    ///Класс для работы с библиотекой БД 
+    /// </summary>
+    /// 
+
+    ///<summary>
+    ///Функция для создания файла БД по заданному пути и имени файла
+    ///</summary>
+    ///<param name="strPath">Путь к БД</param>
+    ///<param name="strNameFile">Имя БД</param>
+    ///
+    public static bool CreateDB(string strPath, string strNameFile)
+    {
+        try
+        {
+            string pathDB = strPath + "\\" + strNameFile;
+            SQLiteConnection.CreateFile(pathDB);
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
+        
+    }
+
+    ///<summary>
+    ///
+    /// </summary>
+    /// <param name="pathDB">Путь к БД</param>
+    /// <param name="strNameTab">Имя таблицы</param>
+    public static bool CreateTab(string pathDB, string strNameTab)
+    {
+        string sqlExpression = "CREATE TABLE IF NOT EXISTS " + strNameTab +
+                "(_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE," +
+                "dtEvent REAL," +
+                "strEvent NVARCHAR(128))";
+
+
+        using (var connection = new SQLiteConnection("Data Source=" + pathDB + "; Version=3;"))
+        {
+            connection.Open();
+
+            SQLiteCommand command = new SQLiteCommand(sqlExpression, connection);
+            command.ExecuteNonQuery();
+
+            return true;
+        }
+
+    }
+
+    //
 }
 
 class MyScreenShot
@@ -647,8 +745,14 @@ public class ScreenInformation
 
 public class WorkInReestr
 {
+    /// <summary>
+    /// Класс для работы с реестром
+    /// 
+    /// </summary>
+    /// 
+
     private static string NameApp = "SergeiAKirApp";
-    public static string strToAPP(string NameKey)
+    public static string strToAPP(string NameKey,string strText = "Screen Saver \nдля программы SeachActiveApp")
     {
 
         using (RegistryKey strTextSS = Registry.CurrentUser.OpenSubKey(NameApp, true))
@@ -663,7 +767,7 @@ public class WorkInReestr
                 }
                 else
                 {
-                    string strText = "Screen Saver \nдля программы SeachActiveApp";
+                    //string strText = "Screen Saver \nдля программы SeachActiveApp";
                     //string strText = "1";
                     strAPPTo(NameKey, strText);
                     return strText;
@@ -674,7 +778,7 @@ public class WorkInReestr
             else
             {
                 //Запись в реестр
-                string strText = "Screen Saver \nдля программы SeachActiveApp";
+                //string strText = "Screen Saver \nдля программы SeachActiveApp"; //Параметр передан по умолчанию
                 //string strText = "1";
                 strAPPTo(NameKey, strText);
                 return strText;

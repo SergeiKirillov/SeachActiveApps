@@ -36,6 +36,7 @@
             this.btnMemoryHome = new System.Windows.Forms.Button();
             this.btnMemoryWork = new System.Windows.Forms.Button();
             this.chkMemoryWork = new System.Windows.Forms.CheckBox();
+            this.DBfolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.SuspendLayout();
             // 
             // lblPathDB
@@ -146,6 +147,7 @@
         private System.Windows.Forms.Button btnMemoryHome;
         private System.Windows.Forms.Button btnMemoryWork;
         private System.Windows.Forms.CheckBox chkMemoryWork;
+        private System.Windows.Forms.FolderBrowserDialog DBfolderBrowserDialog;
     }
 }
 

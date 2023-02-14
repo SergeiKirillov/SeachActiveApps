@@ -1,9 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.645
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeachActiveApp", "SeachActiveApp\SeachActiveApp.csproj", "{2EB371AB-2396-4CB7-9C07-852DBD5BAB18}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppToAppClient", "AppToAppClient\AppToAppClient.csproj", "{CF2FC22F-0390-4972-9752-847064B2B166}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeachActiveAppSCR", "SeachActiveAppSCR\SeachActiveAppSCR.csproj", "{5B45C74A-0545-4700-BE92-D41B8FABC127}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{7C3D5F00-F3AE-4D6C-BC76-F35F8479EEA5}"
+	ProjectSection(SolutionItems) = preProject
+		clMyLiben.cs = clMyLiben.cs
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CADinDB", "CADinDB\CADinDB.csproj", "{AEB4F121-2047-46AE-8262-E0AFD8F29D5D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +26,18 @@ Global
 		{2EB371AB-2396-4CB7-9C07-852DBD5BAB18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EB371AB-2396-4CB7-9C07-852DBD5BAB18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EB371AB-2396-4CB7-9C07-852DBD5BAB18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF2FC22F-0390-4972-9752-847064B2B166}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF2FC22F-0390-4972-9752-847064B2B166}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF2FC22F-0390-4972-9752-847064B2B166}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF2FC22F-0390-4972-9752-847064B2B166}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B45C74A-0545-4700-BE92-D41B8FABC127}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B45C74A-0545-4700-BE92-D41B8FABC127}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B45C74A-0545-4700-BE92-D41B8FABC127}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B45C74A-0545-4700-BE92-D41B8FABC127}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEB4F121-2047-46AE-8262-E0AFD8F29D5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEB4F121-2047-46AE-8262-E0AFD8F29D5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEB4F121-2047-46AE-8262-E0AFD8F29D5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEB4F121-2047-46AE-8262-E0AFD8F29D5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

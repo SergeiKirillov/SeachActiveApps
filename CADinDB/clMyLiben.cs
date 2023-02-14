@@ -156,7 +156,7 @@ class MyDBsqlite
     /// </summary>
     /// <param name="pathDB">Путь к БД</param>
     /// <param name="strNameTab">Имя таблицы</param>
-    public static bool CreateTab(string pathDB, string strNameTab)
+    public static bool CreateTabMemory(string pathDB, string strNameTab)
     {
         string sqlExpression = "CREATE TABLE IF NOT EXISTS " + strNameTab +
                 "(_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE," +

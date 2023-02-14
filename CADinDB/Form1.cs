@@ -147,9 +147,9 @@ namespace CADinDB
 
             //}
 
-            MyDBsqlite.CreateTab(pathDB, "tbHoliday");
-            MyDBsqlite.CreateTab(pathDB, "tbMemoryHome");
-            MyDBsqlite.CreateTab(pathDB, "tbMemoryWork");
+            MyDBsqlite.CreateTabMemory(pathDB, "tbHoliday");
+            MyDBsqlite.CreateTabMemory(pathDB, "tbMemoryHome");
+            MyDBsqlite.CreateTabMemory(pathDB, "tbMemoryWork");
         }
 
         private void chkHolidays_CheckedChanged(object sender, EventArgs e)

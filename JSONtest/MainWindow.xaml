@@ -6,13 +6,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JSONtest"
         mc:Ignorable="d"
-        Title="ToDoApp" Height="450" Width="800">
+        Title="ToDoApp" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
-        <DataGrid x:Name="dgToDoList" FontSize="16" FontWeight="Bold" Margin="10">
+        <DataGrid x:Name="dgToDoList" FontSize="16" FontWeight="Bold" Margin="10" AutoGenerateColumns="False" >
             <DataGrid.Columns>
-                <DataGridTextColumn IsReadOnly="False" Header="CreationData" Width="180"></DataGridTextColumn>
-                <DataGridCheckBoxColumn IsReadOnly="True" Header="Done" Width="80"></DataGridCheckBoxColumn>
-                <DataGridTextColumn IsReadOnly="True" Header="ToDo" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Binding ="{Binding Path=CreationDate}" IsReadOnly="True" Header="CreationData" Width="180"></DataGridTextColumn>
+                <DataGridCheckBoxColumn Binding="{Binding Path=CreationDate,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" Header="Done" Width="80"></DataGridCheckBoxColumn>
+                <DataGridTextColumn Binding="{Binding Path=Text}" IsReadOnly="False" Header="ToDo" Width="*"></DataGridTextColumn>
             </DataGrid.Columns>
             
             

@@ -15,7 +15,7 @@ using System.Runtime.Versioning;
 using System.Runtime.Remoting.Lifetime;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.IO;
-using System.Data.SQLite;
+//using System.Data.SQLite;
 
 internal class clMyLiben
 {
@@ -138,16 +138,16 @@ class MyDBsqlite
     ///
     public static bool CreateDB(string strPath, string strNameFile)
     {
-        try
-        {
-            string pathDB = strPath + "\\" + strNameFile;
-            SQLiteConnection.CreateFile(pathDB);
-            return true;
-        }
-        catch (Exception)
-        {
+        //try
+        //{
+        //    string pathDB = strPath + "\\" + strNameFile;
+        //    SQLiteConnection.CreateFile(pathDB);
+        //    return true;
+        //}
+        //catch (Exception)
+        //{
             return false;
-        }
+        //}
         
     }
 
@@ -158,22 +158,23 @@ class MyDBsqlite
     /// <param name="strNameTab">Имя таблицы</param>
     public static bool CreateTab(string pathDB, string strNameTab)
     {
-        string sqlExpression = "CREATE TABLE IF NOT EXISTS " + strNameTab +
-                "(_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE," +
-                "dtEvent REAL," +
-                "strEvent NVARCHAR(128))";
+        //string sqlExpression = "CREATE TABLE IF NOT EXISTS " + strNameTab +
+        //        "(_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE," +
+        //        "dtEvent REAL," +
+        //        "strEvent NVARCHAR(128))";
 
 
-        using (var connection = new SQLiteConnection("Data Source=" + pathDB + "; Version=3;"))
-        {
-            connection.Open();
+        //using (var connection = new SQLiteConnection("Data Source=" + pathDB + "; Version=3;"))
+        //{
+        //    connection.Open();
 
-            SQLiteCommand command = new SQLiteCommand(sqlExpression, connection);
-            command.ExecuteNonQuery();
+        //    SQLiteCommand command = new SQLiteCommand(sqlExpression, connection);
+        //    command.ExecuteNonQuery();
 
-            return true;
-        }
+        //    return true;
+        //}
 
+        return false; //убрать при снятии галочек
     }
 
     //

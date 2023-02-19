@@ -41,7 +41,7 @@ class MyIOFile
     /// <param name="dtMessage"></param>
     /// <param name="Message"></param>
     /// <param name="NameFile"></param>
-    #region Вывод в файл
+    #region Вывод в файл WriteFileTXT(DateTime dtMessage, string Message, string NameFile) и  WriteFileTXT(string Message, string NameFile)
 
     public static void WriteFileTXT(DateTime dtMessage, string Message, string NameFile)
     {

@@ -51,6 +51,23 @@ namespace SeachActiveAppSCR
             }
         }
 
+        public static bool blDisableScreenSave
+        {
+            get
+            {
+                
+
+                return WorkInReestr.blToAPP("DisableScreenSave");
+            }
+            set
+            {
+                
+
+                WorkInReestr.strAPPTo("DisableScreenSave", value.ToString());
+
+            }
+        }
+
         public static string strTxtScreenSaver
         {
             get
@@ -99,6 +116,8 @@ namespace SeachActiveAppSCR
                 WorkInReestr.strAPPTo("Text", value);
             }
         }
+
+
 
         /// <summary>
         /// Главная точка входа для приложения.

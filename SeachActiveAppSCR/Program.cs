@@ -10,6 +10,52 @@ namespace SeachActiveAppSCR
 {
     static class Program
     {
+        /// <summary>
+        /// blUpdate - bool нужно ли обновлять StrMessage, взводится в true внешней программой
+        /// dtUpdate - DateTime формирования Списка формирования сообщения
+        ///blCheck - Выполненено ли мероприятие, выставляется внешней программой.
+        ///
+        ///StrMessageGov - государственные праздники
+        ///StrMessageHome - семейная памятка
+        ///StrMessageWork - рабочая памятка
+        /// </summary>
+
+        public static bool blUpdate
+        {
+            get { return WorkInReestr.blToAPP("blUpdate"); }
+            set { WorkInReestr.strAPPTo("blText", value.ToString()); }
+        }
+
+        public static string dtUpdate
+        {
+            get { return WorkInReestr.strToAPP("dtUpdate"); }
+            set { WorkInReestr.strAPPTo("dtUpdate", value); }
+        }
+        public static bool blCheck
+        {
+            get { return WorkInReestr.blToAPP("blCheck"); }
+            set { WorkInReestr.strAPPTo("blCheck", value.ToString()); }
+        }
+
+        public static string StrMessageGov
+        {
+            get { return WorkInReestr.strToAPP("StrMessageGov"); }
+            set { WorkInReestr.strAPPTo("StrMessageGov", value); }
+        }
+
+        public static string StrMessageHome
+        {
+            get { return WorkInReestr.strToAPP("StrMessageHome"); }
+            set { WorkInReestr.strAPPTo("StrMessageHome", value); }
+        }
+        public static string StrMessageWork
+        {
+            get { return WorkInReestr.strToAPP("StrMessageWork"); }
+            set { WorkInReestr.strAPPTo("StrMessageWork", value); }
+        }
+
+
+
 
 
         public static bool blTxtScreenSaver
@@ -111,6 +157,11 @@ namespace SeachActiveAppSCR
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new frmScreenSaver());
+
+            #region Проверка значений в реестре и при их отсутствии значение по умолчанию
+
+
+            #endregion
 
             if (args.Length > 0)
             {

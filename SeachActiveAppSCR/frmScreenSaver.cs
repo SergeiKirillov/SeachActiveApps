@@ -226,6 +226,25 @@ namespace SeachActiveAppSCR
 
             #endregion
 
+            #region Опрос каждую минуту ключей реестра(blUpdate и dtUpdate) на изменение
+            if (Program.blUpdate)
+            {
+                //Измение есть
+
+                //Вносим изменения в StrMessageGov, StrMessageHome, StrMessageWork
+
+                //сбрасываем blUpdate в false, Изменения зафиксированы
+
+            }
+
+            DateTime dtReg = Convert.ToDateTime(Program.dtUpdate);
+            DateTime dtNow = DateTime.Now.Date;
+            if (dtReg< dtNow)
+            {
+
+            }
+            #endregion
+
         }
 
 

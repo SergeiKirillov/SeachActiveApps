@@ -713,8 +713,6 @@ public class WorkInReestr
 
     }
 
-   
-
     public static bool blToAPP(string NameKey)
     {
 
@@ -814,6 +812,34 @@ public class WorkInReestr
         }
         
 
+    }
+
+    public static DateTime dtToApp(string NameKey)
+    {
+        return DateTime.Now;
+    }
+    public static void dtAppTo(String NameKey, DateTime ValueKey)
+    {
+        if (ValueKey!=null)
+        {
+            using (RegistryKey strTextSS = Registry.CurrentUser.CreateSubKey(NameApp))
+            {
+
+                strTextSS.SetValue(NameKey, ValueKey.ToString());
+
+            }
+        }
+        else
+        {
+            using (RegistryKey strTextSS = Registry.CurrentUser.CreateSubKey(NameApp))
+            {
+
+                strTextSS.SetValue(NameKey, DateTime.Now.ToString());
+
+            }
+        }
+
+        
     }
 
 }

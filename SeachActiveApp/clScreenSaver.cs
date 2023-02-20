@@ -226,7 +226,7 @@ public static class ScreenSaver
 
 
                     }
-                    else
+                    else 
                     {
                         
                         intTimeCountScreenSave = 0;
@@ -294,7 +294,7 @@ public static class ScreenSaver
                             //System.Diagnostics.Debug.WriteLine(cWindow); 
                             //if (Convert.ToBoolean(SetForegroundWindow(cWindow))) PostMessage(cWindow, WM_CLOSE, 0, 0); ;
 
-                            System.Diagnostics.Debug.WriteLine(DateTime.Now);
+                        System.Diagnostics.Debug.WriteLine(DateTime.Now);
                         System.Diagnostics.Debug.WriteLine("Кол-во циклов: " + intTimeCountScreenSave);
 
                     }

@@ -12,6 +12,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{7C3D5F00-F3AE-4D6C-BC76-F35F8479EEA5}"
 	ProjectSection(SolutionItems) = preProject
 		clMyLiben.cs = clMyLiben.cs
+		Описание, предложение.txt = Описание, предложение.txt
 	EndProjectSection
 EndProject
 Global

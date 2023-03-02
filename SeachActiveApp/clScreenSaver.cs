@@ -186,7 +186,7 @@ public static class ScreenSaver
 
                 if (ScreenSaver.GetScreenSaverRunning())
                 {
-                    if (intTimeCountScreenSave!=Globals.intTimeDisableScreenSave)
+                    if (intTimeCountScreenSave<Globals.intTimeDisableScreenSave)
                     {
                         intTimeCountScreenSave = intTimeCountScreenSave + 1;
                         System.Diagnostics.Debug.WriteLine("Кол-во циклов: "+ intTimeCountScreenSave);

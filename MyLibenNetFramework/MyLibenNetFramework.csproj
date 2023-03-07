@@ -44,7 +44,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clSAA.cs" />
+    <Compile Include="MyIOFile.cs" />
+    <Compile Include="MyNetFramework.cs" />
+    <Compile Include="MyScreenShot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScreenInformation.cs" />
+    <Compile Include="WorkInReestr.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

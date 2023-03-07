@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MyLibenNetFramework;
 
 
 namespace SeachActiveAppSCR
@@ -22,7 +23,7 @@ namespace SeachActiveAppSCR
 
         public static bool blUpdate
         {
-            get { return WorkInReestr.blToAPP("blUpdate"); }
+            get { return  WorkInReestr.blToAPP("blUpdate"); }
             set { WorkInReestr.strAPPTo("blText", value.ToString()); }
         }
 

@@ -25,11 +25,24 @@ internal class clMyLiben
     //работа с рееестром
 
 }
-class MyIO
+class MyIOFile
 {
-    #region Вывод в файл
+    /// <summary>
+    /// MyIOFile - класс работы с файловой системой
+    ///
+    /// </summary>
+    /// 
 
-    //MyIO.WriteFileTXT(DateTime.Now, " X:" + Screen.PrimaryScreen.Bounds.X.ToString() + " Y:" + Screen.PrimaryScreen.Bounds.Y.ToString() + " Size:" + Screen.PrimaryScreen.Bounds.Size.ToString(), "SceenShot"); //вывод в текстовы файл
+
+    ///<summary>
+    ///WriteFileTXT - запись сообщения в текстовый файл
+    /// MyIOFile.WriteFileTXT(DateTime.Now, " X:" + Screen.PrimaryScreen.Bounds.X.ToString() + " Y:" + Screen.PrimaryScreen.Bounds.Y.ToString() + " Size:" + Screen.PrimaryScreen.Bounds.Size.ToString(), "SceenShot"); //вывод в текстовы файл
+    /// </summary>
+    /// <param name="dtMessage"></param>
+    /// <param name="Message"></param>
+    /// <param name="NameFile"></param>
+    #region Вывод в файл WriteFileTXT(DateTime dtMessage, string Message, string NameFile) и  WriteFileTXT(string Message, string NameFile)
+
     public static void WriteFileTXT(DateTime dtMessage, string Message, string NameFile)
     {
         try
@@ -40,6 +53,41 @@ class MyIO
                 DateTime TimeWrite = dtMessage;
 
                 tmptxt = dtMessage.ToString("dd.MM.yyyy HH:mm:ss") + ";" + Message;
+
+                //Если не удачно то записываем в локальный файл
+                //string pathProg = System.AppDomain.CurrentDomain.BaseDirectory.ToString() + NameFile+".txt";
+                string pathProg = "D://" + NameFile + ".txt";
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(pathProg, true))
+                {
+
+                    file.WriteLine(tmptxt);
+                    file.Close();
+                }
+
+
+            }
+
+        }
+        catch
+        { }
+    }
+
+    ///<summary>
+    ///WriteFileTXT - запись сообщения в текстовый файл
+    ///MyIOFile.WriteFileTXT(DateTime.Now, " X:" + Screen.PrimaryScreen.Bounds.X.ToString() + " Y:" + Screen.PrimaryScreen.Bounds.Y.ToString() + " Size:" + Screen.PrimaryScreen.Bounds.Size.ToString(), "SceenShot"); //вывод в текстовы файл
+    /// </summary>
+    /// <param name="Message"></param>
+    /// <param name="NameFile"></param>
+    public static void WriteFileTXT(string Message, string NameFile)
+    {
+        try
+        {
+            if (Message != "" || Message != null || Message != " ")
+            {
+                string tmptxt;
+                DateTime TimeWrite = DateTime.Now;
+
+                tmptxt = TimeWrite.ToString("dd.MM.yyyy HH:mm:ss") + ";" + Message;
 
                 //Если не удачно то записываем в локальный файл
                 //string pathProg = System.AppDomain.CurrentDomain.BaseDirectory.ToString() + NameFile+".txt";
@@ -210,7 +258,7 @@ class MyScreenShot
                 //Здесь мы получаем дескриптор контекста устройства рабочего стола.
                 IntPtr hDC = PlatformInvokeUSER32.GetDC
                               (PlatformInvokeUSER32.GetDesktopWindow());
-                MyIO.WriteFileTXT(DateTime.Now, "Рабочий стол:" + hDC.ToString(), "SceenShot");
+                MyIOFile.WriteFileTXT("Рабочий стол:" + hDC.ToString(), "SceenShot");
 
                 //Здесь мы делаем контекст устройства
 
@@ -239,25 +287,25 @@ class MyScreenShot
                     //контекст и держит ссылку на старый битовый массив.
                     IntPtr hOld = (IntPtr)PlatformInvokeGDI32.SelectObject
                                            (hMemDC, hBitmap);
-                    MyIO.WriteFileTXT(DateTime.Now, "Память:" + hOld.ToString(), "SceenShot"); //вывод в текстовы файл
+                    MyIOFile.WriteFileTXT("Память:" + hOld.ToString(), "SceenShot"); //вывод в текстовы файл
                     //Мы копируем Битовый массив к контексту устройства памяти.
                     bool rrr = PlatformInvokeGDI32.BitBlt(hMemDC, 0, 0, size.cx, size.cy, hDC,
                                                0, 0, PlatformInvokeGDI32.SRCCOPY);
-                    MyIO.WriteFileTXT(DateTime.Now, "Копирование изображение:" + rrr, "SceenShot"); //вывод в текстовы файл
+                    MyIOFile.WriteFileTXT(DateTime.Now, "Копирование изображение:" + rrr, "SceenShot"); //вывод в текстовы файл
 
                     //Мы выбираем старый битовый массив назад к контексту устройства памяти.
                     IntPtr SO = PlatformInvokeGDI32.SelectObject(hMemDC, hOld);
-                    MyIO.WriteFileTXT(DateTime.Now, "Возвращаемое значение после выбирания:" + SO, "SceenShot");
+                    MyIOFile.WriteFileTXT("Возвращаемое значение после выбирания:" + SO, "SceenShot");
 
                     //Мы удаляем контекст устройства памяти.
                     PlatformInvokeGDI32.DeleteDC(hMemDC);
                     //Мы выпускаем контекст устройства экрана.
                     IntPtr RIU = PlatformInvokeUSER32.ReleaseDC(PlatformInvokeUSER32.GetDesktopWindow(), hDC);
                     //Изображение создано и сохранено в локальную переменную
-                    MyIO.WriteFileTXT(DateTime.Now, "ReleaseDC(1-освобожден):" + RIU, "SceenShot");
+                    MyIOFile.WriteFileTXT("ReleaseDC(1-освобожден):" + RIU, "SceenShot");
 
                     Bitmap bmp = System.Drawing.Image.FromHbitmap(hBitmap);
-                    MyIO.WriteFileTXT(DateTime.Now, bmp.RawFormat.ToString(), "SceenShot"); //вывод в текстовы файл
+                    MyIOFile.WriteFileTXT(bmp.RawFormat.ToString(), "SceenShot"); //вывод в текстовы файл
 
                     //Освободим память, чтобы избежать утечек памяти.
                     PlatformInvokeGDI32.DeleteObject(hBitmap);
@@ -665,8 +713,6 @@ public class WorkInReestr
 
     }
 
-   
-
     public static bool blToAPP(string NameKey)
     {
 
@@ -768,6 +814,34 @@ public class WorkInReestr
 
     }
 
+    public static DateTime dtToApp(string NameKey)
+    {
+        return DateTime.Now;
+    }
+    public static void dtAppTo(String NameKey, DateTime ValueKey)
+    {
+        if (ValueKey!=null)
+        {
+            using (RegistryKey strTextSS = Registry.CurrentUser.CreateSubKey(NameApp))
+            {
+
+                strTextSS.SetValue(NameKey, ValueKey.ToString());
+
+            }
+        }
+        else
+        {
+            using (RegistryKey strTextSS = Registry.CurrentUser.CreateSubKey(NameApp))
+            {
+
+                strTextSS.SetValue(NameKey, DateTime.Now.ToString());
+
+            }
+        }
+
+        
+    }
+
 }
 
 public class MyNetFramework
@@ -793,14 +867,14 @@ public class MyNetFramework
                     if (install == "")
                     {
                         strVersionNet = strVersionNet + versionName + " " + name;
-                        MyIO.WriteFileTXT(DateTime.Now, "VersionName -" + versionName + " -- name-" + name, "NFw");
+                        MyIOFile.WriteFileTXT("VersionName -" + versionName + " -- name-" + name, "NFw");
                     }
                     else
                     {
                         if (sp != "" && install == "1")
                         {
                             strVersionNet = strVersionNet + versionName + " " + name + " SP " + sp;
-                            MyIO.WriteFileTXT(DateTime.Now, "VersionName-" + versionName + " -- name-" + name + " -- SP-" + sp, "NFw");
+                            MyIOFile.WriteFileTXT("VersionName-" + versionName + " -- name-" + name + " -- SP-" + sp, "NFw");
                         }
                     }
 
@@ -821,19 +895,19 @@ public class MyNetFramework
                         if (install == "")
                         {
                             strVersionNet = strVersionNet + versionName + " " + name;
-                            MyIO.WriteFileTXT(DateTime.Now, "VersionName -" + versionName + " -- name-" + name, "NFw");
+                            MyIOFile.WriteFileTXT("VersionName -" + versionName + " -- name-" + name, "NFw");
                         }
                         else
                         {
                             if (sp != "" && install == "1")
                             {
                                 strVersionNet = strVersionNet + " " + SubKeyName + " " + name + " SP" + sp;
-                                MyIO.WriteFileTXT(DateTime.Now, "VersionName-" + versionName + " -- name-" + name + " -- SP-" + sp, "NFw");
+                                MyIOFile.WriteFileTXT("VersionName-" + versionName + " -- name-" + name + " -- SP-" + sp, "NFw");
                             }
                             else if (install == "1")
                             {
                                 strVersionNet = strVersionNet + " " + SubKeyName + " " + name;
-                                MyIO.WriteFileTXT(DateTime.Now, "VersionName -" + versionName + " -- name-" + name, "NFw");
+                                MyIOFile.WriteFileTXT("VersionName -" + versionName + " -- name-" + name, "NFw");
                             }
                         }
 
@@ -1038,7 +1112,7 @@ public class MyNetFramework
                     Console.WriteLine(intRegVerNet.ToString());
                     Console.WriteLine(intMinVerApp.ToString());
 
-                    MyIO.WriteFileTXT(DateTime.Now, "System-" + intRegVerNet+ " -- App-" + intMinVerApp + "("+ sfv0 + ")", "NFw");
+                    MyIOFile.WriteFileTXT("System-" + intRegVerNet+ " -- App-" + intMinVerApp + "("+ sfv0 + ")", "NFw");
 
                     if (intRegVerNet > intMinVerApp) blNetFrameWork =  true; 
                     else blNetFrameWork = false;

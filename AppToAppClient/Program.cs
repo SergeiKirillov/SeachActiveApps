@@ -1,6 +1,7 @@
 ﻿
+using System;
 using System.IO.MemoryMappedFiles;
-using System.Reflection.PortableExecutable;
+using System.Threading;
 
 namespace AppToAppClient
 {

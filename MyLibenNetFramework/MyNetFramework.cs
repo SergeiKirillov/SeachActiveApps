@@ -150,7 +150,9 @@ namespace MyLibenNetFramework
 
             //var attributes = assembly.CustomAttributes; //получаем имя файла из параметров функции //public static string ShowFrameworkVersionApp(Assembly assembly) 
             bool blNetFrameWork = false;
-            var fxAssembly = Assembly.LoadFrom(Assembly.GetExecutingAssembly().Location);
+            string  rer = Assembly.GetCallingAssembly().Location;
+            //var fxAssembly = Assembly.LoadFrom(Assembly.GetExecutingAssembly().Location); //GetExecutingAssembly() вернет текущую сборку - null
+            var fxAssembly = Assembly.LoadFrom(Assembly.GetCallingAssembly().Location); //GetCallingAssembly() вернет сборку которая вызвала текущий метод
             var attributes = fxAssembly.CustomAttributes; //тередаем текущее имя файла
             string sfv = "";
             foreach (var attribute in attributes)

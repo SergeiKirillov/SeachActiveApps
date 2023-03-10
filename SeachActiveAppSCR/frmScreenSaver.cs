@@ -247,12 +247,12 @@ namespace SeachActiveAppSCR
 
             }
 
-            DateTime dtReg = Convert.ToDateTime(Program.dtUpdate);
-            DateTime dtNow = DateTime.Now.Date;
-            if (dtReg< dtNow)
-            {
+            //DateTime dtReg = Convert.ToDateTime(Program.dtUpdate);
+            //DateTime dtNow = DateTime.Now.Date;
+            //if (dtReg < dtNow)
+            //{
 
-            }
+            //}
             #endregion
 
         }

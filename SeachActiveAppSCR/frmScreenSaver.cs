@@ -251,8 +251,8 @@ namespace SeachActiveAppSCR
             //DateTime dtNow = DateTime.Now.Date;
             //if (dtReg < dtNow)
             //{
-
             //}
+
             #endregion
 
         }

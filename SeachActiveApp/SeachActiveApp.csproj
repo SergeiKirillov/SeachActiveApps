@@ -70,12 +70,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="clData1Hour.cs" />
-    <Compile Include="clDataAppCount.cs" />
     <Compile Include="clRW.cs" />
-    <Compile Include="clReg.cs" />
-    <Compile Include="clScreenSaver.cs" />
-    <Compile Include="clWinAPI.cs" />
     <Compile Include="frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>

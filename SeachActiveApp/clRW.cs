@@ -5,9 +5,29 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using LiteDB;
+using MyLibenNetFramework;
 
 namespace SeachActiveApp
 {
+    /// <summary>
+    /// модуль отвечает за запись/чтение данных в базу LiteDb
+    /// </summary>
+    /// 
+    class clData1Hour
+    {
+        [BsonId]
+
+        public Guid ID { get; set; }
+        public DateTime dtApp { get; set; }
+        public String strApp { get; set; }
+        public int Raz1Minut { get; set; }
+    }
+    class clDataAppCount
+    {
+
+        public string strApp { get; set; }
+        public int CountMinut { get; set; }
+    }
     class clRW
     {
         public clRW()

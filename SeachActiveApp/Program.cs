@@ -148,6 +148,17 @@ public static class Globals
         }
     }
 
+    public static bool blScreenShotDesktop
+    {
+        get
+        {
+            return WorkInReestr.blToAPP("EnableScreenShot");
+        }
+        set
+        {
+            WorkInReestr.strAPPTo("EnableScreenShot", value.ToString());
+        }
+    }
     
 
 
@@ -273,7 +284,14 @@ namespace SeachActiveApp
 
                     #endregion
 
-                    
+
+                    #region Если включена настройка скиншот, то тогда каждую минуту делаем скриншот работчего стола.пока не включена экранная заставка
+                    Thread ScreenShot = new Thread(ToDoScreenShot);
+                    ScreenShot.IsBackground = true;
+                    ScreenShot.Start();
+                    #endregion
+
+
 
 
                     Thread.Sleep(TimeSpan.FromHours(1)); //спим 1 час
@@ -307,7 +325,7 @@ namespace SeachActiveApp
         /// intTimeDisableScreenSave - int Время когда будет происходить разблокировка
         /// Globals.SharedMemory - Создание участка разделяемой памяти
         /// </summary>
-        public static void CheckScreenSave()
+        private static void CheckScreenSave()
         {
             while (true)
             {
@@ -467,5 +485,20 @@ namespace SeachActiveApp
 
 
         }
+
+        /// <summary>
+        /// ToDoScreenShot() - функция которая с промежутком около 1 мин будет делать скриншот
+        /// </summary>
+        private static void ToDoScreenShot() 
+        {
+            while (true)
+            {
+                MyScreenShot.MakeScreenshot(); //Делаем скринШот с помощью функции библиотеки 
+                Thread.Sleep(TimeSpan.FromMinutes(1));
+            }
+        }
+
+
+
     }
 }

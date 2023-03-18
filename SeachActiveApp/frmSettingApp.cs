@@ -20,6 +20,7 @@ namespace SeachActiveApp
             InitializeComponent();
             chkDisableScreenSave.Checked = Globals.blDisableScreenSave;
             txtTimeDisableScreenSave.Text = Globals.intTimeDisableScreenSave.ToString();
+            chkScreenShotDesktop.Checked = Globals.blScreenShotDesktop;
         }
 
         private void chkDisableScreenSave_CheckedChanged(object sender, EventArgs e)
@@ -59,6 +60,16 @@ namespace SeachActiveApp
             Globals.intTimeDisableScreenSave = Convert.ToInt32(txtTimeDisableScreenSave.Text);
         }
 
-        
+        private void chkScreenShotDesktop_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkScreenShotDesktop.Checked)
+            {
+                Globals.blScreenShotDesktop = true;
+            }
+            else
+            {
+                Globals.blScreenShotDesktop = false;
+            }
+        }
     }
 }

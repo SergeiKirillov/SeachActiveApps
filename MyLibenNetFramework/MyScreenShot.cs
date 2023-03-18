@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace MyLibenNetFramework
 {
-    class MyScreenShot
+    public class MyScreenShot
     {
 
 

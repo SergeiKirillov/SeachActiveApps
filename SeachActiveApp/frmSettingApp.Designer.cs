@@ -33,6 +33,7 @@
             this.chkDisableScreenSave = new System.Windows.Forms.CheckBox();
             this.txtTimeDisableScreenSave = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.chkScreenShotDesktop = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // chkSaveToFiles
@@ -75,7 +76,6 @@
             this.txtTimeDisableScreenSave.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTimeDisableScreenSave_KeyDown);
             this.txtTimeDisableScreenSave.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTimeDisableScreenSave_KeyPress);
             this.txtTimeDisableScreenSave.Leave += new System.EventHandler(this.txtTimeDisableScreenSave_Leave);
-           
             // 
             // label1
             // 
@@ -86,11 +86,23 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Через какое время экранная заставка будет отключена";
             // 
+            // chkScreenShotDesktop
+            // 
+            this.chkScreenShotDesktop.AutoSize = true;
+            this.chkScreenShotDesktop.Location = new System.Drawing.Point(59, 204);
+            this.chkScreenShotDesktop.Name = "chkScreenShotDesktop";
+            this.chkScreenShotDesktop.Size = new System.Drawing.Size(351, 17);
+            this.chkScreenShotDesktop.TabIndex = 5;
+            this.chkScreenShotDesktop.Text = "Применение скриншота рабочего стола как экранная заставка";
+            this.chkScreenShotDesktop.UseVisualStyleBackColor = true;
+            this.chkScreenShotDesktop.CheckedChanged += new System.EventHandler(this.chkScreenShotDesktop_CheckedChanged);
+            // 
             // frmSettingApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.chkScreenShotDesktop);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtTimeDisableScreenSave);
             this.Controls.Add(this.chkDisableScreenSave);
@@ -113,5 +125,6 @@
         private System.Windows.Forms.CheckBox chkDisableScreenSave;
         private System.Windows.Forms.TextBox txtTimeDisableScreenSave;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox chkScreenShotDesktop;
     }
 }

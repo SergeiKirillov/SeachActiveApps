@@ -493,8 +493,18 @@ namespace SeachActiveApp
         {
             while (true)
             {
-                MyScreenShot.MakeScreenshot(); //Делаем скринШот с помощью функции библиотеки 
-                Thread.Sleep(TimeSpan.FromMinutes(1));
+                if (Globals.blScreenShotDesktop) //Если в настройках экрана стоит что делаем скриншот, то тогда запускаем скриншот каждую 1мин
+                {
+                    
+                    if (!ScreenSaver.GetScreenSaverRunning()) //Если Хранитель экрана не запущен то делаем скриншот
+                    {
+                        MyScreenShot.MakeScreenshot(); //Делаем скринШот с помощью функции библиотеки 
+                        Thread.Sleep(TimeSpan.FromMinutes(1));
+                    }
+
+                    
+                }
+                
             }
         }
 

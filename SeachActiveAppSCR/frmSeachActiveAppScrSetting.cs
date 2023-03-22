@@ -52,6 +52,17 @@ namespace SeachActiveAppSCR
 
             }
 
+            chkDesktopToScreenShot.Checked = Program.blDesktopSaveForSceenShot;//Устанавливаем значение из реестра
+            if (Program.blSaveDesktopToJPG) //Если SeachActiveApp создает скриншот то разблокируем управление вставкой фонового изображения
+            {
+                chkDesktopToScreenShot.Enabled= true;
+            
+            }
+            else
+            {
+                chkDesktopToScreenShot.Enabled = false;
+            }
+
         }
 
         private void SaveSettings()
@@ -129,6 +140,13 @@ namespace SeachActiveAppSCR
             {
                 Program.strTxtScreenSaver = txtBox.Text;
             }
+        }
+
+        private void chkDesktopToScreenShot_CheckedChanged(object sender, EventArgs e)
+        {
+            //передаем в реестр значение ключа скриншота
+            Program.blDesktopSaveForSceenShot = chkDesktopToScreenShot.Checked;
+           
         }
     }
 }

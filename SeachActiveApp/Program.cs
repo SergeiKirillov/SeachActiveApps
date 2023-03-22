@@ -152,11 +152,11 @@ public static class Globals
     {
         get
         {
-            return WorkInReestr.blToAPP("EnableScreenShot");
+            return WorkInReestr.blToAPP("SaveDesktopToJPG");
         }
         set
         {
-            WorkInReestr.strAPPTo("EnableScreenShot", value.ToString());
+            WorkInReestr.strAPPTo("SaveDesktopToJPG", value.ToString());
         }
     }
     

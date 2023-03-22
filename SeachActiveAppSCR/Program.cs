@@ -102,17 +102,25 @@ namespace SeachActiveAppSCR
         {
             get
             {
-                
-
                 return WorkInReestr.blToAPP("DisableScreenSave");
             }
             set
             {
-                
-
                 WorkInReestr.strAPPTo("DisableScreenSave", value.ToString());
 
             }
+        }
+
+        public static bool blDesktopSaveForSceenShot
+        {
+            get{return WorkInReestr.blToAPP("DesktopSaveForScreenSave");}
+            set{WorkInReestr.strAPPTo("DesktopSaveForScreenSave", value.ToString());}
+        }
+
+        public static bool blSaveDesktopToJPG
+        {
+            get { return WorkInReestr.blToAPP("SaveDesktopToJPG"); }
+            set { WorkInReestr.strAPPTo("SaveDesktopToJPG", value.ToString()); }
         }
 
         public static string strTxtScreenSaver

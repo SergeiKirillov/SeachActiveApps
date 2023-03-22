@@ -38,6 +38,7 @@
             // lblStopTimeScreenSaver
             // 
             this.lblStopTimeScreenSaver.AutoSize = true;
+            this.lblStopTimeScreenSaver.BackColor = System.Drawing.Color.Transparent;
             this.lblStopTimeScreenSaver.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblStopTimeScreenSaver.ForeColor = System.Drawing.Color.Yellow;
             this.lblStopTimeScreenSaver.Location = new System.Drawing.Point(13, 13);
@@ -49,6 +50,7 @@
             // txtLabel
             // 
             this.txtLabel.AutoSize = true;
+            this.txtLabel.BackColor = System.Drawing.Color.Transparent;
             this.txtLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtLabel.ForeColor = System.Drawing.Color.Red;
             this.txtLabel.Location = new System.Drawing.Point(368, 13);
@@ -64,6 +66,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.ForeColor = System.Drawing.Color.Yellow;
             this.label1.Location = new System.Drawing.Point(27, 275);
@@ -84,7 +87,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmScreenSaver";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "Form1";
+            this.Text = "ftmScreenSave";
             this.Load += new System.EventHandler(this.frmScreenSaver_Load);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.frmScreenSaver_KeyPress);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.frmScreenSaver_MouseClick);

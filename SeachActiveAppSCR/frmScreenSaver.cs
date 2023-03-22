@@ -70,40 +70,63 @@ namespace SeachActiveAppSCR
 
         private void frmScreenSaver_Load(object sender, EventArgs e)
         {
-            Cursor.Hide();
-            TopMost = true;
-            //this.TransparencyKey = this.BackColor;
-
-            //RegistryKey key = Registry.CurrentUser.OpenSubKey("SergeiAKirApp");
-            //string ssText = (string)key.GetValue("text");
-            //if (ssText == null)
-            //{
-            //    txtLabel.Text = "C# Screen Saver";
-            //}
-            //else
-            //{
-            //    txtLabel.Text = (string)key.GetValue("text");
-            //}
-
-            //label1.Text = "1 января  Новый год \n8 марта  Международный женский день";
-            label1.Text = WorkInReestr.strToAPP("DataMessage");
-
-            if (Program.blTxtScreenSaver)
+            try
             {
-                txtLabel.Text = Program.strTxtScreenSaver;
+                Cursor.Hide();
+                TopMost = true;
+
+                #region Заполняем изображением Если задействована опция что нужно показывать скриншот экрана
+                if (Program.blDesktopSaveForSceenShot)
+                {
+                    Bitmap imgSS = new Bitmap(@"D:\screenshot.jpg");
+                    this.BackgroundImage = imgSS;
+                }
+                else
+                {
+                    Bitmap imgSS = new Bitmap(@"");
+                    this.BackgroundImage = imgSS;
+                }
+
+                #endregion
+
+
+                //this.TransparencyKey = this.BackColor;
+
+                //RegistryKey key = Registry.CurrentUser.OpenSubKey("SergeiAKirApp");
+                //string ssText = (string)key.GetValue("text");
+                //if (ssText == null)
+                //{
+                //    txtLabel.Text = "C# Screen Saver";
+                //}
+                //else
+                //{
+                //    txtLabel.Text = (string)key.GetValue("text");
+                //}
+
+                //label1.Text = "1 января  Новый год \n8 марта  Международный женский день";
+                label1.Text = WorkInReestr.strToAPP("DataMessage");
+
+                if (Program.blTxtScreenSaver)
+                {
+                    txtLabel.Text = Program.strTxtScreenSaver;
+                }
+                else
+                {
+                    txtLabel.Text = DateTime.Now.ToString("HH:mm");
+                }
+
+
+                MoveTimer.Interval = 60000; //1мин  
+                MoveTimer.Start();
+
             }
-            else
+            catch (Exception ex)
             {
-                txtLabel.Text = DateTime.Now.ToString("HH:mm");
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+               
             }
 
-
-            MoveTimer.Interval = 60000; //1мин  
-            MoveTimer.Start();
-
-
-
-
+ 
         }
 
       

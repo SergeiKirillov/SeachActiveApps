@@ -35,6 +35,7 @@
             this.lblSettingText = new System.Windows.Forms.Label();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.chkDesktopToScreenShot = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -89,7 +90,7 @@
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(17, 152);
+            this.btnOK.Location = new System.Drawing.Point(12, 188);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(160, 23);
             this.btnOK.TabIndex = 10;
@@ -99,7 +100,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(201, 152);
+            this.btnCancel.Location = new System.Drawing.Point(196, 188);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(160, 23);
             this.btnCancel.TabIndex = 11;
@@ -107,11 +108,23 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // chkDesktopToScreenShot
+            // 
+            this.chkDesktopToScreenShot.AutoSize = true;
+            this.chkDesktopToScreenShot.Location = new System.Drawing.Point(17, 135);
+            this.chkDesktopToScreenShot.Name = "chkDesktopToScreenShot";
+            this.chkDesktopToScreenShot.Size = new System.Drawing.Size(239, 17);
+            this.chkDesktopToScreenShot.TabIndex = 12;
+            this.chkDesktopToScreenShot.Text = "Рабочий стол, как фоновое изображение ";
+            this.chkDesktopToScreenShot.UseVisualStyleBackColor = true;
+            this.chkDesktopToScreenShot.CheckedChanged += new System.EventHandler(this.chkDesktopToScreenShot_CheckedChanged);
+            // 
             // frmSeachActiveAppScrSetting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.chkDesktopToScreenShot);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.lblSettingText);
@@ -136,5 +149,6 @@
         private System.Windows.Forms.Label lblSettingText;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.CheckBox chkDesktopToScreenShot;
     }
 }

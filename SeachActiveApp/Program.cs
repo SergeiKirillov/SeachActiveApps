@@ -228,14 +228,19 @@ namespace SeachActiveApp
 
                 #region Запуск WWW сервера
 
-                    //Ver 1
-                    server www = new server();
-                    Thread serverWWW = new Thread(www.start);
-                    serverWWW.Start();
+                    ////Ver 1
+                    //server www = new server();
+                    //Thread serverWWW = new Thread(www.start);
+                    //serverWWW.Start();
 
-                    //Ver 2
+                    ////Ver 2
                     //Thread wwwServer = new Thread(new ThreadStart(server.start));
                     //wwwServer.Start();
+
+                //Ver 3
+                server www = new server();
+                Thread serverWWW = new Thread(www.start);
+                serverWWW.Start();
 
                 #endregion
 

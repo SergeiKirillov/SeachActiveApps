@@ -34,6 +34,8 @@
             this.txtTimeDisableScreenSave = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.chkScreenShotDesktop = new System.Windows.Forms.CheckBox();
+            this.chkEnableSeachActiveApp = new System.Windows.Forms.CheckBox();
+            this.lnkWWW = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // chkSaveToFiles
@@ -97,11 +99,35 @@
             this.chkScreenShotDesktop.UseVisualStyleBackColor = true;
             this.chkScreenShotDesktop.CheckedChanged += new System.EventHandler(this.chkScreenShotDesktop_CheckedChanged);
             // 
+            // chkEnableSeachActiveApp
+            // 
+            this.chkEnableSeachActiveApp.AutoSize = true;
+            this.chkEnableSeachActiveApp.Location = new System.Drawing.Point(59, 9);
+            this.chkEnableSeachActiveApp.Name = "chkEnableSeachActiveApp";
+            this.chkEnableSeachActiveApp.Size = new System.Drawing.Size(468, 17);
+            this.chkEnableSeachActiveApp.TabIndex = 6;
+            this.chkEnableSeachActiveApp.Text = "Активировать модуль сбора информации об активном запущенном приложении(1мин)";
+            this.chkEnableSeachActiveApp.UseVisualStyleBackColor = true;
+            this.chkEnableSeachActiveApp.CheckedChanged += new System.EventHandler(this.chkEnableSeachActiveApp_CheckedChanged);
+            // 
+            // lnkWWW
+            // 
+            this.lnkWWW.AutoSize = true;
+            this.lnkWWW.Location = new System.Drawing.Point(59, 79);
+            this.lnkWWW.Name = "lnkWWW";
+            this.lnkWWW.Size = new System.Drawing.Size(185, 13);
+            this.lnkWWW.TabIndex = 7;
+            this.lnkWWW.TabStop = true;
+            this.lnkWWW.Text = "Открыть локальный WWW сервер";
+            this.lnkWWW.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkWWW_LinkClicked);
+            // 
             // frmSettingApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lnkWWW);
+            this.Controls.Add(this.chkEnableSeachActiveApp);
             this.Controls.Add(this.chkScreenShotDesktop);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtTimeDisableScreenSave);
@@ -126,5 +152,7 @@
         private System.Windows.Forms.TextBox txtTimeDisableScreenSave;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox chkScreenShotDesktop;
+        private System.Windows.Forms.CheckBox chkEnableSeachActiveApp;
+        private System.Windows.Forms.LinkLabel lnkWWW;
     }
 }

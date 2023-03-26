@@ -71,5 +71,17 @@ namespace SeachActiveApp
                 Globals.blScreenShotDesktop = false;
             }
         }
+
+        private void chkEnableSeachActiveApp_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        
+        private void lnkWWW_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            lnkWWW.LinkVisited= true;
+            System.Diagnostics.Process.Start("http://localhost:8000");
+        }
     }
 }

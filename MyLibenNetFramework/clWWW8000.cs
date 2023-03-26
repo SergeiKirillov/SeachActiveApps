@@ -10,12 +10,16 @@ using System.Threading;
 using System.Threading.Tasks;
  
 
-class www
+class clWWW8000
 {
+    ///
+    //server - запуск www сервера
+    //client - запуск модуля прослушки 
+    //clientSmall - ответ клиенту
 }
 
 //https://habr.com/ru/post/120157/  статья про WWW
-class server
+public class server
 {
     TcpListener Listener;
 
@@ -263,25 +267,28 @@ class clientSmall
     {
         try
         {
-            ////Вариант 1 - Простая станичка -
-            ///
+            //Вариант 1 - Простая станичка -
+            
 
 
-            //string strData = "<tr><td>34,5</td><td>3,5</td><td>36</td><td>23</td></tr>" +
-            //    "<tr><td>35,5</td><td>4</td><td>36⅔</td><td>23–23,5</td></tr>" +
-            //    "<tr><td>36</td><td>4,5</td><td>37⅓</td><td>23,5</td></tr>" +
-            //    "<tr><td>36,5</td><td>5</td><td>38</td><td>24</td></tr>" +
-            //    "<tr><td>37</td><td>5,5</td><td>38⅔</td><td>24,5</td></tr>" +
-            //    "<tr><td>38</td><td>6</td><td>39⅓</td><td>25</td></tr>" +
-            //    "<tr><td>38,5</td><td>6,5</td><td>40</td><td>25,5</td></tr>";
+            string strData = "<tr><td>34,5</td><td>3,5</td><td>36</td><td>23</td></tr>" +
+                "<tr><td>35,5</td><td>4</td><td>36⅔</td><td>23–23,5</td></tr>" +
+                "<tr><td>36</td><td>4,5</td><td>37⅓</td><td>23,5</td></tr>" +
+                "<tr><td>36,5</td><td>5</td><td>38</td><td>24</td></tr>" +
+                "<tr><td>37</td><td>5,5</td><td>38⅔</td><td>24,5</td></tr>" +
+                "<tr><td>38</td><td>6</td><td>39⅓</td><td>25</td></tr>" +
+                "<tr><td>38,5</td><td>6,5</td><td>40</td><td>25,5</td></tr>";
 
-            var SelectDay = new SeachActiveApp.clRW();
-            var source = SelectDay.Get(true, DateTime.Now);
-            string strData = "";
-            foreach (var item in source)
-            {
-                strData = strData + "<tr><td>" + source.Count + "</td><td>" + item.strApp + "</td><td>" + item.CountMinut + "</td><td>23</td></tr>";
-            }
+            ////Вариант 2 - Данные с БД -
+            ////
+            //var SelectDay = new SeachActiveApp.clRW();
+            //var source = SelectDay.Get(true, DateTime.Now);
+            //string strData = "";
+            //foreach (var item in source)
+            //{
+            //    strData = strData + "<tr><td>" + source.Count + "</td><td>" + item.strApp + "</td><td>" + item.CountMinut + "</td><td>23</td></tr>";
+            //}
+
 
             string strTable = "<table border = '1'><caption>Таблица размеров обуви</caption><tr><th>Россия</th><th>Великобритания</th><th>Европа</th><th>Длина ступни, см</th>" + "</tr>" +
                 strData +

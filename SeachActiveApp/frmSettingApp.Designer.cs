@@ -47,6 +47,7 @@
             this.chkSaveToFiles.TabIndex = 0;
             this.chkSaveToFiles.Text = "сохранение результатов в файл";
             this.chkSaveToFiles.UseVisualStyleBackColor = true;
+            this.chkSaveToFiles.CheckedChanged += new System.EventHandler(this.chkSaveToFiles_CheckedChanged);
             // 
             // chkSaveToBD
             // 
@@ -57,6 +58,7 @@
             this.chkSaveToBD.TabIndex = 1;
             this.chkSaveToBD.Text = "сохранение результатов в базу данных";
             this.chkSaveToBD.UseVisualStyleBackColor = true;
+            this.chkSaveToBD.CheckedChanged += new System.EventHandler(this.chkSaveToBD_CheckedChanged);
             // 
             // chkDisableScreenSave
             // 

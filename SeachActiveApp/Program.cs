@@ -159,7 +159,31 @@ public static class Globals
             WorkInReestr.strAPPTo("SaveDesktopToJPG", value.ToString());
         }
     }
-    
+
+    public static bool blSaveDateToFile
+    {
+        //читаем/записываем в реестр значение переменной 
+        get
+        {
+            return WorkInReestr.blToAPP("SaveDateToFile");
+        }
+        set
+        {
+            WorkInReestr.strAPPTo("SaveDateToFile", value.ToString());
+        }
+    }
+
+    public static bool blSaveDateToBD
+    {
+        get
+        {
+            return WorkInReestr.blToAPP("SaveDateToBD");
+        }
+        set
+        {
+            WorkInReestr.strAPPTo("SaveDateToBD", value.ToString());
+        }
+    }
 
 
 }
@@ -259,7 +283,7 @@ namespace SeachActiveApp
                     ///
 
                     //Ver2 - C помощью фонового потока
-                    Thread AppActive = new Thread(clRW.AciveApp);
+                    Thread AppActive = new Thread(clRWLiteDB.AciveApp);
                     AppActive.IsBackground = true;
                     AppActive.Start();
 

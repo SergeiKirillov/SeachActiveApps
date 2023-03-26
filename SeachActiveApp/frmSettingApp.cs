@@ -21,6 +21,9 @@ namespace SeachActiveApp
             chkDisableScreenSave.Checked = Globals.blDisableScreenSave;
             txtTimeDisableScreenSave.Text = Globals.intTimeDisableScreenSave.ToString();
             chkScreenShotDesktop.Checked = Globals.blScreenShotDesktop;
+            chkSaveToBD.Checked = Globals.blSaveDateToBD;
+            chkSaveToFiles.Checked = Globals.blSaveDateToFile;
+
         }
 
         private void chkDisableScreenSave_CheckedChanged(object sender, EventArgs e)
@@ -74,7 +77,7 @@ namespace SeachActiveApp
 
         private void chkEnableSeachActiveApp_CheckedChanged(object sender, EventArgs e)
         {
-
+            //Активация WWW сервера 
         }
 
         
@@ -82,6 +85,32 @@ namespace SeachActiveApp
         {
             lnkWWW.LinkVisited= true;
             System.Diagnostics.Process.Start("http://localhost:8000");
+        }
+
+        private void chkSaveToFiles_CheckedChanged(object sender, EventArgs e)
+        {
+            //Запись результатов в файл
+            if (chkSaveToFiles.Checked)
+            {
+                Globals.blSaveDateToFile = true;
+            }
+            else
+            {
+                Globals.blSaveDateToFile= false;
+            }
+        }
+
+        private void chkSaveToBD_CheckedChanged(object sender, EventArgs e)
+        {
+            //Запись результатов в БД
+            if (chkSaveToBD.Checked)
+            {
+                Globals.blSaveDateToBD = true;
+            }
+            else
+            {
+                Globals.blSaveDateToBD = false;
+            }
         }
     }
 }

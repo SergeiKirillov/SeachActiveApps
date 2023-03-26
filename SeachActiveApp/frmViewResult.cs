@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MyLibenNetFramework;
 
 namespace SeachActiveApp
 {
@@ -16,7 +17,7 @@ namespace SeachActiveApp
         {
             InitializeComponent();
 
-            var AppsData = new clRW();
+            var AppsData = new clRWLiteDB();
 
             RefreshGridView(AppsData.GetAll());
 
@@ -86,7 +87,7 @@ namespace SeachActiveApp
 
         private void btnRunningSelectQuery_Click(object sender, EventArgs e)
         {
-            var AppsData = new clRW();
+            var AppsData = new clRWLiteDB();
 
             if (chkSelect.SelectedIndex == 2)
             {
@@ -122,14 +123,14 @@ namespace SeachActiveApp
         {
             //MessageBox.Show("За день");
 
-            var SelectDay = new clRW();
+            var SelectDay = new clRWLiteDB();
             var source = SelectDay.Get(true, DataSelect.Value);
             RefreshGridViewAppCount(source);
         }
 
         private void ViewSelectMount()
         {
-            var SelectMount = new clRW();
+            var SelectMount = new clRWLiteDB();
             var source = SelectMount.Get(false, DataSelect.Value);
             RefreshGridViewAppCount(source);
         }

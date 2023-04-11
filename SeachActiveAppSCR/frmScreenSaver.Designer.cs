@@ -46,6 +46,7 @@
             this.lblStopTimeScreenSaver.Size = new System.Drawing.Size(98, 108);
             this.lblStopTimeScreenSaver.TabIndex = 0;
             this.lblStopTimeScreenSaver.Text = "0";
+
             // 
             // txtLabel
             // 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyLibenNetFramework
 {
-    class MyIOFile
+    public class MyIOFile
     {
         /// <summary>
         /// MyIOFile - класс работы с файловой системой

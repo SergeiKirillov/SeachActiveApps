@@ -72,8 +72,11 @@ namespace SeachActiveAppSCR
         {
             try
             {
+               // MyLibenNetFramework.MyIOFile.WriteFileTXT("frmScreenSaver_Load", "SeachActiveAppSCR");
                 Cursor.Hide();
                 TopMost = true;
+
+                
 
                 #region Заполняем изображением Если задействована опция что нужно показывать скриншот экрана
                 if (Program.blDesktopSaveForSceenShot)
@@ -83,7 +86,8 @@ namespace SeachActiveAppSCR
                 }
                 else
                 {
-                    Bitmap imgSS = new Bitmap(@"");
+                    //Bitmap imgSS = new Bitmap(@"");
+                    Bitmap imgSS = null;
                     this.BackgroundImage = imgSS;
                 }
 
@@ -106,7 +110,7 @@ namespace SeachActiveAppSCR
                 //label1.Text = "1 января  Новый год \n8 марта  Международный женский день";
                 label1.Text = WorkInReestr.strToAPP("DataMessage");
 
-                if (Program.blTxtScreenSaver)
+                if (Program.blTxtScreenSaver) //blText
                 {
                     txtLabel.Text = Program.strTxtScreenSaver;
                 }
@@ -123,7 +127,7 @@ namespace SeachActiveAppSCR
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine(ex.Message);
-               
+                MyLibenNetFramework.MyIOFile.WriteFileTXT("error frmScreenSaver_Load :" + ex.Message, "SeachActiveAppSCR");
             }
 
  
@@ -286,5 +290,7 @@ namespace SeachActiveAppSCR
 
             return "";
         }
+
+     
     }
 }

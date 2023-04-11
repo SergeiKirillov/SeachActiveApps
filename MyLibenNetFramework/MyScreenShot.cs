@@ -18,11 +18,11 @@ namespace MyLibenNetFramework
         //https://myrusakov.ru/csharp-create-screenshot.html
         public static void MakeScreenshot()
         {
-
+            //MyIOFile.WriteFileTXT("сТАРТ", "errScreenShot");
             try
             {
+                //MyIOFile.WriteFileTXT("BEGIN TRY", "errScreenShot");
 
-           
                 // получаем размеры окна рабочего стола
                 Rectangle bounds = Screen.GetBounds(System.Drawing.Point.Empty);
 
@@ -45,7 +45,7 @@ namespace MyLibenNetFramework
             }
             catch (Exception ex)
             {
-               // System.Diagnostics.Debug.WriteLine(ex.Message);
+               MyIOFile.WriteFileTXT("Error MakeScreenshot = " + ex.Message, "errScreenShot");
                 
             }
         }

@@ -180,74 +180,86 @@ namespace SeachActiveAppSCR
         [STAThread]
         static void Main(string[] args)
         {
-            
-            
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new frmScreenSaver());
-
-            #region Проверка значений в реестре и при их отсутствии значение по умолчанию
-
-
-            #endregion
-
-            if (args.Length > 0)
+            try
             {
-                string firstArgument = args[0].ToLower().Trim();
-                string secondArgument = null;
+                //MyScreenShot.MakeScreenshot();
+                //.MyIOFile.WriteFileTXT("main", "SeachActiveAppSCR");
 
-                if (firstArgument.Length > 2)
-                {
-                    secondArgument = firstArgument.Substring(3).Trim();
-                    firstArgument = firstArgument.Substring(0, 2);
-                }
-                else if (args.Length > 1)
-                {
-                    secondArgument = args[1];
-                }
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                //Application.Run(new frmScreenSaver());
 
-                if (firstArgument == "/c")
-                {
-                    //TODO configuration mode
-                    Application.Run(new frmSeachActiveAppScrSetting());
-                }
+                #region Проверка значений в реестре и при их отсутствии значение по умолчанию
 
-                else if (firstArgument == "/p")
-                {
-                    //TODO Preview mode
 
-                    if (secondArgument == null)
+                #endregion
+
+                if (args.Length > 0)
+                {
+                    string firstArgument = args[0].ToLower().Trim();
+                    string secondArgument = null;
+
+                    if (firstArgument.Length > 2)
                     {
-                        MessageBox.Show("Не был передан Handle windows окна", "ScreenSaver", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        return;
+                        secondArgument = firstArgument.Substring(3).Trim();
+                        firstArgument = firstArgument.Substring(0, 2);
+                    }
+                    else if (args.Length > 1)
+                    {
+                        secondArgument = args[1];
                     }
 
-                    IntPtr PreviewWndHandle = new IntPtr(long.Parse(secondArgument));
-                    Application.Run(new frmScreenSaver(PreviewWndHandle));
-                }
+                    if (firstArgument == "/c")
+                    {
+                        //TODO configuration mode
+                        Application.Run(new frmSeachActiveAppScrSetting());
+                    }
 
-                else if (firstArgument == "/s")
+                    else if (firstArgument == "/p")
+                    {
+                        //TODO Preview mode
+
+                        if (secondArgument == null)
+                        {
+                            MessageBox.Show("Не был передан Handle windows окна", "ScreenSaver", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            return;
+                        }
+
+                        IntPtr PreviewWndHandle = new IntPtr(long.Parse(secondArgument));
+                        Application.Run(new frmScreenSaver(PreviewWndHandle));
+                    }
+
+                    else if (firstArgument == "/s")
+                    {
+                        //MyLibenNetFramework.MyIOFile.WriteFileTXT("/s", "SeachActiveAppSCR");
+                        ShowScreenSaver();
+                        Application.Run();
+                    }
+
+                    else
+                    {
+                        MessageBox.Show("Аргумент командной строки \"" + firstArgument + "\" не подходит под условия.", "ScreenSaver", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+                }
+                else
                 {
                     ShowScreenSaver();
                     Application.Run();
-                }
 
-                else
-                {
-                    MessageBox.Show("Аргумент командной строки \"" + firstArgument + "\" не подходит под условия.", "ScreenSaver", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    //Application.Run(new frmSeachActiveAppScrSetting());
                 }
             }
-            else
+            catch (Exception)
             {
-                ShowScreenSaver();
-                Application.Run();
 
-                //Application.Run(new frmSeachActiveAppScrSetting());
+                MyLibenNetFramework.MyIOFile.WriteFileTXT("error Main", "SeachActiveAppSCR");
             }
+           
         }
 
         static void ShowScreenSaver()
         {
+            //MyLibenNetFramework.MyIOFile.WriteFileTXT("ShowScreenSaver", "SeachActiveAppSCR");
             foreach (Screen item in Screen.AllScreens)
             {
                 frmScreenSaver Screen = new frmScreenSaver(item.Bounds);

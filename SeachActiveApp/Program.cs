@@ -290,7 +290,7 @@ namespace SeachActiveApp
                     #endregion
 
                     #region Проверка - если экранная заставка включена то выключаем её (Внутренний цикл 1мин * 10 раз)
-
+                    //23042023
                     //Thread NotSleep = new Thread(new ThreadStart(ScreenSaver.CheckScreenSave()));
                     Thread NotSleep = new Thread(CheckScreenSave);
                     NotSleep.IsBackground = true;
@@ -308,12 +308,12 @@ namespace SeachActiveApp
                     //    //NotSleep.Join(TimeSpan.FromSeconds(10));
                     //}
 
-                    //версия 2 - Внутри потока при каждом запуске проверяем значение глобальной переменной и если включена то отключаем экранную заставку или включаем её 
+                    ////версия 2 - Внутри потока при каждом запуске проверяем значение глобальной переменной и если включена то отключаем экранную заставку или включаем её 
                     NotSleep.Start();
 
                     #endregion
 
-
+                    //23042023
                     #region Если включена настройка скиншот, то тогда каждую минуту делаем скриншот работчего стола.пока не включена экранная заставка
                     Thread ScreenShot = new Thread(ToDoScreenShot);
                     ScreenShot.IsBackground = true;
@@ -398,7 +398,7 @@ namespace SeachActiveApp
                             }
 
                             #endregion
-                            //}
+                        
 
 
 
@@ -524,17 +524,19 @@ namespace SeachActiveApp
             {
                 if (Globals.blScreenShotDesktop) //Если в настройках экрана стоит что делаем скриншот, то тогда запускаем скриншот каждую 1мин
                 {
-                    
-                    if (!ScreenSaver.GetScreenSaverRunning()) //Если Хранитель экрана не запущен то делаем скриншот
-                    {
+
+                    //if (!ScreenSaver.GetScreenSaverRunning()) //Если Хранитель экрана не запущен то делаем скриншот
+                    //{
                         MyScreenShot.MakeScreenshot(); //Делаем скринШот с помощью функции библиотеки 
                         Thread.Sleep(TimeSpan.FromMinutes(1));
-                    }
+                    //}
 
-                    
+
                 }
-                
+
             }
+
+
         }
 
 

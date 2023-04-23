@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MyLibenNetFramework;
 
 namespace MyLibenNetFramework
 {
@@ -18,30 +19,36 @@ namespace MyLibenNetFramework
         //https://myrusakov.ru/csharp-create-screenshot.html
         public static void MakeScreenshot()
         {
+
             //MyIOFile.WriteFileTXT("сТАРТ", "errScreenShot");
             try
             {
-                //MyIOFile.WriteFileTXT("BEGIN TRY", "errScreenShot");
 
-                // получаем размеры окна рабочего стола
-                Rectangle bounds = Screen.GetBounds(System.Drawing.Point.Empty);
-
-                // создаем пустое изображения размером с экран устройства
-                //using (var bitmap = new Bitmap(bounds.Width, bounds.Height))
-                using (var bitmap = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format32bppArgb))
+                if (!ScreenSaver.GetScreenSaverRunning())
                 {
-                    // создаем объект на котором можно рисовать
-                    using (var g = Graphics.FromImage(bitmap))
+                    //MyIOFile.WriteFileTXT("BEGIN TRY", "errScreenShot");
+
+                    // получаем размеры окна рабочего стола
+                    Rectangle bounds = Screen.GetBounds(System.Drawing.Point.Empty);
+
+                    // создаем пустое изображения размером с экран устройства
+                    //using (var bitmap = new Bitmap(bounds.Width, bounds.Height))
+                    using (var bitmap = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format32bppArgb))
                     {
-                        // перерисовываем экран на наш графический объект
-                        //g.CopyFromScreen(Point.Empty, Point.Empty, bounds.Size);
+                        // создаем объект на котором можно рисовать
+                        using (var g = Graphics.FromImage(bitmap))
+                        {
+                            // перерисовываем экран на наш графический объект
+                            //g.CopyFromScreen(Point.Empty, Point.Empty, bounds.Size);
 
-                        g.CopyFromScreen(Screen.PrimaryScreen.Bounds.X, Screen.PrimaryScreen.Bounds.Y, 0, 0, Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
+                            g.CopyFromScreen(Screen.PrimaryScreen.Bounds.X, Screen.PrimaryScreen.Bounds.Y, 0, 0, Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
+                        }
+
+                        // сохраняем в файл с форматом JPG
+                        bitmap.Save("d:\\screenshot.jpg", ImageFormat.Jpeg);
                     }
-
-                    // сохраняем в файл с форматом JPG
-                    bitmap.Save("d:\\screenshot.jpg", ImageFormat.Jpeg);
                 }
+                
             }
             catch (Exception ex)
             {

@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.IO.MemoryMappedFiles;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Authentication.ExtendedProtection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -81,8 +83,18 @@ namespace SeachActiveAppSCR
                 #region Заполняем изображением Если задействована опция что нужно показывать скриншот экрана
                 if (Program.blDesktopSaveForSceenShot)
                 {
-                    Bitmap imgSS = new Bitmap(@"D:\screenshot.jpg");
-                    this.BackgroundImage = imgSS;
+                    #region проверка на существование файла и если да то вставляем его фоном 
+                    
+                    string PathFile = @"D:\screenshot.jpg";
+                    if (File.Exists(PathFile))
+                    {
+                        Bitmap imgSS = new Bitmap(PathFile);
+                        this.BackgroundImage = imgSS;
+                    }
+                   
+                    #endregion
+
+
                 }
                 else
                 {

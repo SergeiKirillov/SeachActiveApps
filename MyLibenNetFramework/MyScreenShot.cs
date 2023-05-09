@@ -45,6 +45,8 @@ namespace MyLibenNetFramework
                         }
 
                         // сохраняем в файл с форматом JPG
+                        string dtNow = DateTime.Now.ToString("-HHmmss-fff -ddMM");
+                        //bitmap.Save("d:\\screenshot"+dtNow+".jpg", ImageFormat.Jpeg);
                         bitmap.Save("d:\\screenshot.jpg", ImageFormat.Jpeg);
                     }
                 }
@@ -59,29 +61,39 @@ namespace MyLibenNetFramework
         #endregion
 
 
-        #region Версия 1.1 - MakeScreenshot2(Создаем скриншот MULTI рабочего стола) - Черный экран
+        #region Версия 1.1 -Error MakeScreenshot = В GDI+ возникла ошибка общего вида- MakeScreenshot2(Создаем скриншот MULTI рабочего стола) - Черный экран -
         //https://myrusakov.ru/csharp-create-screenshot.html
         public static void MakeScreenshot2()
         {
-            // получаем размеры окна рабочего стола
-            Rectangle bounds = Screen.GetBounds(System.Drawing.Point.Empty);
-
-            // создаем пустое изображения размером с экран устройства
-            //using (var bitmap = new Bitmap(bounds.Width, bounds.Height))
-            using (var bitmap = new Bitmap(SystemInformation.VirtualScreen.Width, SystemInformation.VirtualScreen.Height, PixelFormat.Format32bppArgb))
+            try
             {
+                // получаем размеры окна рабочего стола
+                Rectangle bounds = Screen.GetBounds(System.Drawing.Point.Empty);
 
-                // создаем объект на котором можно рисовать
-                using (var g = Graphics.FromImage(bitmap))
+                // создаем пустое изображения размером с экран устройства
+                //using (var bitmap = new Bitmap(bounds.Width, bounds.Height))
+                using (var bitmap = new Bitmap(SystemInformation.VirtualScreen.Width, SystemInformation.VirtualScreen.Height, PixelFormat.Format32bppArgb))
                 {
-                    // перерисовываем экран на наш графический объект
-                    //g.CopyFromScreen(Point.Empty, Point.Empty, bounds.Size);
-                    g.CopyFromScreen(SystemInformation.VirtualScreen.X, SystemInformation.VirtualScreen.Y, 0, 0, SystemInformation.VirtualScreen.Size, CopyPixelOperation.SourceCopy);
-                }
 
-                // сохраняем в файл с форматом JPG
-                bitmap.Save("d:\\screenshot.jpg", ImageFormat.Jpeg);
+                    // создаем объект на котором можно рисовать
+                    using (var g = Graphics.FromImage(bitmap))
+                    {
+                        // перерисовываем экран на наш графический объект
+                        //g.CopyFromScreen(Point.Empty, Point.Empty, bounds.Size);
+                        g.CopyFromScreen(SystemInformation.VirtualScreen.X, SystemInformation.VirtualScreen.Y, 0, 0, SystemInformation.VirtualScreen.Size, CopyPixelOperation.SourceCopy);
+                    }
+
+                    // сохраняем в файл с форматом JPG
+                    bitmap.Save("d:\\screenshot.jpg", ImageFormat.Jpeg);
+                }
             }
+            catch (Exception ex)
+            {
+                // Error MakeScreenshot = В GDI + возникла ошибка общего вида.
+                MyIOFile.WriteFileTXT("Error MakeScreenshot = " + ex.Message, "errScreenShot");
+            }
+
+            
         }
 
 
@@ -236,10 +248,10 @@ namespace MyLibenNetFramework
                     //Если hBitmap пустой, возвратите пустой указатель.
                     return null;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-
-                    throw;
+                    MyIOFile.WriteFileTXT("Error GetDesktopImage = " + ex.Message, "errScreenShot");
+                    return null;
                 }
 
             }

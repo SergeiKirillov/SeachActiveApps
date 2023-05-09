@@ -36,6 +36,8 @@
             this.chkScreenShotDesktop = new System.Windows.Forms.CheckBox();
             this.chkEnableSeachActiveApp = new System.Windows.Forms.CheckBox();
             this.lnkWWW = new System.Windows.Forms.LinkLabel();
+            this.chkAutoStartInWindows = new System.Windows.Forms.CheckBox();
+            this.lblAutoStartInWindows = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // chkSaveToFiles
@@ -123,11 +125,33 @@
             this.lnkWWW.Text = "Открыть локальный WWW сервер";
             this.lnkWWW.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkWWW_LinkClicked);
             // 
+            // chkAutoStartInWindows
+            // 
+            this.chkAutoStartInWindows.AutoSize = true;
+            this.chkAutoStartInWindows.Location = new System.Drawing.Point(59, 253);
+            this.chkAutoStartInWindows.Name = "chkAutoStartInWindows";
+            this.chkAutoStartInWindows.Size = new System.Drawing.Size(315, 17);
+            this.chkAutoStartInWindows.TabIndex = 8;
+            this.chkAutoStartInWindows.Text = "Автоматический старт программы при запуске Windows";
+            this.chkAutoStartInWindows.UseVisualStyleBackColor = true;
+            this.chkAutoStartInWindows.CheckedChanged += new System.EventHandler(this.chkAutoStartInWindows_CheckedChanged);
+            // 
+            // lblAutoStartInWindows
+            // 
+            this.lblAutoStartInWindows.AutoSize = true;
+            this.lblAutoStartInWindows.Location = new System.Drawing.Point(59, 277);
+            this.lblAutoStartInWindows.Name = "lblAutoStartInWindows";
+            this.lblAutoStartInWindows.Size = new System.Drawing.Size(49, 13);
+            this.lblAutoStartInWindows.TabIndex = 9;
+            this.lblAutoStartInWindows.Text = "_______";
+            // 
             // frmSettingApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lblAutoStartInWindows);
+            this.Controls.Add(this.chkAutoStartInWindows);
             this.Controls.Add(this.lnkWWW);
             this.Controls.Add(this.chkEnableSeachActiveApp);
             this.Controls.Add(this.chkScreenShotDesktop);
@@ -156,5 +180,7 @@
         private System.Windows.Forms.CheckBox chkScreenShotDesktop;
         private System.Windows.Forms.CheckBox chkEnableSeachActiveApp;
         private System.Windows.Forms.LinkLabel lnkWWW;
+        private System.Windows.Forms.CheckBox chkAutoStartInWindows;
+        private System.Windows.Forms.Label lblAutoStartInWindows;
     }
 }

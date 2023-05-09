@@ -211,13 +211,13 @@ namespace SeachActiveAppSCR
 
                     if (firstArgument == "/c")
                     {
-                        //TODO configuration mode
+                        
                         Application.Run(new frmSeachActiveAppScrSetting());
                     }
 
                     else if (firstArgument == "/p")
                     {
-                        //TODO Preview mode
+                        
 
                         if (secondArgument == null)
                         {

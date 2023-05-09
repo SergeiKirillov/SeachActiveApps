@@ -185,10 +185,16 @@ public static class Globals
         }
     }
 
+    public static bool blWindowsAutoStart
+    {
+        get {return WorkInReestr.GetAutostartWindows("SeachActiveApp");}
+        set {WorkInReestr.SetAutostartWindows(value,Assembly.GetExecutingAssembly().Location,"SeachActiveApp");}
+    }
+
 
 }
 
-namespace SeachActiveApp
+namespace SeachActiveApp 
 {
    
     class Program
@@ -261,10 +267,10 @@ namespace SeachActiveApp
                     //Thread wwwServer = new Thread(new ThreadStart(server.start));
                     //wwwServer.Start();
 
-                //Ver 3
-                server www = new server();
-                Thread serverWWW = new Thread(www.start);
-                serverWWW.Start();
+                    //Ver 3
+                    server www = new server();
+                    Thread serverWWW = new Thread(www.start);
+                    serverWWW.Start();
 
                 #endregion
 
@@ -273,6 +279,7 @@ namespace SeachActiveApp
 
                     #region Сбор данных о активном приложении
 
+                   
                     ////Ver 1
                     ////Внутри потока опрос с промежутком в 1 мин
                     //strActivApp = clWinAPI.GetCaptionOfActiveWindow();
@@ -315,17 +322,22 @@ namespace SeachActiveApp
 
                     //23042023
                     #region Если включена настройка скиншот, то тогда каждую минуту делаем скриншот работчего стола.пока не включена экранная заставка
+                   
                     Thread ScreenShot = new Thread(ToDoScreenShot);
                     ScreenShot.IsBackground = true;
                     ScreenShot.Start();
+
+                    //MyScreenShot.MakeScreenshot2();
                     #endregion
 
 
 
 
-                    Thread.Sleep(TimeSpan.FromHours(1)); //спим 1 час
-                    
-
+                    //Thread.Sleep(TimeSpan.FromHours(1)); //спим 1 час
+                    Thread.Sleep(TimeSpan.FromMinutes(10)); //спим 10 min
+                    NotSleep.Abort();
+                    ScreenShot.Abort();
+                    AppActive.Abort();
 
                 }
 
@@ -524,14 +536,13 @@ namespace SeachActiveApp
             {
                 if (Globals.blScreenShotDesktop) //Если в настройках экрана стоит что делаем скриншот, то тогда запускаем скриншот каждую 1мин
                 {
-
+                    
                     //if (!ScreenSaver.GetScreenSaverRunning()) //Если Хранитель экрана не запущен то делаем скриншот
                     //{
                         MyScreenShot.MakeScreenshot(); //Делаем скринШот с помощью функции библиотеки 
+                        //MyScreenShot.MakeScreenshot2(); //Делаем скринШот с помощью функции библиотеки 
                         Thread.Sleep(TimeSpan.FromMinutes(1));
                     //}
-
-
                 }
 
             }

@@ -177,5 +177,58 @@ namespace MyLibenNetFramework
 
         }
 
+        public static void SetAutostartWindows(bool Autorun, String PathKey, string NameApp) 
+        {
+            ///<summary>Функция для добавления программы в автозапуск</summary> 
+            ///<param name="Autorun">При true вставляем в автозапуск, при false удаляем из автозапуска</param>
+            ///<param name="PathKey">Путь где распложен запускающий модуль</param>
+            ///<param name="NameApp">Имя приложения</param>
+            ///<returns>Если нет ошибок то true, при ошибке false</returns>
+            
+            try
+            {
+                RegistryKey reg;
+                reg=Registry.CurrentUser.CreateSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run\\");
+                if (Autorun)
+                {
+                    reg.SetValue(NameApp, PathKey);
+                }
+                else
+                {
+                    reg.DeleteValue(NameApp);
+                }
+                reg.Flush();
+                reg.Close();
+            }
+            catch (Exception)
+            {
+                
+            }
+            
+        }
+
+        public static bool GetAutostartWindows(string NameApp) 
+        {
+            ///<summary>Функция для для считывания пути программы из автозапуска</summary> 
+            ///<param name="NameApp">Имя приложения</param>
+            ///<returns>Если есть в атозапуске то true, нету -- false</returns>
+            try
+            {
+                RegistryKey reg;
+                reg = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run\\");
+                string value = reg.GetValue(NameApp).ToString();
+                if (value=="")
+                {
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
+
+
     }
 }

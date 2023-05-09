@@ -11,6 +11,7 @@ using LiteDB;
 
 namespace SeachActiveApp
 {
+    //TODO Форма настроек приложения SeachActiveApp
     public partial class frmSettingApp : Form
     {
         public frmSettingApp()
@@ -23,6 +24,7 @@ namespace SeachActiveApp
             chkScreenShotDesktop.Checked = Globals.blScreenShotDesktop;
             chkSaveToBD.Checked = Globals.blSaveDateToBD;
             chkSaveToFiles.Checked = Globals.blSaveDateToFile;
+            chkAutoStartInWindows.Checked = Globals.blWindowsAutoStart;
 
         }
 
@@ -110,6 +112,18 @@ namespace SeachActiveApp
             else
             {
                 Globals.blSaveDateToBD = false;
+            }
+        }
+
+        private void chkAutoStartInWindows_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!chkAutoStartInWindows.Checked) 
+            { 
+                Globals.blWindowsAutoStart = false;
+            }
+            else
+            {
+                Globals.blWindowsAutoStart = true;
             }
         }
     }

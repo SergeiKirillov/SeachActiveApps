@@ -140,7 +140,7 @@ public class clRWLiteDB
                 string pathProg = System.AppDomain.CurrentDomain.BaseDirectory.ToString() + NameDB + ".db";
 
 
-                //TODO LiteDB 5.0.9
+                
                 var DataWrite = new clData1Hour
                 {
                     ID = Guid.NewGuid(),

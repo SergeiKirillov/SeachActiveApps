@@ -212,12 +212,14 @@ namespace MyLibenNetFramework
             ///<summary>Функция для для считывания пути программы из автозапуска</summary> 
             ///<param name="NameApp">Имя приложения</param>
             ///<returns>Если есть в атозапуске то true, нету -- false</returns>
+            ///
+            string value;
             try
             {
                 RegistryKey reg;
                 reg = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run\\");
-                string value = reg.GetValue(NameApp).ToString();
-                if (value=="")
+                value = reg.GetValue(NameApp, "").ToString();
+                if (value == "")
                 {
                     return false;
                 }
@@ -229,6 +231,28 @@ namespace MyLibenNetFramework
             return true;
         }
 
+
+        public static string strGetAutostartWindows(string NameApp)
+        {
+            ///<summary>Функция для для считывания пути программы из автозапуска</summary> 
+            ///<param name="NameApp">Имя приложения</param>
+            ///<returns>Если есть в атозапуске то путь, а если  нету -- ""</returns>
+            ///
+            string value;
+            try
+            {
+                RegistryKey reg;
+                reg = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run\\");
+                value = reg.GetValue(NameApp,"").ToString();
+                return value;
+
+            }
+            catch (Exception)
+            {
+                return "";
+            }
+            
+        }
 
     }
 }

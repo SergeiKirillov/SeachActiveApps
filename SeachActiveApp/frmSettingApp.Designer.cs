@@ -49,7 +49,7 @@
             this.chkSaveToFiles.TabIndex = 0;
             this.chkSaveToFiles.Text = "сохранение результатов в файл";
             this.chkSaveToFiles.UseVisualStyleBackColor = true;
-            this.chkSaveToFiles.CheckedChanged += new System.EventHandler(this.chkSaveToFiles_CheckedChanged);
+            this.chkSaveToFiles.Click += new System.EventHandler(this.chkSaveToFiles_Click);
             // 
             // chkSaveToBD
             // 
@@ -60,7 +60,7 @@
             this.chkSaveToBD.TabIndex = 1;
             this.chkSaveToBD.Text = "сохранение результатов в базу данных";
             this.chkSaveToBD.UseVisualStyleBackColor = true;
-            this.chkSaveToBD.CheckedChanged += new System.EventHandler(this.chkSaveToBD_CheckedChanged);
+            this.chkSaveToBD.Click += new System.EventHandler(this.chkSaveToBD_Click);
             // 
             // chkDisableScreenSave
             // 
@@ -71,7 +71,7 @@
             this.chkDisableScreenSave.TabIndex = 2;
             this.chkDisableScreenSave.Text = "Отключение Экранной заставки при работе программы";
             this.chkDisableScreenSave.UseVisualStyleBackColor = true;
-            this.chkDisableScreenSave.CheckedChanged += new System.EventHandler(this.chkDisableScreenSave_CheckedChanged);
+            this.chkDisableScreenSave.Click += new System.EventHandler(this.chkDisableScreenSave_Click);
             // 
             // txtTimeDisableScreenSave
             // 
@@ -101,7 +101,7 @@
             this.chkScreenShotDesktop.TabIndex = 5;
             this.chkScreenShotDesktop.Text = "Применение скриншота рабочего стола как экранная заставка";
             this.chkScreenShotDesktop.UseVisualStyleBackColor = true;
-            this.chkScreenShotDesktop.CheckedChanged += new System.EventHandler(this.chkScreenShotDesktop_CheckedChanged);
+            this.chkScreenShotDesktop.Click += new System.EventHandler(this.chkScreenShotDesktop_Click);
             // 
             // chkEnableSeachActiveApp
             // 
@@ -134,7 +134,7 @@
             this.chkAutoStartInWindows.TabIndex = 8;
             this.chkAutoStartInWindows.Text = "Автоматический старт программы при запуске Windows";
             this.chkAutoStartInWindows.UseVisualStyleBackColor = true;
-            this.chkAutoStartInWindows.CheckedChanged += new System.EventHandler(this.chkAutoStartInWindows_CheckedChanged);
+            this.chkAutoStartInWindows.Click += new System.EventHandler(this.chkAutoStartInWindows_Click);
             // 
             // lblAutoStartInWindows
             // 
@@ -165,6 +165,7 @@
             this.Name = "frmSettingApp";
             this.ShowIcon = false;
             this.Text = "Настройка программы";
+            this.Load += new System.EventHandler(this.frmSettingApp_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

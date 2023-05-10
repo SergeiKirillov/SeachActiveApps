@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using LiteDB;
+using MyLibenNetFramework;
 
 namespace SeachActiveApp
 {
@@ -19,63 +20,35 @@ namespace SeachActiveApp
             //При инициализации формы считываем значения из класса и по нему взводим элемент checkbox
             
             InitializeComponent();
+           
+
+        }
+
+        private void frmSettingApp_Load(object sender, EventArgs e)
+        {
             chkDisableScreenSave.Checked = Globals.blDisableScreenSave;
             txtTimeDisableScreenSave.Text = Globals.intTimeDisableScreenSave.ToString();
             chkScreenShotDesktop.Checked = Globals.blScreenShotDesktop;
             chkSaveToBD.Checked = Globals.blSaveDateToBD;
             chkSaveToFiles.Checked = Globals.blSaveDateToFile;
-            chkAutoStartInWindows.Checked = Globals.blWindowsAutoStart;
-
-        }
-
-        private void chkDisableScreenSave_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkDisableScreenSave.Checked==true)
+            //chkAutoStartInWindows.Checked = Globals.blWindowsAutoStart;
+            if (Globals.blWindowsAutoStart)
             {
-                Globals.blDisableScreenSave = true;
-            }
-            else if (chkDisableScreenSave.Checked==false)
-            {
-                Globals.blDisableScreenSave = false;
-            }
-        }
-
-        private void txtTimeDisableScreenSave_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            char number = e.KeyChar;
-
-            if (!Char.IsDigit(number) && number!= 8)
-            {
-                e.Handled = true;
-            }
-
-
-        }
-
-        private void txtTimeDisableScreenSave_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode==Keys.Enter)
-            {
-                Globals.intTimeDisableScreenSave = Convert.ToInt32(txtTimeDisableScreenSave.Text);
-            }
-        }
-
-        private void txtTimeDisableScreenSave_Leave(object sender, EventArgs e)
-        {
-            Globals.intTimeDisableScreenSave = Convert.ToInt32(txtTimeDisableScreenSave.Text);
-        }
-
-        private void chkScreenShotDesktop_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkScreenShotDesktop.Checked)
-            {
-                Globals.blScreenShotDesktop = true;
+                chkAutoStartInWindows.Checked = true;
+                lblAutoStartInWindows.Text = WorkInReestr.strGetAutostartWindows("SeachActiveApp");
             }
             else
             {
-                Globals.blScreenShotDesktop = false;
+                chkAutoStartInWindows.Checked = false;
+                lblAutoStartInWindows.Text = "";
             }
         }
+
+        
+
+        
+
+       
 
         private void chkEnableSeachActiveApp_CheckedChanged(object sender, EventArgs e)
         {
@@ -89,7 +62,85 @@ namespace SeachActiveApp
             System.Diagnostics.Process.Start("http://localhost:8000");
         }
 
-        private void chkSaveToFiles_CheckedChanged(object sender, EventArgs e)
+       
+
+        
+//--------------------------------------------------------------------------------------------------------
+        private void chkAutoStartInWindows_Click(object sender, EventArgs e)
+        {
+            if (!chkAutoStartInWindows.Checked) 
+            {
+                Globals.blWindowsAutoStart = false;
+                lblAutoStartInWindows.Text = "";
+
+            }
+            else
+            {
+                Globals.blWindowsAutoStart = true;
+                lblAutoStartInWindows.Text = WorkInReestr.strGetAutostartWindows("SeachActiveApp");
+
+            }
+        }
+
+        private void chkScreenShotDesktop_Click(object sender, EventArgs e)
+        {
+            if (chkScreenShotDesktop.Checked)
+            {
+                Globals.blScreenShotDesktop = true;
+            }
+            else
+            {
+                Globals.blScreenShotDesktop = false;
+            }
+        }
+
+        #region Оключение заставки
+
+        
+        private void chkDisableScreenSave_Click(object sender, EventArgs e)
+        {
+            if (chkDisableScreenSave.Checked)
+            {
+                Globals.blDisableScreenSave = true;
+            }
+            else
+            {
+                Globals.blDisableScreenSave = false;
+            }
+        }
+
+        private void txtTimeDisableScreenSave_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+
+            if (!Char.IsDigit(number) && number != 8)
+            {
+                e.Handled = true;
+            }
+
+
+        }
+
+        private void txtTimeDisableScreenSave_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Globals.intTimeDisableScreenSave = Convert.ToInt32(txtTimeDisableScreenSave.Text);
+                Globals.blDisableScreenSave = true;
+                chkScreenShotDesktop.Checked= true;
+            }
+        }
+
+        private void txtTimeDisableScreenSave_Leave(object sender, EventArgs e)
+        {
+            Globals.intTimeDisableScreenSave = Convert.ToInt32(txtTimeDisableScreenSave.Text);
+        }
+
+        #endregion
+
+      
+
+        private void chkSaveToFiles_Click(object sender, EventArgs e)
         {
             //Запись результатов в файл
             if (chkSaveToFiles.Checked)
@@ -98,11 +149,11 @@ namespace SeachActiveApp
             }
             else
             {
-                Globals.blSaveDateToFile= false;
+                Globals.blSaveDateToFile = false;
             }
         }
 
-        private void chkSaveToBD_CheckedChanged(object sender, EventArgs e)
+        private void chkSaveToBD_Click(object sender, EventArgs e)
         {
             //Запись результатов в БД
             if (chkSaveToBD.Checked)
@@ -112,18 +163,6 @@ namespace SeachActiveApp
             else
             {
                 Globals.blSaveDateToBD = false;
-            }
-        }
-
-        private void chkAutoStartInWindows_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!chkAutoStartInWindows.Checked) 
-            { 
-                Globals.blWindowsAutoStart = false;
-            }
-            else
-            {
-                Globals.blWindowsAutoStart = true;
             }
         }
     }

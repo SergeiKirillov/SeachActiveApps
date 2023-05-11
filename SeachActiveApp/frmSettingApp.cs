@@ -42,6 +42,29 @@ namespace SeachActiveApp
                 chkAutoStartInWindows.Checked = false;
                 lblAutoStartInWindows.Text = "";
             }
+
+
+            if (Globals.blEnableActiveAppSaving)
+            {
+                chkEnableSeachActiveApp.Checked = true;
+                chkSaveToBD.Enabled = true;
+                chkSaveToFiles.Enabled = true;
+            }
+            else
+            {
+                chkEnableSeachActiveApp.Checked = false;
+
+                //Globals.blSaveDateToBD = false;
+                //chkSaveToBD.Checked = false;
+                chkSaveToBD.Enabled = false;
+
+                //Globals.blSaveDateToFile = false;
+                //chkSaveToFiles.Checked = false;
+                chkSaveToFiles.Enabled = false;
+                
+                
+            }
+
         }
 
         
@@ -52,7 +75,7 @@ namespace SeachActiveApp
 
         private void chkEnableSeachActiveApp_CheckedChanged(object sender, EventArgs e)
         {
-            //Активация WWW сервера 
+            
         }
 
         
@@ -164,6 +187,32 @@ namespace SeachActiveApp
             {
                 Globals.blSaveDateToBD = false;
             }
+        }
+
+        private void chkEnableSeachActiveApp_Click(object sender, EventArgs e)
+        {
+            #region Нужно ли производить контроль за активным приложением и если да то куда писать результат в БД и/или в тестовый файл
+            if (chkEnableSeachActiveApp.Checked)
+            {
+                Globals.blEnableActiveAppSaving = true;
+                chkSaveToBD.Enabled = true;
+                chkSaveToFiles.Enabled = true;
+
+            }
+            else
+            {
+                Globals.blEnableActiveAppSaving = false;
+                
+                //Globals.blSaveDateToBD = false;
+                //chkSaveToBD.Checked = false;
+                chkSaveToBD.Enabled = false;
+
+                //Globals.blSaveDateToFile = false;
+                //chkSaveToFiles.Checked = false;
+                chkSaveToFiles.Enabled = false;
+
+            }
+            #endregion
         }
     }
 }

@@ -36,14 +36,20 @@ public class clRWLiteDB
 
     public static void AciveApp()
     {
+        ///<summary>Запуск программы сборщика информации с циклом 1 мин. Предварительно производим проверку необходимо ли роизводить сбор данных</summary>
+
         while (true)
         {
-            string strActivApp = clWinAPI.GetCaptionOfActiveWindow();
-            DateTime dtActiveApp = DateTime.Now;
-
-            new clRWLiteDB(dtActiveApp, strActivApp, 1);
+            if ((WorkInReestr.blToAPP("EnableActiveAppSaving"))) //Если в реестре включен сбор информации то заходим внутрь 
+            {
+                string strActivApp = clWinAPI.GetCaptionOfActiveWindow();
+                DateTime dtActiveApp = DateTime.Now;
+                new clRWLiteDB(dtActiveApp, strActivApp, 1);
+            }
+           
 
             Thread.Sleep(TimeSpan.FromMinutes(1));
+
         }
     }
 
@@ -51,6 +57,7 @@ public class clRWLiteDB
 
     public clRWLiteDB(DateTime dt, string message, int time1min)
     {
+        ///<summary>С реестра считывается значение и идет запуск функции по сбору и записи данных</summary>
         //if (Properties.Settings.Default.blWriteFile)
         //{
         //    WriteFileTXT(dt, message, time1min);

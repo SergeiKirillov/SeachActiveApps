@@ -148,7 +148,7 @@ public static class Globals
         }
     }
 
-    public static bool blScreenShotDesktop
+    public static bool blScreenShotDesktop //Создание скриншота
     {
         get
         {
@@ -160,7 +160,7 @@ public static class Globals
         }
     }
 
-    public static bool blSaveDateToFile
+    public static bool blSaveDateToFile //запись названия активного приложения в файл
     {
         //читаем/записываем в реестр значение переменной 
         get
@@ -171,9 +171,9 @@ public static class Globals
         {
             WorkInReestr.strAPPTo("SaveDateToFile", value.ToString());
         }
-    }
+    } 
 
-    public static bool blSaveDateToBD
+    public static bool blSaveDateToBD //запись навзвания активного приложения в БД
     {
         get
         {
@@ -183,12 +183,25 @@ public static class Globals
         {
             WorkInReestr.strAPPTo("SaveDateToBD", value.ToString());
         }
-    }
+    } 
 
-    public static bool blWindowsAutoStart
+    public static bool blWindowsAutoStart // автозапуск приложения при старте windows
     {
         get {return WorkInReestr.GetAutostartWindows("SeachActiveApp");}
         set {WorkInReestr.SetAutostartWindows(value,Assembly.GetExecutingAssembly().Location,"SeachActiveApp");}
+    } 
+
+    public static bool blEnableActiveAppSaving //True - производим запись имени активного приложения или в БД или в текстовй файл
+    {
+        
+        get
+        {
+            return WorkInReestr.blToAPP("EnableActiveAppSaving");
+        }
+        set
+        {
+            WorkInReestr.strAPPTo("EnableActiveAppSaving", value.ToString());
+        }
     }
 
 

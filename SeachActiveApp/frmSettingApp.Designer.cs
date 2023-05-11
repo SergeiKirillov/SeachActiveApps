@@ -113,6 +113,7 @@
             this.chkEnableSeachActiveApp.Text = "Активировать модуль сбора информации об активном запущенном приложении(1мин)";
             this.chkEnableSeachActiveApp.UseVisualStyleBackColor = true;
             this.chkEnableSeachActiveApp.CheckedChanged += new System.EventHandler(this.chkEnableSeachActiveApp_CheckedChanged);
+            this.chkEnableSeachActiveApp.Click += new System.EventHandler(this.chkEnableSeachActiveApp_Click);
             // 
             // lnkWWW
             // 

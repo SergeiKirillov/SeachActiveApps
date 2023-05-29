@@ -10,6 +10,7 @@ namespace MyLibenNetFramework
 {
     public class WorkInReestr
     {
+
         private static string NameApp = "SergeiAKirApp";
         public static string strToAPP(string NameKey)
         {
@@ -253,6 +254,70 @@ namespace MyLibenNetFramework
             }
             
         }
+
+    }
+
+
+    public class WorkingReestr
+    {
+        private string NameProg;
+        public WorkingReestr(string NameApp) 
+        {
+            NameProg = NameApp.Trim();
+        }
+
+        public void SetStr(string NameKey, string ValueKey)
+        {
+            if (((ValueKey.Length * 2) < 1048576) && (ValueKey != null))
+            {
+                //Запись в реестр значения value
+                using (RegistryKey strTextSS = Registry.CurrentUser.CreateSubKey(NameProg))
+                {
+
+                    strTextSS.SetValue(NameKey, ValueKey);
+
+                }
+            }
+
+        }
+
+        
+
+        public bool GetBool(string NameKey)
+        {
+
+            using (RegistryKey key = Registry.CurrentUser.OpenSubKey(NameProg, true))
+            {
+                if (key != null)
+                {
+                    if (Convert.ToBoolean(key.GetValue(NameKey)))
+                    {
+                        return Convert.ToBoolean(key.GetValue(NameKey) as string);
+                    }
+                    else
+                    {
+                        string strText = "False";
+                        SetStr(NameKey, strText);
+                        return false;
+                    }
+
+                }
+                else
+                {
+
+                    string strText = "False";
+                    SetStr(NameKey, strText);
+                    return false;
+                }
+
+
+            }
+
+
+
+        }
+
+
 
     }
 }

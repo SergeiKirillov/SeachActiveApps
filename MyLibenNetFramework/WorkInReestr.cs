@@ -317,6 +317,16 @@ namespace MyLibenNetFramework
 
         }
 
+        public void SetBool(string NameKey,bool ValueKey)
+        {
+            //Запись в реестр значения value
+            using (RegistryKey strTextSS = Registry.CurrentUser.CreateSubKey(NameProg))
+            {
+                strTextSS.SetValue(NameKey, ValueKey);
+                
+            }
+        }
+
 
 
     }
